@@ -1,0 +1,50 @@
+{
+  "name": "send-email",
+  "version": "1.0.0",
+  "description": "Sends emails using Gmail SMTP with username/pw or Google OAuth2",
+  "main": "dist/index.js",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "vitest",
+    "transpile": "tsc -p tsconfig.json && tsc-alias",
+    "transpile:noemit": "tsc -p tsconfig.json --noEmit",
+    "transpile:test": "tsc -p tsconfig.test.json --noEmit",
+    "watch": "tsc -p tsconfig.json --watch",
+    "lint": "eslint \"src/**/*.ts\" \"__tests__/**/*.ts\" *.mjs *.ts",
+    "lint:fix": "eslint \"src/**/*.ts\" \"__tests__/**/*.ts\" *.mjs *.ts --fix",
+    "test": "vitest run",
+    "docker:debug": "export IS_DOCKER=true && node --inspect=0.0.0.0:9229 ./node_modules/.bin/vite-node src/utils/sample.ts",
+    "docker:dev:win": "export CHOKIDAR_USEPOLLING=1 && export CHOKIDAR_INTERVAL=1000 && vitest",
+    "docker:watch:win": "tsc -p tsconfig.json --watch --watchFile dynamicPriorityPolling --watchDirectory dynamicPriorityPolling"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/weaponsforge/send-email.git"
+  },
+  "keywords": [
+    "email",
+    "gmail",
+    "smtp",
+    "oauth2"
+  ],
+  "author": "weaponsforge",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/weaponsforge/send-email/issues"
+  },
+  "homepage": "https://github.com/weaponsforge/send-email#readme",
+  "devDependencies": {
+    "@eslint/js": "^9.23.0",
+    "@types/node": "^22.13.11",
+    "eslint": "^9.23.0",
+    "globals": "^16.0.0",
+    "tsc-alias": "^1.8.11",
+    "typescript": "^5.8.2",
+    "typescript-eslint": "^8.27.0",
+    "vite-node": "^3.0.9",
+    "vitest": "^3.0.9"
+  }
+}
