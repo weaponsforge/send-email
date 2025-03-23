@@ -1,0 +1,38 @@
+{
+  "name": "send-email",
+  "version": "1.0.0",
+  "description": "Sends emails using Gmail SMTP with username/pw or Google OAuth2",
+  "main": "index.js",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "transpile": "tsc -p tsconfig.json && tsc-alias",
+    "transpile:noemit": "tsc -p tsconfig.json --noEmit",
+    "watch": "tsc -p tsconfig.json --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/weaponsforge/send-email.git"
+  },
+  "keywords": [
+    "email",
+    "gmail",
+    "smtp",
+    "oauth2"
+  ],
+  "author": "weaponsforge",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/weaponsforge/send-email/issues"
+  },
+  "homepage": "https://github.com/weaponsforge/send-email#readme",
+  "devDependencies": {
+    "@types/node": "^22.13.11",
+    "tsc-alias": "^1.8.11",
+    "typescript": "^5.8.2",
+    "vite-node": "^3.0.9",
+    "vitest": "^3.0.9"
+  }
+}
