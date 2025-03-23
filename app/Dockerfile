@@ -27,5 +27,5 @@ FROM base AS production
 ENV NODE_ENV=production
 COPY --from=build /opt/app/dist /opt/app/dist
 COPY package*.json ./
-USER user
+USER node
 CMD ["sh"]

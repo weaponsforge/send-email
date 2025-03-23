@@ -1,3 +1,4 @@
+# Docker compose file for local development mode
 services:
   weaponsforge.sendemail-dev:
     container_name: weaponsforge-sendemail-dev

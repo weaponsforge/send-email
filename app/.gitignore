@@ -5,5 +5,7 @@ dist/
 *.rar
 *.tgz
 *.txt
+*.d.ts
+*.map
 src/**/*.js
 __tests__/**/*.js
