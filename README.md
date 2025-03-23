@@ -5,9 +5,9 @@ Sends emails using Gmail SMTP with username/pw or Google OAuth2
 ### Table of Contents
 
 - [Requirements](#requirements)
-- [Installation](#-installation)
+- [Installation](#%EF%B8%8F-installation)
 - [Usage](#-usage)
-- [Alternate Usage](#-alternate-usage)
+- [Alternate Usage](#alternate-usage)
 - [Available Scripts](#-available-scripts)
 - [Docker Scripts](#-docker-scripts)
 
@@ -30,6 +30,8 @@ Sends emails using Gmail SMTP with username/pw or Google OAuth2
       - Read on the Google [Gmail](https://developers.google.com/gmail/api/guides), [SMTP and OAuth2 Setup](https://github.com/weaponsforge/email-sender?tab=readme-ov-file#using-the-oauth-20-playground) sections for more information
 
 ### Core Libraries/Frameworks
+
+(Installed via npm)
 
 1. typescript `v5.8.2` - Compile-time error checker
 2. vite-node `v3.0.9`- Runs TS files in development mode
@@ -70,12 +72,12 @@ Sends emails using Gmail SMTP with username/pw or Google OAuth2
 
 **Using Docker**
 
-- **Build the image**
+- **Build the image** (Run only once)
    ```bash
    docker compose -f docker-compose.dev.yml build
    ```
 
-- **Run the container**
+- **Run the container** (Run only once)
    ```bash
    docker compose -f docker-compose.dev.yml up
    ```
@@ -112,11 +114,15 @@ Watches file changes in `.ts` files using the `tsc --watch` option.
 
 ### `npm run transpile`
 
-Builds JavaScript, `.d.ts` declaration files, and map files from the TypeScript source files.
+Builds JavaScript, `.d.ts` declaration files, and map files from the TypeScript source files in the `/src` directory.
 
 ### `npm run transpile:noemit`
 
-Runs type-checking without generating the JavaScript or declaration files from the TypeScript files.
+Runs type-checking without generating the JavaScript or declaration files from the TypeScript files in the `/src` directory.
+
+### `npm run transpile:test`
+
+Runs type-checking without generating the JavaScript or declaration files from the TypeScript files in the `/src` and `__tests__` directories.
 
 ### `npm run lint`
 Lints TypeScript source codes.

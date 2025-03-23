@@ -11,6 +11,7 @@
     "dev": "vitest",
     "transpile": "tsc -p tsconfig.json && tsc-alias",
     "transpile:noemit": "tsc -p tsconfig.json --noEmit",
+    "transpile:test": "tsc -p tsconfig.test.json --noEmit",
     "watch": "tsc -p tsconfig.json --watch",
     "lint": "eslint \"src/**/*.ts\" \"__tests__/**/*.ts\" *.mjs *.ts",
     "lint:fix": "eslint \"src/**/*.ts\" \"__tests__/**/*.ts\" *.mjs *.ts --fix",
