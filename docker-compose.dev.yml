@@ -1,0 +1,15 @@
+services:
+  weaponsforge.sendemail-dev:
+    container_name: weaponsforge-sendemail-dev
+    image: weaponsforge/sendemail:dev
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+      target: development
+    volumes:
+      - ./app:/opt/app
+      - /opt/app/node_modules
+    ports:
+      - "9229:9229"
+    stdin_open: true
+    tty: true
