@@ -2,15 +2,19 @@
   "name": "send-email",
   "version": "1.0.0",
   "description": "Sends emails using Gmail SMTP with username/pw or Google OAuth2",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "type": "module",
   "engines": {
     "node": ">=22"
   },
   "scripts": {
-    "test": "vitest run",
+    "dev": "vitest",
     "transpile": "tsc -p tsconfig.json && tsc-alias",
     "transpile:noemit": "tsc -p tsconfig.json --noEmit",
-    "watch": "tsc -p tsconfig.json --watch"
+    "watch": "tsc -p tsconfig.json --watch",
+    "lint": "eslint \"src/**/*.ts\" *.mjs *.ts",
+    "lint:fix": "eslint \"src/**/*.ts\" *.mjs *.ts --fix",
+    "test": "vitest run"
   },
   "repository": {
     "type": "git",
@@ -29,9 +33,13 @@
   },
   "homepage": "https://github.com/weaponsforge/send-email#readme",
   "devDependencies": {
+    "@eslint/js": "^9.23.0",
     "@types/node": "^22.13.11",
+    "eslint": "^9.23.0",
+    "globals": "^16.0.0",
     "tsc-alias": "^1.8.11",
     "typescript": "^5.8.2",
+    "typescript-eslint": "^8.27.0",
     "vite-node": "^3.0.9",
     "vitest": "^3.0.9"
   }

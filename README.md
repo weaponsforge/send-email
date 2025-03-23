@@ -2,7 +2,13 @@
 
 Sends emails using Gmail SMTP with username/pw or Google OAuth2
 
-## Requirements
+### Table of Contents
+
+- [Requirements](#requirements)
+- [Installation](#-installation)
+- [Available Scripts](#-available-scripts)
+
+## 📋 Requirements
 
 1. Windows 11/Linux OS
 2. NodeJS LTS v22 or higher
@@ -23,13 +29,45 @@ Sends emails using Gmail SMTP with username/pw or Google OAuth2
 2. vite-node `v3.0.9`- Runs TS files in development mode
 3. vitest `v3.0.9` - Runs tests
 
-## Installation
+## 🛠️ Installation
 
 1. Clone the repository.<br>
 `git clone https://github.com/weaponsforge/send-email.git`
 
 2. Install dependencies.<br>
 `npm install`
+
+## 📜 Available Scripts
+
+<details>
+<summary>Click to expand the list of available scripts</summary>
+
+### `npm run dev`
+
+Runs `vitest` in watch mode, watching file changes and errors to files linked with `*.test.ts` files.
+
+### `npm run watch`
+
+Watches file changes in `.ts` files using the `tsc --watch` option.
+
+### `npm run transpile`
+
+Builds JavaScript, `.d.ts` declaration files, and map files from the TypeScript source files.
+
+### `npm run transpile:noemit`
+
+Runs type-checking without generating the JavaScript or declaration files from the TypeScript files.
+
+### `npm run lint`
+Lints TypeScript source codes.
+
+### `npm run lint:fix`
+Fixes lint errors in TypeScript files.
+
+### `npm test`
+Runs test scripts defined in *.test.ts files.
+
+</details>
 
 ---
 
