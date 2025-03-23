@@ -4,7 +4,7 @@ Sends emails using Gmail SMTP with username/pw or Google OAuth2
 
 ### Table of Contents
 
-- [Requirements](#requirements)
+- [Requirements](#-requirements)
 - [Installation](#%EF%B8%8F-installation)
 - [Usage](#-usage)
 - [Alternate Usage](#alternate-usage)
