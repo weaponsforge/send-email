@@ -3,4 +3,4 @@ export {
   EmailTransport,
   GmailOAuthClient,
   send
-} from "@/lib/index.js";
+} from '@/lib/index.js'
