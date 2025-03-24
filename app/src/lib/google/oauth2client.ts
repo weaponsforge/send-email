@@ -29,11 +29,11 @@ class GmailOAuthClient implements IGmailOAuthClient {
    * expect to have correct values for the default values.
    */
   constructor (params?: Partial<IOauthClient>) {
-    const clientId = params?.clientId || process.env.CLIENT_ID
-    const clientSecret = params?.clientSecret || process.env.CLIENT_SECRET
-    const redirectURI = params?.redirectURI || process.env.REDIRECT_URI
-    const refreshToken = params?.refreshToken || process.env.REFRESH_TOKEN
-    const userEmail = params?.userEmail || process.env.USER_EMAIL
+    const clientId = params?.clientId || process.env.GOOGLE_CLIENT_ID
+    const clientSecret = params?.clientSecret || process.env.GOOGLE_CLIENT_SECRET
+    const redirectURI = params?.redirectURI || process.env.GOOGLE_REDIRECT_URI
+    const refreshToken = params?.refreshToken || process.env.GOOGLE_REFRESH_TOKEN
+    const userEmail = params?.userEmail || process.env.GOOGLE_USER_EMAIL
 
     this.init(<IOauthClient>{
       clientId,
