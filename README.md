@@ -47,6 +47,21 @@ Sends emails using Gmail SMTP with username/pw or Google OAuth2
 2. Install dependencies.<br>
 `npm install`
 
+3. Configure **OAuth2**. Get a refresh token from the Google [OAuth 2 Playground](https://developers.google.com/oauthplayground).
+   - Read on [Using the OAuth 2.0 Playground](https://github.com/weaponsforge/email-sender?tab=readme-ov-file#using-the-oauth-20-playground) for more information about generating a refresh token using the Google OAuth Playground.
+   - _**INFO:** This is an older note, some steps may vary this 2025)_
+
+4. Set up the environment variables. Create a `.env` file inside the **/app** directory with reference to the `.env.example` file.
+
+   | Variable Name | Description |
+   | --- | --- |
+   | GOOGLE_USER_EMAIL | Your google email that you've configured for Gmail SMTP and Google OAuth2 |
+   | GOOGLE_CLIENT_ID | Google Developer Project ID associated with your email |
+   | GOOGLE_CLIENT_SECRET | Client secret for the Google Developer Project CLIENT_ID|
+   | GOOGLE_REDIRECT_URI | Allowed Google API redirect URI. Its value is `https://developers.google.com/oauthplayground` by default. |
+   | GOOGLE_REFRESH_TOKEN | The initial (or any) refresh token obtained from [OAuthPlayground](https://developers.google.com/oauthplayground).<ul><li>Read on [Using the OAuth 2.0 Playground](https://github.com/weaponsforge/email-sender?tab=readme-ov-file#using-the-oauth-20-playground) for more information about generating a refresh token using the Google OAuth Playground.</li><li><blockquote>(_**INFO:** This is an older note, some steps may vary this 2025)_</blockquote></li></ul> |
+
+
 ## 🚀 Usage
 
 **Using Node**
@@ -92,6 +107,12 @@ Sends emails using Gmail SMTP with username/pw or Google OAuth2
    Ensure the Docker container is running (see **Run the container**)
    ```bash
    docker run -it -v ${pwd}/app:/opt/app -v /opt/app/node_modules --rm weaponsforge/sendemail:dev npm run <AVAILABLE_SCRIPT_OR_DOCKER_SCRIPT>
+   ```
+
+- **Run a non-test TS file using Vite**<br>
+   (requires **Run an NPM script using Docker compose**)
+   ```
+   docker exec -it weaponsforge-sendemail-dev npx vite-node /opt/app/src/<PATH_TO_TS_FILE>.ts
    ```
 
 - See the [Available Scripts](#-available-scripts) and [Docker Scripts](#-docker-scripts) sections for more information.
