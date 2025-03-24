@@ -94,6 +94,12 @@ Sends emails using Gmail SMTP with username/pw or Google OAuth2
    docker run -it -v ${pwd}/app:/opt/app -v /opt/app/node_modules --rm weaponsforge/sendemail:dev npm run <AVAILABLE_SCRIPT_OR_DOCKER_SCRIPT>
    ```
 
+- **Run a non-test TS file using Vite**<br>
+   (requires **Run an NPM script using Docker compose**)
+   ```
+   docker exec -it weaponsforge-sendemail-dev npx vite-node /opt/app/src/<PATH_TO_TS_FILE>.ts
+   ```
+
 - See the [Available Scripts](#-available-scripts) and [Docker Scripts](#-docker-scripts) sections for more information.
 
 

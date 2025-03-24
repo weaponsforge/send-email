@@ -7,5 +7,6 @@ dist/
 *.txt
 *.d.ts
 *.map
+*.env
 src/**/*.js
 __tests__/**/*.js
