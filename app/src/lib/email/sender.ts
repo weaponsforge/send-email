@@ -20,7 +20,7 @@ class EmailSender extends EmailTransport implements IEmailSender {
       const transportOptions = this.getTransportOptions()
       const { recipient, subject, content } = params
 
-      return await this.transporter.sendMail({
+      return await this.transporter!.sendMail({
         from: transportOptions.auth?.user || process.env.USER_EMAIL,
         to: recipient,
         subject: subject,

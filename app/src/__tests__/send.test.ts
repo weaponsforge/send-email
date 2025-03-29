@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest'
-import { send } from '@/lib'
+import { send } from '@/lib/index.js'
 
 const MAX_TIMEOUT = 10000
 const TEST_RECIPIENT = 'tester@gmail.com'
