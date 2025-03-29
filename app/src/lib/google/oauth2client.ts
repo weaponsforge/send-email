@@ -23,6 +23,9 @@ class GmailOAuthClient implements IGmailOAuthClient {
   /** Google OAuth2 refresh token from the Google OAuth2 Playground  */
   #refreshToken: string | null = null
 
+  /** Google OAuth2 access token generated using the #refreshToken */
+  #accessToken: string | null = null
+
   /**
    * @constructor
    * @param {Partial<IOauthClient>} params (Optional) constructor parameters. The corresponding `.env` variables
@@ -74,11 +77,19 @@ class GmailOAuthClient implements IGmailOAuthClient {
   }
 
   async getAccessToken (): Promise<GetAccessTokenResponse> {
+    this.checkClient()
+    return await this.#client!.getAccessToken()
+  }
+
+  async generateAccessToken (): Promise<void> {
+    this.checkClient()
+    this.#accessToken = await this.getAccessToken() as string
+  }
+
+  checkClient (): void {
     if (!this.#client) {
       throw new Error('Undefined OAuth2 client')
     }
-
-    return await this.#client?.getAccessToken()
   }
 
   get client (): OAuth2Client | null {
@@ -91,6 +102,10 @@ class GmailOAuthClient implements IGmailOAuthClient {
 
   get refreshToken (): string | null {
     return this.#refreshToken
+  }
+
+  get accessToken (): string | null {
+    return this.#accessToken
   }
 }
 
