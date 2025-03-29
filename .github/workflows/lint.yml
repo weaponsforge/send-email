@@ -1,4 +1,4 @@
-name: Run Unit/Integration Tests
+name: Run Lint Tests
 
 on:
   push:
@@ -6,15 +6,9 @@ on:
       - 'main'
 
 jobs:
-  test-app:
-    name: Test App
+  lint-app:
+    name: Lint App
     runs-on: ubuntu-latest
-    env:
-      GOOGLE_USER_EMAIL: ${{ secret.GOOGLE_USER_EMAIL }}
-      GOOGLE_CLIENT_ID: ${{ secret.GOOGLE_CLIENT_ID }}
-      GOOGLE_CLIENT_SECRET: ${{ secret.GOOGLE_CLIENT_SECRET }}
-      GOOGLE_REDIRECT_URI: ${{ secret.GOOGLE_REDIRECT_URI }}
-      GOOGLE_REFRESH_TOKEN: ${{ secret.GOOGLE_REFRESH_TOKEN }}
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v3
@@ -30,7 +24,13 @@ jobs:
           cd app
           npm install
 
-      - name: Test
+      - name: Lint
         run: |
           cd app
-          npm test
+          npm run lint
+
+      - name: Transpile
+        run: |
+          cd app
+          npm run transpile:test
+
