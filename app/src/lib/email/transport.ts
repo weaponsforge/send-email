@@ -31,8 +31,12 @@ class EmailTransport implements IEmailTransport {
 
   async createTransport3LO (oauth2Client: GmailOAuthClient): Promise<void> {
     try {
-      // Retrieve a fresh access token
-      const token = await oauth2Client.getAccessToken()
+      let token = oauth2Client.accessToken
+
+      // Generate and retrieve a fresh access token
+      if (!token) {
+        token = await oauth2Client.getAccessToken()
+      }
 
       // Initialize the nodemailer transport with a fresh access token
       this.#transporter = nodemailer.createTransport(<SMTPTransport.Options>{

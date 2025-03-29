@@ -25,6 +25,23 @@ export interface IGmailOAuthClient {
   getAccessToken (): Promise<GetAccessTokenResponse>;
 
   /**
+   * Generates a Google OAuth2 access token, storing it in the local `this.#accessToken`
+   * @returns {Promise<void>}
+   */
+  generateAccessToken (): Promise<void>;
+
+  /**
+   * Validates that the OAuth2 client is initialized
+   * @throws {Error} When the OAuth2 client is null
+   */
+  checkClient (): void;
+
+  /**
+   * Sets the value of the local access token
+   */
+  set accessToken (accessToken: GetAccessTokenResponse | null);
+
+  /**
    * Retrieves the local-initialized Google OAuth2 client
    * @returns {OAuth2Client | null} local Google OAuth2 client
    */
@@ -42,5 +59,11 @@ export interface IGmailOAuthClient {
    * @returns {string | null} Google OAuth2 refresh token
    */
   get refreshToken (): string | null;
+
+  /**
+   * Retrieves the local access token if initialized
+   * @returns {GetAccessTokenResponse | null} Google Oauth2 access token
+   */
+  get accessToken (): GetAccessTokenResponse | null;
 }
 

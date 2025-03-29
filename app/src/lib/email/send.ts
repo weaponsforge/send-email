@@ -8,8 +8,8 @@ import type { EmailType } from '@/types/email.schema.js'
  *  Sends a raw, text-content email to a recipient
  * @param {EmailType} params Email sending input parameters
  */
-export const send = async (params: EmailType): Promise<void> => {
-  const oauthClient = new GmailOAuthClient()
+export const send = async (params: EmailType, client?: GmailOAuthClient): Promise<void> => {
+  const oauthClient = client || new GmailOAuthClient()
 
   const handler = new EmailSender({
     host: TRANSPORT_SMTP_HOSTS.GMAIL,
@@ -18,7 +18,6 @@ export const send = async (params: EmailType): Promise<void> => {
 
   try {
     await handler.createTransport3LO(oauthClient)
-    console.log('Transport created')
   } catch (err: unknown) {
     if (err instanceof Error) {
       throw new Error(err.message)
