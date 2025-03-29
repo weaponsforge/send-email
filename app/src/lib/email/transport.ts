@@ -14,7 +14,7 @@ class EmailTransport implements IEmailTransport {
   /** Nodemailer tansport */
   #transporter: nodemailer.Transporter | null = null
 
-  /** SMPT hosts allowed within Nodemailer */
+  /** SMTP hosts allowed within Nodemailer */
   #host: TRANSPORT_SMTP_HOSTS | null = null
 
   /** SMTP authentication modes allowed by Nodemailer */
