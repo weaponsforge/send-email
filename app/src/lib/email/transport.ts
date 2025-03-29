@@ -2,19 +2,19 @@ import nodemailer from 'nodemailer'
 import GmailOAuthClient from '@/lib/google/oauth2client.js'
 
 import { TRANSPORT_SMTP_HOSTS, TRANSPORT_AUTH_TYPES } from '@/types/transport.types.js'
-import type { ITransportAuth, SMTPTransport } from '@/types/transport.types.js'
-import type { ITransport } from '@/types/transport.interface.js'
+import type { IEmailTransportAuth, SMTPTransport } from '@/types/transport.types.js'
+import type { IEmailTransport } from '@/types/transport.interface.js'
 
 /**
  * @class EmailTransport
  * @description Initializes the Nodemailer transport with Google OAuth2 credentials
  * and initiates sending emails using the Gmail SMTP
  */
-class EmailTransport implements ITransport {
+class EmailTransport implements IEmailTransport {
   /** Nodemailer tansport */
   #transporter: nodemailer.Transporter | null = null
 
-  /** SMPT hosts allowed within Nodemailer */
+  /** SMTP hosts allowed within Nodemailer */
   #host: TRANSPORT_SMTP_HOSTS | null = null
 
   /** SMTP authentication modes allowed by Nodemailer */
@@ -22,9 +22,9 @@ class EmailTransport implements ITransport {
 
   /**
    * @constructor
-   * @param {ITransportAuth} params Constructor parameters
+   * @param {IEmailTransportAuth} params Constructor parameters
    */
-  constructor (params?: ITransportAuth) {
+  constructor (params?: IEmailTransportAuth) {
     this.#host = params?.host || TRANSPORT_SMTP_HOSTS.GMAIL
     this.#type = params?.type || TRANSPORT_AUTH_TYPES.OAUTH2
   }

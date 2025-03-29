@@ -1,6 +1,6 @@
 ## send-email
 
-Sends emails using Gmail SMTP with username/pw or Google OAuth2
+Sends emails using Gmail SMTP with Google OAuth2 or username/pw.
 
 ### Table of Contents
 
@@ -33,9 +33,11 @@ Sends emails using Gmail SMTP with username/pw or Google OAuth2
 
 (Installed via npm)
 
-1. typescript `v5.8.2` - Compile-time error checker
-2. vite-node `v3.0.9`- Runs TS files in development mode
-3. vitest `v3.0.9` - Runs tests
+1. googleapis `v148.0.0`
+2. nodemailer `v6.10.0`
+3. typescript `v5.8.2` - Compile-time error checker
+4. vite-node `v3.0.9`- Runs TS files in development mode
+5. vitest `v3.0.9` - Runs tests
 
 </details>
 
