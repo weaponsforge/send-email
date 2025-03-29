@@ -8,16 +8,17 @@ import type { SMTPTransport } from './transport.types.js'
  */
 export interface ITransport {
   /**
-   * Initializes `this.#transporter` with a Nodemailer transport using the 3-Legged OAuth (3LO) authentication at
-   * https://nodemailer.com/smtp/oauth2/#example-3
+   * Initializes `this.#transporter` with a Nodemailer transport using the 3-Legged OAuth (3LO) authentication.
    * @param {GmailOAuthClient} oauth2Client Instance of the `GmailOAuthClient` class
    * @returns {Promise<void>} A completed Promise that intialized `this.#transporter`with a Nodemailer transport
+   * @see https://nodemailer.com/smtp/oauth2/#example-3
    */
   createTransport3LO (oauth2Client: GmailOAuthClient): Promise<void>;
 
   /**
    * Retrieves the options used to initialize the Nodemailer transport
-   * @returns {SMTPTransport.Options} Options
+   * @returns {SMTPTransport.Options} Nodemailer SMTP Options
+   * @throws {Error} Nodemailer transport initialization error
    */
   getTransportOptions (): SMTPTransport.Options;
 
