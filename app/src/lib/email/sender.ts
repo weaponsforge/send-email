@@ -5,6 +5,7 @@ import EmailTransport from '@/lib/email/transport.js'
 import type { IEmailTransportAuth } from '@/types/transport.types.js'
 import type { IEmailSender } from '@/types/sender.interface.js'
 import { type EmailType, EmailSchema } from '@/types/email.schema.js'
+import { zodErrorsToString } from '@/utils/helpers.js'
 
 /**
  * @class EmailSender
@@ -21,7 +22,8 @@ class EmailSender extends EmailTransport implements IEmailSender {
       const result = EmailSchema.safeParse(params)
 
       if (!result.success) {
-        throw new Error(result.error.message)
+        const errors = zodErrorsToString(result?.error?.errors)
+        throw new Error(errors || 'An unknown error occured')
       }
 
       const { recipient, subject, content } = params
