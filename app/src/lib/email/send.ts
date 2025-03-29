@@ -2,13 +2,13 @@ import EmailSender from '@/lib/email/sender.js'
 import GmailOAuthClient from '@/lib/google/oauth2client.js'
 
 import { TRANSPORT_AUTH_TYPES, TRANSPORT_SMTP_HOSTS } from '@/types/transport.types.js'
-import type { ISendEmail } from '@/types/sender.types.js'
+import type { EmailType } from '@/types/email.schema.js'
 
 /**
  *  Sends a raw, text-content email to a recipient
- * @param {ISendEmail} params Email sending input parameters
+ * @param {EmailType} params Email sending input parameters
  */
-export const send = async (params: ISendEmail): Promise<void> => {
+export const send = async (params: EmailType): Promise<void> => {
   const oauthClient = new GmailOAuthClient()
 
   const handler = new EmailSender({

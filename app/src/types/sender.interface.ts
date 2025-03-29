@@ -1,10 +1,10 @@
-import type { ISendEmail } from '@/types/sender.types.js'
+import type { EmailType } from '@/types/email.schema.js'
 
 export interface IEmailSender {
   /**
    * Sends an email using Gmail SMTP and Google OAuth2
-   * @param {ISendEmail} params Input parameters for sending email
+   * @param {EmailType} params Input parameters for sending email
    * @returns {Promise<void>} Resolved Promise that sent the email
    */
-  sendEmail (params: ISendEmail): Promise<void>;
+  sendEmail (params: EmailType): Promise<void>;
 }
