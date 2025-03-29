@@ -2,7 +2,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 import EmailTransport from '@/lib/email/transport.js'
-import type { ITransportAuth } from '@/types/transport.types.js'
+import type { IEmailTransportAuth } from '@/types/transport.types.js'
 import type { ISendEmail } from '@/types/sender.types.js'
 import type { IEmailSender } from '@/types/sender.interface.js'
 
@@ -11,7 +11,7 @@ import type { IEmailSender } from '@/types/sender.interface.js'
  * @description Sends emails using its Nodemailer transporter
  */
 class EmailSender extends EmailTransport implements IEmailSender {
-  constructor (params: ITransportAuth) {
+  constructor (params: IEmailTransportAuth) {
     super(params)
   }
 

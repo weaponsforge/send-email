@@ -4,9 +4,9 @@ import type { SMTPTransport } from './transport.types.js'
 
 /**
  * Public properties and methods types of the `GmailOAuthClient` class
- * @interface ITransport
+ * @interface IEmailTransport
  */
-export interface ITransport {
+export interface IEmailTransport {
   /**
    * Initializes `this.#transporter` with a Nodemailer transport using the 3-Legged OAuth (3LO) authentication.
    * @param {GmailOAuthClient} oauth2Client Instance of the `GmailOAuthClient` class
