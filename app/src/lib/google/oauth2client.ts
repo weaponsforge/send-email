@@ -24,7 +24,7 @@ class GmailOAuthClient implements IGmailOAuthClient {
   #refreshToken: string | null = null
 
   /** Google OAuth2 access token generated using the #refreshToken */
-  #accessToken: string | null = null
+  #accessToken: GetAccessTokenResponse | null = null
 
   /**
    * @constructor
@@ -83,7 +83,7 @@ class GmailOAuthClient implements IGmailOAuthClient {
 
   async generateAccessToken (): Promise<void> {
     this.checkClient()
-    this.#accessToken = await this.getAccessToken() as string
+    this.#accessToken = await this.getAccessToken()
   }
 
   checkClient (): void {
@@ -104,7 +104,7 @@ class GmailOAuthClient implements IGmailOAuthClient {
     return this.#refreshToken
   }
 
-  get accessToken (): string | null {
+  get accessToken (): GetAccessTokenResponse | null {
     return this.#accessToken
   }
 }

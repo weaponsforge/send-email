@@ -35,7 +35,7 @@ class EmailTransport implements IEmailTransport {
 
       // Generate and retrieve a fresh access token
       if (!token) {
-        token = await oauth2Client.getAccessToken() as string
+        token = await oauth2Client.getAccessToken()
       }
 
       // Initialize the nodemailer transport with a fresh access token

@@ -57,8 +57,8 @@ export interface IGmailOAuthClient {
 
   /**
    * Retrieves the local access token if initialized
-   * @returns {string | null} Google Oauth2 access token
+   * @returns {GetAccessTokenResponse | null} Google Oauth2 access token
    */
-  get accessToken (): string | null;
+  get accessToken (): GetAccessTokenResponse | null;
 }
 
