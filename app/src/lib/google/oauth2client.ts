@@ -92,6 +92,10 @@ class GmailOAuthClient implements IGmailOAuthClient {
     }
   }
 
+  set accessToken (accessToken: GetAccessTokenResponse | null) {
+    this.#accessToken = accessToken
+  }
+
   get client (): OAuth2Client | null {
     return this.#client
   }

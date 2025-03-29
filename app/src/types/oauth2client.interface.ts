@@ -37,6 +37,11 @@ export interface IGmailOAuthClient {
   checkClient (): void;
 
   /**
+   * Sets the value of the local access token
+   */
+  set accessToken (accessToken: GetAccessTokenResponse | null);
+
+  /**
    * Retrieves the local-initialized Google OAuth2 client
    * @returns {OAuth2Client | null} local Google OAuth2 client
    */
