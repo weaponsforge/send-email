@@ -49,7 +49,7 @@ class GmailOAuthClient implements IGmailOAuthClient {
       const { clientId, clientSecret, redirectURI, refreshToken, userEmail } = params
 
       if (!userEmail) {
-        throw new Error('Undefined email')
+        throw new Error('Undefined sender email')
       }
 
       if (!refreshToken) {
