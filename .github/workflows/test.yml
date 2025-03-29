@@ -1,13 +1,42 @@
-name: Run Unit/Integration Tests
+name: Run CI Tests
 
 on:
   push:
     branches-ignore:
-      - 'main'
+      - main
 
 jobs:
+  lint-app:
+    name: Lint App
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+
+      - name: Use NodeJS v22.14.0
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22.14.0
+          registry-url: https://registry.npmjs.org/
+
+      - name: Install Dependencies
+        run: |
+          cd app
+          npm install
+
+      - name: Lint
+        run: |
+          cd app
+          npm run lint
+
+      - name: Transpile
+        run: |
+          cd app
+          npm run transpile:noemit
+
   test-app:
-    name: Test App
+    name: Unit/Integration Tests
+    needs: lint-app
     runs-on: ubuntu-latest
     env:
       GOOGLE_USER_EMAIL: ${{ secrets.GOOGLE_USER_EMAIL }}

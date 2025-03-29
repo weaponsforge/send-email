@@ -139,10 +139,6 @@ Builds JavaScript, `.d.ts` declaration files, and map files from the TypeScript 
 
 ### `npm run transpile:noemit`
 
-Runs type-checking without generating the JavaScript or declaration files from the TypeScript files in the `/src` directory.
-
-### `npm run transpile:test`
-
 Runs type-checking without generating the JavaScript or declaration files from the TypeScript files in the `/src` and `__tests__` directories.
 
 ### `npm run lint`
