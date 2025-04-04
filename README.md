@@ -108,7 +108,7 @@ Sends emails using Gmail SMTP with Google OAuth2 or username/pw.
 - **Run an NPM script using only Docker**<br>
    Ensure the Docker container is running (see **Run the container**)
    ```bash
-   docker run -it -v ${pwd}/app:/opt/app -v /opt/app/node_modules --rm weaponsforge/sendemail:dev npm run <AVAILABLE_SCRIPT_OR_DOCKER_SCRIPT>
+   docker run -it -v ${pwd}/app:/opt/app -v /opt/app/node_modules --rm weaponsforge/sendemail:dev <AVAILABLE_SCRIPT_OR_DOCKER_SCRIPT>
    ```
 
 - **Run a non-test TS file using Vite**<br>
@@ -127,7 +127,7 @@ These scripts, compatible with running in Node and Docker, run various TypeScrip
 <details>
 <summary>Click to expand the list of available scripts</summary>
 
-### A. Running the Codes
+### A. Running the Codes ⚙️➡️
 
 ### `npm run dev`
 
@@ -145,7 +145,7 @@ Builds JavaScript, `.d.ts` declaration files, and map files from the TypeScript 
 
 Runs type-checking without generating the JavaScript or declaration files from the TypeScript files in the `/src` and `__tests__` directories.
 
-### B. Testing
+### B. Testing 🚦✅
 
 ### `npm run lint`
 Lints TypeScript source codes.
@@ -162,7 +162,7 @@ Fixes lint errors in TypeScript files.
 
 - Runs test scripts defined in `*.test.ts` files with coverage.
 - Spawns a local report-like website showing each test's real-time status and coverage using vitest-ui
-- This script is similar to the vitest **`npm run dev`** script that watches for changes in the `*.test.ts` files but displays the result logs in the local website rather than the command line.
+- This script is similar to the vitest **`npm run dev`** script that watches for changes in the `*.test.ts` files but displays the result logs and coverage details in the local website rather than the command line.
 
 ### `npm run report:view`
 
