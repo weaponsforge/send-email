@@ -18,7 +18,7 @@ describe('Email format test', () => {
   })
 
   // Testing invalid format emails
-  it('should detect an invalid email format', async () => {
+  it('should detect an invalid email address format', async () => {
     const invalidEmail = 'tester!#5@.4/'
 
     await expect(
@@ -34,7 +34,7 @@ describe('Email format test', () => {
   }, MAX_TIMEOUT)
 
   // Testing long email addresses
-  it('should detect emails longer than 150 characters', async () => {
+  it('should detect email addresses longer than 150 characters', async () => {
     const longRecipientEmail = createLongString(150) + '@gmail.com'
 
     await expect(

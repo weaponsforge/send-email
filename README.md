@@ -102,7 +102,7 @@ Sends emails using Gmail SMTP with Google OAuth2 or username/pw.
 - **Run an NPM script using Docker compose**<br>
    Ensure the Docker container is running (see **Run the container**)
    ```bash
-   docker exec -it weaponsforge-sendemail-dev npm run <AVAILABLE_SCRIPT_OR_DOCKER_SCRIPT>
+   docker exec -it weaponsforge-sendemail-dev <AVAILABLE_SCRIPT_OR_DOCKER_SCRIPT>
    ```
 
 - **Run an NPM script using only Docker**<br>
@@ -127,6 +127,8 @@ These scripts, compatible with running in Node and Docker, run various TypeScrip
 <details>
 <summary>Click to expand the list of available scripts</summary>
 
+### A. Running the Codes
+
 ### `npm run dev`
 
 Runs `vitest` in watch mode, watching file changes and errors to files linked with `*.test.ts` files.
@@ -143,6 +145,8 @@ Builds JavaScript, `.d.ts` declaration files, and map files from the TypeScript 
 
 Runs type-checking without generating the JavaScript or declaration files from the TypeScript files in the `/src` and `__tests__` directories.
 
+### B. Testing
+
 ### `npm run lint`
 Lints TypeScript source codes.
 
@@ -150,13 +154,31 @@ Lints TypeScript source codes.
 Fixes lint errors in TypeScript files.
 
 ### `npm test`
-Runs test scripts defined in *.test.ts files.
+- Runs test scripts defined in `*.test.ts` files with coverage.
+- Generates a vitest test report into the **/html** directory.
+- Run `npm run report:view` to preview the generated report.
+
+### `npm run test:ui`
+
+- Runs test scripts defined in `*.test.ts` files with coverage.
+- Spawns a local report-like website showing each test's real-time status and coverage using vitest-ui
+- This script is similar to the vitest **`npm run dev`** script that watches for changes in the `*.test.ts` files but displays the result logs in the local website rather than the command line.
+
+### `npm run report:view`
+
+> **NOTE:** This script requires running `npm test` first to generate a test report into the **/html** directory
+
+- Spins up a local web server accessible at `http://localhost:4174/`
+- Serves the website contents of a test report from the **/html** directory
 
 </details>
 
 ## 📦 Docker Scripts
 
 These scripts allow optional Docker-related processes, such as enabling file watching in Docker containers running in Windows WSL2 and others.
+
+> [!TIP]
+> Scripts with a `":win"` suffix indicate compatibility for Windows Docker running in WSL2.
 
 <details>
 <summary>Click to expand the list of available scripts</summary>
@@ -170,6 +192,12 @@ Run the Docker containers first using options A or B.
 ```
 docker compose -f docker-compose.dev.yml build
 docker compose -f docker-compose.dev.yml up
+```
+
+Use the template:
+
+```
+docker exec -it weaponsforge-sendemail-dev <AVAILABLE_DOCKER_SCRIPT>
 ```
 
 **B. Using Only Docker (PowerShell)**
@@ -207,6 +235,20 @@ docker compose -f docker-compose.dev.yml up
    }
    ```
 
+### `npm run docker:test:ui`
+
+- Docker command counterpart of the `npm run test:ui` script,  compatible with containers running in **Linux** OS.
+- Runs test scripts defined in `*.test.ts` files in watch mode with coverage from a container.
+- Spawns a local report-like website showing each test's real-time status and coverage using vitest-ui accessible at `http://localhost:51204/__vitest__/`.
+
+### `npm run docker:report:view`
+
+> **NOTE:** This script requires running `npm test` first to generate a test report into the **/html** directory
+
+- Docker command counterpart of the `npm run report:view` script.
+- Spins up a local web server accessible at `http://localhost:4174/`
+- Serves the website contents of a test report from the host's **/html** directory
+
 ### `npm run docker:watch:win`
 
 Watches file changes in `.ts` files using the `tsc --watch` option with `dynamicPriorityPolling` in Docker containers running in Windows WSL2.
@@ -215,6 +257,12 @@ Watches file changes in `.ts` files using the `tsc --watch` option with `dynamic
 
 - Sets and exports the environment variables: `CHOKIDAR_USEPOLLING=1` and `CHOKIDAR_INTERVAL=1000`
 - Runs `vitest` in watch mode inside Docker containers running in Windows WSL2, watching file changes and errors to files linked with `*.test.ts` files.
+
+### `npm run docker:test:ui:win`
+
+- Sets and exports the environment variables: `CHOKIDAR_USEPOLLING=1` and `CHOKIDAR_INTERVAL=1000`
+- Runs test scripts defined in `*.test.ts` files in watch mode with coverage inside Docker containers running in **Windows WSL2**.
+- Spawns a local report-like website showing each test's real-time status and coverage using vitest-ui accessible at `http://localhost:51204/__vitest__/`.
 
 </details>
 
