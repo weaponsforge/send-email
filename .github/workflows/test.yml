@@ -22,15 +22,15 @@ jobs:
       - name: Cache Node modules
         uses: actions/cache@v4
         with:
-          path: app/node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('app/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-
+            ${{ runner.os }}-npm-
 
       - name: Install Dependencies
         run: |
           cd app
-          npm install
+          npm ci
 
       - name: Lint
         run: |
@@ -69,15 +69,15 @@ jobs:
       - name: Cache Node modules
         uses: actions/cache@v4
         with:
-          path: app/node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('app/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-
+            ${{ runner.os }}-npm-
 
       - name: Install Dependencies
         run: |
           cd app
-          npm install
+          npm ci
 
       - name: Test
         run: |
