@@ -19,7 +19,7 @@ COPY . ./
 RUN mkdir /opt/app/node_modules/.vite \
   && chown -R node:node /opt/app/node_modules/.vite
 USER node
-EXPOSE 9229
+EXPOSE 9229 4173 51204
 CMD ["sh"]
 
 # Proudction target profile

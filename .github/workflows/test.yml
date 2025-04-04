@@ -38,6 +38,9 @@ jobs:
     name: Unit/Integration Tests
     needs: lint-app
     runs-on: ubuntu-latest
+    permissions:
+      checks: write
+      pull-requests: write
     env:
       GOOGLE_USER_EMAIL: ${{ secrets.GOOGLE_USER_EMAIL }}
       GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
@@ -64,3 +67,17 @@ jobs:
         run: |
           cd app
           npm test
+
+      - name: Upload Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: app/html/junit.xml
+
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          files: app/html/junit.xml
+          check_name: "Test Results"
