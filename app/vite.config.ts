@@ -8,7 +8,10 @@ export default defineConfig({
     }
   },
   test: {
-    reporters: ['verbose', 'html'],
+    reporters: ['verbose', 'html', 'junit'],
+    outputFile: {
+      junit: './html/junit.xml'
+    },
     coverage: {
       provider: 'v8',
       enabled: true,
