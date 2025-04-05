@@ -1,3 +1,4 @@
+import SchemaValidator from '@/lib/validator/schemavalidator.js'
 
 import type {
   GetAccessTokenResponse,
@@ -40,6 +41,12 @@ export interface IGmailOAuthClient {
    * Sets the value of the local access token
    */
   set accessToken (accessToken: GetAccessTokenResponse | null);
+
+  /**
+   * Retrieves the local zod schema wrapper
+   * @returns {SchemaValidator | null} Local zod schema validator and wrapper
+   */
+  get schema (): SchemaValidator | null;
 
   /**
    * Retrieves the local-initialized Google OAuth2 client
