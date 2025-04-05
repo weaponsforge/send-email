@@ -4,7 +4,7 @@ dotenv.config()
 import EmailTransport from '@/lib/email/transport.js'
 import type { IEmailTransportAuth, SentMessageInfo } from '@/types/transport.types.js'
 import type { IEmailSender } from '@/types/sender.interface.js'
-import { type EmailType, EmailSchema } from '@/types/email.schema.js'
+import { type EmailType, EmailSchema, EmailSchemaMessages } from '@/types/email.schema.js'
 import { stringsToArray, zodErrorsToString } from '@/utils/helpers.js'
 
 /**
@@ -34,6 +34,10 @@ class EmailSender extends EmailTransport implements IEmailSender {
       } = params
 
       const receivers = stringsToArray(recipient, recipients)
+
+      if (receivers.length > 20) {
+        throw new Error(EmailSchemaMessages.RECIPIENT_EMAIL_MAX)
+      }
 
       return await this.transporter!.sendMail({
         from: transportOptions.auth?.user || process.env.USER_EMAIL,

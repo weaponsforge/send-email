@@ -3,6 +3,7 @@ import { z } from 'zod'
 export enum EmailSchemaMessages {
   RECIPIENT_EMAIL = 'Please enter a valid email address',
   RECIPIENT_EMAIL_LENGTH = 'Email address cannot be longer than 150 characters',
+  RECIPIENT_EMAIL_MAX = 'Maximum of 20 recipients allowed',
   RECIPIENT_REQUIRED = 'Either recipient or recipients must be provided',
   SUBJECT = 'Subject/title cannot be longer than 200 characters',
   CONTENT = 'Email content cannot be longer than 1500 characters'
@@ -30,7 +31,8 @@ export const EmailSchema = z.object({
     z.string()
       .email({ message: EmailSchemaMessages.RECIPIENT_EMAIL })
       .max(150, { message: EmailSchemaMessages.RECIPIENT_EMAIL_LENGTH })
-  ).optional(),
+  ).max(20, { message: EmailSchemaMessages.RECIPIENT_EMAIL_MAX })
+    .optional(),
 
   subject: z.string()
     .max(200, { message: EmailSchemaMessages.SUBJECT }),

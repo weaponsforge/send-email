@@ -202,7 +202,7 @@ docker exec -it weaponsforge-sendemail-dev <AVAILABLE_DOCKER_SCRIPT>
 
 **B. Using Only Docker (PowerShell)**
 
-`docker run -it -v ${pwd}/app:/opt/app -v /opt/app/node_modules --rm weaponsforge/sendemail:dev <AVAILABLE_SCRIPT>`
+`docker run -it -v ${pwd}/app:/opt/app -v /opt/app/node_modules --rm weaponsforge/sendemail:dev <AVAILABLE_DOCKER_SCRIPT>`
 
 ### Scripts
 
