@@ -2,10 +2,10 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 import EmailTransport from '@/lib/email/transport.js'
-import type { IEmailTransportAuth } from '@/types/transport.types.js'
+import type { IEmailTransportAuth, SentMessageInfo } from '@/types/transport.types.js'
 import type { IEmailSender } from '@/types/sender.interface.js'
-import { type EmailType, EmailSchema } from '@/types/email.schema.js'
-import { zodErrorsToString } from '@/utils/helpers.js'
+import { type EmailType, EmailSchema, EmailSchemaMessages } from '@/types/email.schema.js'
+import { stringsToArray, zodErrorsToString } from '@/utils/helpers.js'
 
 /**
  * @class EmailSender
@@ -16,7 +16,7 @@ class EmailSender extends EmailTransport implements IEmailSender {
     super(params)
   }
 
-  async sendEmail (params: EmailType): Promise<void> {
+  async sendEmail (params: EmailType): Promise<SentMessageInfo> {
     try {
       const transportOptions = this.getTransportOptions()
       const result = EmailSchema.safeParse(params)
@@ -26,11 +26,22 @@ class EmailSender extends EmailTransport implements IEmailSender {
         throw new Error(errors || 'Encountered email parameter validation errors')
       }
 
-      const { recipient, subject, content } = params
+      const {
+        recipient,
+        recipients = [],
+        subject,
+        content
+      } = params
+
+      const receivers = stringsToArray(recipient, recipients)
+
+      if (receivers.length > 20) {
+        throw new Error(EmailSchemaMessages.RECIPIENT_EMAIL_MAX)
+      }
 
       return await this.transporter!.sendMail({
         from: transportOptions.auth?.user || process.env.USER_EMAIL,
-        to: recipient,
+        to: receivers,
         subject: subject,
         text: content
       })
