@@ -17,7 +17,7 @@ describe('Email format test', () => {
     await oauthClient.generateAccessToken()
   })
 
-  // Testing invalid format emails
+  // Testing email formats
   it('should reject invalid email address format', async () => {
     const invalidEmail = 'tester!#5@.4/'
 
@@ -65,6 +65,7 @@ describe('Email format test', () => {
     ).rejects.toThrow(EmailSchemaMessages.SUBJECT)
   }, MAX_TIMEOUT)
 
+  // Testing long email message content
   it('should reject email message content longer that 1500 characters', async () => {
     const longContent = createLongString(1501)
 
@@ -78,5 +79,18 @@ describe('Email format test', () => {
         oauthClient
       )
     ).rejects.toThrow(EmailSchemaMessages.CONTENT)
+  }, MAX_TIMEOUT)
+
+  // Testing missing recipient or recipients[]
+  it('should reject if recipient or recipients[] is missing', async () => {
+    await expect(
+      send(
+        {
+          subject: TEST_SUBJECT,
+          content: 'Hello there'
+        },
+        oauthClient
+      )
+    ).rejects.toThrow(EmailSchemaMessages.RECIPIENT_REQUIRED)
   }, MAX_TIMEOUT)
 })

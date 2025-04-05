@@ -10,6 +10,7 @@ import type { EmailType } from '@/types/email.schema.js'
  */
 export const send = async (params: EmailType, client?: GmailOAuthClient): Promise<void> => {
   const oauthClient = client || new GmailOAuthClient()
+  const { recipient, recipients, subject, content } = params
 
   const handler = new EmailSender({
     host: TRANSPORT_SMTP_HOSTS.GMAIL,
@@ -25,13 +26,14 @@ export const send = async (params: EmailType, client?: GmailOAuthClient): Promis
   }
 
   try {
-    await handler.sendEmail({
-      recipient: params?.recipient,
-      subject: params?.subject,
-      content: params?.content
+    const result = await handler.sendEmail({
+      recipient,
+      recipients,
+      subject,
+      content
     })
 
-    console.log('Email sent to', params?.recipient)
+    console.log('Email sent to', result?.accepted)
   } catch (err: unknown) {
     if (err instanceof Error) {
       throw new Error(err.message)

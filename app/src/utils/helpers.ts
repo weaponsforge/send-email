@@ -17,3 +17,14 @@ export const zodErrorsToString = (errors: ZodIssue[]): string => {
 export const createLongString = (length: number = 10): string => {
   return Array.from({ length }).map(() => 'a').join('')
 }
+
+/**
+  * Joins one (1) or more strings into an aray of strings
+  * @param {string} text String of text
+  * @param {string[]} texts Array containing strings of text
+  * @returns {string[]} Array of strings containing the combined parameters
+  */
+export const stringsToArray = (text: string | undefined, texts: string[] = []): string[] => {
+  return [...texts, text]
+    .filter(item => item !== undefined)
+}

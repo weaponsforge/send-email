@@ -5,7 +5,7 @@ import EmailTransport from '@/lib/email/transport.js'
 import type { IEmailTransportAuth } from '@/types/transport.types.js'
 import type { IEmailSender } from '@/types/sender.interface.js'
 import { type EmailType, EmailSchema } from '@/types/email.schema.js'
-import { zodErrorsToString } from '@/utils/helpers.js'
+import { stringsToArray, zodErrorsToString } from '@/utils/helpers.js'
 
 /**
  * @class EmailSender
@@ -26,11 +26,18 @@ class EmailSender extends EmailTransport implements IEmailSender {
         throw new Error(errors || 'Encountered email parameter validation errors')
       }
 
-      const { recipient, subject, content } = params
+      const {
+        recipient,
+        recipients = [],
+        subject,
+        content
+      } = params
 
-      return await this.transporter!.sendMail({
+      const receivers = stringsToArray(recipient, recipients)
+
+      await this.transporter!.sendMail({
         from: transportOptions.auth?.user || process.env.USER_EMAIL,
-        to: recipient,
+        to: receivers,
         subject: subject,
         text: content
       })
