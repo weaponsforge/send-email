@@ -2,7 +2,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 import EmailTransport from '@/lib/email/transport.js'
-import type { IEmailTransportAuth } from '@/types/transport.types.js'
+import type { IEmailTransportAuth, SentMessageInfo } from '@/types/transport.types.js'
 import type { IEmailSender } from '@/types/sender.interface.js'
 import { type EmailType, EmailSchema } from '@/types/email.schema.js'
 import { stringsToArray, zodErrorsToString } from '@/utils/helpers.js'
@@ -16,7 +16,7 @@ class EmailSender extends EmailTransport implements IEmailSender {
     super(params)
   }
 
-  async sendEmail (params: EmailType): Promise<void> {
+  async sendEmail (params: EmailType): Promise<SentMessageInfo> {
     try {
       const transportOptions = this.getTransportOptions()
       const result = EmailSchema.safeParse(params)
@@ -35,7 +35,7 @@ class EmailSender extends EmailTransport implements IEmailSender {
 
       const receivers = stringsToArray(recipient, recipients)
 
-      await this.transporter!.sendMail({
+      return await this.transporter!.sendMail({
         from: transportOptions.auth?.user || process.env.USER_EMAIL,
         to: receivers,
         subject: subject,
