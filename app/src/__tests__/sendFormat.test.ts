@@ -18,7 +18,7 @@ describe('Email format test', () => {
   })
 
   // Testing invalid format emails
-  it('should detect an invalid email address format', async () => {
+  it('should reject invalid email address format', async () => {
     const invalidEmail = 'tester!#5@.4/'
 
     await expect(
@@ -34,7 +34,7 @@ describe('Email format test', () => {
   }, MAX_TIMEOUT)
 
   // Testing long email addresses
-  it('should detect email addresses longer than 150 characters', async () => {
+  it('should reject email addresses longer than 150 characters', async () => {
     const longRecipientEmail = createLongString(150) + '@gmail.com'
 
     await expect(
@@ -50,7 +50,7 @@ describe('Email format test', () => {
   }, MAX_TIMEOUT)
 
   // Testing long subject/title content
-  it('should detect long subject/title content', async () => {
+  it('should reject subject/title longer that 200 characters', async () => {
     const longTitle = createLongString(201)
 
     await expect(
@@ -65,7 +65,7 @@ describe('Email format test', () => {
     ).rejects.toThrow(EmailSchemaMessages.SUBJECT)
   }, MAX_TIMEOUT)
 
-  it('should detect long email message content', async () => {
+  it('should reject email message content longer that 1500 characters', async () => {
     const longContent = createLongString(1501)
 
     await expect(

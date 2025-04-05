@@ -23,7 +23,7 @@ class EmailSender extends EmailTransport implements IEmailSender {
 
       if (!result.success) {
         const errors = zodErrorsToString(result?.error?.errors)
-        throw new Error(errors || 'An unknown error occured')
+        throw new Error(errors || 'Encountered email parameter validation errors')
       }
 
       const { recipient, subject, content } = params
