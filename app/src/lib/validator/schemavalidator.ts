@@ -1,9 +1,12 @@
-import { ZodObject, type ZodIssue, type ZodRawShape } from 'zod'
+import { ZodFirstPartyTypeKind, ZodObject } from '@/types/schemavalidator.interface.js'
 
 import type {
   ISchemaValidator,
   ISchemaValidateParams,
-  ZodObjectType
+  ZodIssue,
+  ZodObjectBasicType,
+  ZodObjectEffectsType,
+  ZodRawShape
 } from '@/types/schemavalidator.interface.js'
 
 /**
@@ -11,13 +14,13 @@ import type {
  * @description Wrapper around a zod schema that returns formatted validation error messages and extracts sub-schemas
  */
 class SchemaValidator implements ISchemaValidator {
-  schema: ZodObjectType | null = null
+  schema: ZodObjectBasicType | null = null
 
   /**
    * @constructor
-   * @param {ZodObjectType} schema zod schema
+   * @param {ZodObjectBasicType} schema zod schema
    */
-  constructor (schema: ZodObjectType) {
+  constructor (schema: ZodObjectBasicType) {
     if (!this.isZodSchema(schema)) {
       throw new Error('Schema is not a zod schema')
     }
@@ -25,15 +28,32 @@ class SchemaValidator implements ISchemaValidator {
     this.schema = schema
   }
 
-  isZodSchema (schema: ZodObjectType) {
-    return schema instanceof ZodObject
+  isZodSchema (schema: ZodObjectEffectsType | ZodObjectBasicType): boolean {
+    if (schema instanceof ZodObject) return true
+
+    // Check if it's a ZodEffects that wraps a ZodObject; e.g., using z.refine()
+    if ('_def' in schema && 'schema' in schema._def) {
+      return this.isZodSchema(schema._def.schema)
+    }
+
+    return false
   }
 
   isObject (param: object) {
     return !Array.isArray(param) && typeof param === 'object'
   }
 
-  getSubSchema (data: Record<string, ZodRawShape|unknown>): ZodObjectType {
+  isZodObject (schema: ZodObjectBasicType): schema is ZodObjectBasicType {
+    return schema instanceof ZodObject
+  }
+
+  isZodEffects (schema: ZodObjectEffectsType): boolean {
+    return '_def' in schema &&
+      'typeName' in schema._def &&
+      schema._def.typeName === ZodFirstPartyTypeKind.ZodEffects
+  }
+
+  getSubSchema (data: Record<string, ZodRawShape|unknown>): ZodObjectBasicType {
     this.checkSchema()
 
     if (!this.isObject(data)) {
@@ -94,9 +114,20 @@ class SchemaValidator implements ISchemaValidator {
     }
   }
 
+  get typeName (): string {
+    this.checkSchema()
+    return this.schema!._def.typeName
+  }
+
   get properties (): string[] {
     this.checkSchema()
-    return Object.keys(this.schema!.shape)
+
+    if (this.isZodEffects(this.schema!)) {
+      const schema = (this.schema! as unknown as { _def: { schema: ZodObject<any> } })._def.schema
+      return Object.keys(schema.shape)
+    } else {
+      return Object.keys(this.schema!.shape)
+    }
   }
 }
 

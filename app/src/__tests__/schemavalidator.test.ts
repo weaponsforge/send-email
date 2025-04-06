@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import { beforeAll, describe, expect, it } from 'vitest'
 import SchemaValidator from '@/lib/validator/schemavalidator.js'
-import type { ZodObjectType } from '@/types/schemavalidator.interface.js'
+import type { ZodObjectBasicType } from '@/types/schemavalidator.interface.js'
 
 describe('SchemaValidator class test', () => {
   let testSchema: SchemaValidator | null = null
@@ -28,7 +28,7 @@ describe('SchemaValidator class test', () => {
   })
 
   it ('should throw an error if no schema is provided', () => {
-    const typesafeUndefined = undefined as unknown as ZodObjectType
+    const typesafeUndefined = undefined as unknown as ZodObjectBasicType
 
     expect(
       () => new SchemaValidator(typesafeUndefined)

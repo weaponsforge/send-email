@@ -4,7 +4,7 @@ dotenv.config()
 
 import SchemaValidator from '@/lib/validator/schemavalidator.js'
 import type { IGmailOAuthClient } from '@/types/oauth2client.interface.js'
-import type { ZodObjectType } from '@/types/schemavalidator.interface.js'
+import type { ZodObjectBasicType } from '@/types/schemavalidator.interface.js'
 import { GmailOAuthClientSchema } from '@/types/oauth2client.schema.js'
 
 import {
@@ -37,9 +37,9 @@ class GmailOAuthClient implements IGmailOAuthClient {
    * @constructor
    * @param {Partial<IOauthClient>} params (Optional) constructor parameters. The corresponding `.env` variables
    * expect to have correct values for the default values.
-   * @param {ZodObjectType} [schema] (Optional) zod Schema. Defaults to the `GmailOAuthClientSchema` if not provided.
+   * @param {ZodObjectBasicType} [schema] (Optional) zod Schema. Defaults to the `GmailOAuthClientSchema` if not provided.
    */
-  constructor (params?: Partial<IOauthClient> | null, schema?: ZodObjectType) {
+  constructor (params?: Partial<IOauthClient> | null, schema?: ZodObjectBasicType) {
     const clientId = params?.clientId || process.env.GOOGLE_CLIENT_ID
     const clientSecret = params?.clientSecret || process.env.GOOGLE_CLIENT_SECRET
     const redirectURI = params?.redirectURI || process.env.GOOGLE_REDIRECT_URI

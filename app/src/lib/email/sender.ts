@@ -5,26 +5,26 @@ import EmailTransport from '@/lib/email/transport.js'
 import type { IEmailTransportAuth, SentMessageInfo } from '@/types/transport.types.js'
 import type { IEmailSender } from '@/types/sender.interface.js'
 import { type EmailType, EmailSchema, EmailSchemaMessages } from '@/types/email.schema.js'
-import { stringsToArray, zodErrorsToString } from '@/utils/helpers.js'
+import { stringsToArray } from '@/utils/helpers.js'
+import SchemaValidator from '@/lib/validator/schemavalidator.js'
 
 /**
  * @class EmailSender
  * @description Sends emails using its Nodemailer transporter
  */
 class EmailSender extends EmailTransport implements IEmailSender {
+  /** Zod schema wrapper methods and functions */
+  #schema: SchemaValidator | null = null
+
   constructor (params: IEmailTransportAuth) {
     super(params)
+    this.#schema = new SchemaValidator(EmailSchema)
   }
 
   async sendEmail (params: EmailType): Promise<SentMessageInfo> {
     try {
       const transportOptions = this.getTransportOptions()
-      const result = EmailSchema.safeParse(params)
-
-      if (!result.success) {
-        const errors = zodErrorsToString(result?.error?.errors)
-        throw new Error(errors || 'Encountered email parameter validation errors')
-      }
+      this.#schema?.validate({ data: params })
 
       const {
         recipient,
@@ -50,6 +50,10 @@ class EmailSender extends EmailTransport implements IEmailSender {
         throw new Error(err.message)
       }
     }
+  }
+
+  get schema (): SchemaValidator | null {
+    return this.#schema
   }
 }
 

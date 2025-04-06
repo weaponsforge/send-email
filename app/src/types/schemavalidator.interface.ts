@@ -1,5 +1,12 @@
-import { ZodObject, type ZodIssue, type ZodRawShape } from 'zod'
-export type ZodObjectType = ZodObject<ZodRawShape>
+import { ZodObject, ZodFirstPartyTypeKind } from 'zod'
+import type { ZodIssue, ZodRawShape, ZodType, ZodEffects } from 'zod'
+
+export type ZodObjectBasicType = ZodObject<ZodRawShape>
+export type ZodObjectEffectsType = ZodType | ZodEffects<any>
+export type ZodObjectInput = ZodObjectBasicType | ZodObjectEffectsType
+
+export type { ZodIssue, ZodRawShape }
+export { ZodObject, ZodFirstPartyTypeKind }
 
 /**
   * Parameter properties of the `ISchemaValidator.validate()` function
@@ -20,14 +27,14 @@ export interface ISchemaValidateParams {
  */
 export interface ISchemaValidator {
   /** zod schema */
-  schema: ZodObjectType | null;
+  schema: ZodObjectBasicType | null;
 
   /**
-   * Checks if an object is a zod schema
-   * @param {ZodObjectType} schema zod schema
+   * Checks if an zod schema is a basic zod schema (`ZodObject`) or an effects schema (`ZodEffects`, e.g., edited with `z.refine()`)
+   * @param {ZodObjectEffectsType} schema zod schema
    * @returns {boolean} Flag that checks if an object is a zod schema
    */
-  isZodSchema (schema: ZodObjectType): boolean;
+  isZodSchema (schema: ZodObjectEffectsType | ZodObjectBasicType): boolean;
 
   /**
    * Checks if an input parameter is an Object
@@ -36,14 +43,27 @@ export interface ISchemaValidator {
    */
   isObject (param: object): boolean;
 
+  /**
+   * Checks if a zod schema is a basic zod schema (`ZodObject`)
+   * @param {ZodObjectBasicType} schema zod schema
+   * @returns {boolean} Flag that checks if an object is a zod schema
+   */
+  isZodObject (schema: ZodObjectBasicType): schema is ZodObjectBasicType;
+
+  /**
+   * Checks if a zod schema is an effects zod schema (`ZodEffects`)
+   * @param {ZodObjectEffectsType} schema zod schema
+   * @returns {boolean} Flag that checks if an object is an effects zod schema
+   */
+  isZodEffects (schema: ZodObjectEffectsType): boolean;
 
   /**
    * Retrieves a subset of the zod `this.schema` using `.pick()`
    * @param {Record<string, any>} data Object that may possibly be a subset of the local zod `this.schema`
-   * @returns {ZodObjectType} Subset of the zod `this.schema`
+   * @returns {ZodObjectBasicType} Subset of the zod `this.schema`
    * @throws {Error} Validation errors. Also throws an error if one (1) or more keys in the `data` parameter are missing in the original `this.schema`
    */
-  getSubSchema (data: Record<string, ZodRawShape>): ZodObjectType;
+  getSubSchema (data: Record<string, ZodRawShape>): ZodObjectBasicType;
 
   /**
    * Validates a set of input parameters with the zod `this.schema`
@@ -68,6 +88,12 @@ export interface ISchemaValidator {
   checkSchema (): void;
 
   /**
+   * Retrieves the type name of the zod schema
+   * @returns {string} Type name of the zod schema
+   */
+  get typeName (): string;
+
+  /**
    * Retrieves the object keys of `this.schema`
    * @returns {string[]} Object keys of `this.schema`
    */
@@ -79,5 +105,5 @@ export interface ISchemaValidator {
  * @interface ISchemaValidatorConstructor
  */
 export interface ISchemaValidatorConstructor {
-  new (schema: ZodObjectType): ISchemaValidator;
+  new (schema: ZodObjectEffectsType): ISchemaValidator;
 }
