@@ -18,7 +18,16 @@ describe('SchemaValidator class test', () => {
     testSchema = new SchemaValidator(playerSchema)
   })
 
-  it('should throw an error if no schema is provided', () => {
+  it ('should list the zod schema keys and properties', () => {
+    const keys = testSchema?.properties
+
+    expect(keys).toBeDefined()
+    expect(keys).toBeInstanceOf(Array)
+    expect(keys?.every(key => typeof key === 'string')).toBe(true)
+    expect(keys).toEqual(['name', 'level', 'server'])
+  })
+
+  it ('should throw an error if no schema is provided', () => {
     const typesafeUndefined = undefined as unknown as ZodObjectType
 
     expect(

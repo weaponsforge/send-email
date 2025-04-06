@@ -54,7 +54,7 @@ export interface ISchemaValidator {
   validate (params: ISchemaValidateParams): void;
 
   /**
-   * Joins one (1) or more group of zod error messages into a string of text.
+   * Joins one (1) or more group of zod error messages `ZodError[].message` into one (1) string of text.
    * @param {ZodIssue[]} errors One (1) or more zod validation error messages
    * @param {string} [errorDelimiter] (Optional) Character or text to put between one (1) or more zod error messages. Defaults to a newline `"\n"` character.
    */
@@ -71,7 +71,7 @@ export interface ISchemaValidator {
    * Retrieves the object keys of `this.schema`
    * @returns {string[]} Object keys of `this.schema`
    */
-  get properties (): ZodRawShape;
+  get properties (): string[];
 }
 
 /**

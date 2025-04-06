@@ -94,9 +94,9 @@ class SchemaValidator implements ISchemaValidator {
     }
   }
 
-  get properties (): ZodRawShape {
+  get properties (): string[] {
     this.checkSchema()
-    return this.schema!.shape
+    return Object.keys(this.schema!.shape)
   }
 }
 
