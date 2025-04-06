@@ -3,22 +3,22 @@ import { beforeAll, describe, expect, it } from 'vitest'
 import SchemaValidator from '@/lib/validator/schemavalidator.js'
 import type { ZodObjectBasicType } from '@/types/schemavalidator.interface.js'
 
-describe('SchemaValidator class test', () => {
+describe('SchemaValidator class test - using zod (ZODOBJECT) schema', () => {
   // Sample schema validator instance
   let testSchema: SchemaValidator | null = null
 
-  // Sample zod schema for testing
-  const playerSchema = z.object({
-    name: z.string(),
-    level: z.number(),
-    server: z.string()
-  })
-
   beforeAll(async () => {
+    // Sample zod ZodObject schema for testing
+    const playerSchema = z.object({
+      name: z.string(),
+      level: z.number(),
+      server: z.string()
+    })
+
     testSchema = new SchemaValidator(playerSchema)
   })
 
-  it ('should list the zod schema keys and properties', () => {
+  it ('should list the ZodObject zod schema keys and properties', () => {
     const keys = testSchema?.properties
 
     expect(keys).toBeDefined()
@@ -78,17 +78,20 @@ describe('SchemaValidator class test', () => {
       testSchema!.validate({ data: correntInputValues, pick: true })
     ).not.toThrow()
   })
+})
+
+describe('SchemaValidator class test - using zod (ZODEFFECTS) schema', () => {
+  // Sample zod ZodEffects schema
+  const effectsSchema = z.object({
+    id: z.number(),
+    address: z.string(),
+    name: z.string()
+  }).refine((data) =>
+    (data.address !== undefined),
+  { message: 'Address is required' }
+  )
 
   it ('should extract properties from a ZodEffects schema', async () => {
-    const effectsSchema = z.object({
-      id: z.number(),
-      address: z.string(),
-      name: z.string()
-    }).refine((data) =>
-      (data.address !== undefined),
-    { message: 'Address is required' }
-    )
-
     const testSchema = new SchemaValidator(effectsSchema)
     const keys = testSchema?.properties
 
