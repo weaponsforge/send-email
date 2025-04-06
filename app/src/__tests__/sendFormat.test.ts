@@ -82,7 +82,7 @@ describe('Email format test', () => {
   }, MAX_TIMEOUT)
 
   // Testing missing recipient AND recipients[]
-  it('should reject if recipient or recipients[] are missing', async () => {
+  it('should reject if recipient and recipients[] are missing', async () => {
     await expect(
       send(
         {
