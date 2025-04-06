@@ -1,12 +1,13 @@
 import { ZodObject, ZodFirstPartyTypeKind } from 'zod'
-import type { ZodIssue, ZodRawShape, ZodType, ZodEffects } from 'zod'
+import type { ZodIssue, ZodRawShape, ZodType, ZodEffects, ZodEffectsDef } from 'zod'
 
 export type ZodObjectBasicType = ZodObject<ZodRawShape>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type ZodObjectEffectsType = ZodType | ZodEffects<any>
-export type ZodObjectInput = ZodObjectBasicType | ZodObjectEffectsType
+export type ZodSchemaType = ZodObjectBasicType | ZodObjectEffectsType;
 
 export type { ZodIssue, ZodRawShape }
-export { ZodObject, ZodFirstPartyTypeKind }
+export { type ZodEffectsDef, ZodObject, ZodFirstPartyTypeKind }
 
 /**
   * Parameter properties of the `ISchemaValidator.validate()` function
@@ -27,14 +28,14 @@ export interface ISchemaValidateParams {
  */
 export interface ISchemaValidator {
   /** zod schema */
-  schema: ZodObjectBasicType | null;
+  schema: ZodSchemaType | null;
 
   /**
    * Checks if an zod schema is a basic zod schema (`ZodObject`) or an effects schema (`ZodEffects`, e.g., edited with `z.refine()`)
-   * @param {ZodObjectEffectsType} schema zod schema
+   * @param {ZodSchemaType} schema zod schema
    * @returns {boolean} Flag that checks if an object is a zod schema
    */
-  isZodSchema (schema: ZodObjectEffectsType | ZodObjectBasicType): boolean;
+  isZodSchema (schema: ZodSchemaType): boolean;
 
   /**
    * Checks if an input parameter is an Object
@@ -52,18 +53,25 @@ export interface ISchemaValidator {
 
   /**
    * Checks if a zod schema is an effects zod schema (`ZodEffects`)
-   * @param {ZodObjectEffectsType} schema zod schema
+   * @param {ZodSchemaType} schema zod schema
    * @returns {boolean} Flag that checks if an object is an effects zod schema
    */
-  isZodEffects (schema: ZodObjectEffectsType): boolean;
+  isZodEffects (schema: ZodSchemaType): boolean;
 
   /**
-   * Retrieves a subset of the zod `this.schema` using `.pick()`
+   * @description Get the base schema from a `ZodEffects` schema
+   * @param {ZodSchemaType} schema - The `ZodEffects` schema to get the `ZodObject` base schema from
+   * @returns {ZodObjectBasicType | null} The base schema or null if it's not a ZodEffects
+   */
+  getBaseSchema (schema: ZodSchemaType): ZodObjectBasicType | null;
+
+  /**
+   * Retrieves only the `ZodObject` base subset of from `this.schema` using `.pick()`. Finds the base `ZodObject` if `this.schema` is a `ZodEffects` schema.
    * @param {Record<string, any>} data Object that may possibly be a subset of the local zod `this.schema`
-   * @returns {ZodObjectBasicType} Subset of the zod `this.schema`
+   * @returns {ZodObjectBasicType} `ZodObjectBasicType` subset of the zod `this.schema`
    * @throws {Error} Validation errors. Also throws an error if one (1) or more keys in the `data` parameter are missing in the original `this.schema`
    */
-  getSubSchema (data: Record<string, ZodRawShape>): ZodObjectBasicType;
+  getSubSchema (data: Record<string, ZodRawShape | unknown>): ZodObjectBasicType | null;
 
   /**
    * Validates a set of input parameters with the zod `this.schema`
