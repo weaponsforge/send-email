@@ -3,16 +3,16 @@ import { ZodFirstPartyTypeKind, ZodObject } from '@/types/schemavalidator.interf
 import type {
   ISchemaValidator,
   ISchemaValidateParams,
+  ZodEffectsDef,
   ZodIssue,
   ZodObjectBasicType,
   ZodRawShape,
-  ZodSchemaType,
-  ZodEffectsDef
+  ZodSchemaType
 } from '@/types/schemavalidator.interface.js'
 
 /**
  * @class SchemaValidator
- * @description Wrapper around a zod schema that returns formatted validation error messages and extracts sub-schemas
+ * @description Wrapper around `ZodObject` and `ZodEffects` zod schemas that returns formatted validation error messages and extracts sub-schemas
  */
 class SchemaValidator implements ISchemaValidator {
   schema: ZodSchemaType | null = null
@@ -30,7 +30,7 @@ class SchemaValidator implements ISchemaValidator {
   }
 
   isZodSchema (schema: ZodSchemaType): boolean {
-    if (this.isZodObject(schema as ZodObjectBasicType)) return true
+    if (this.isZodObjectSchema(schema as ZodObjectBasicType)) return true
 
     // Check if it's a ZodEffects that wraps a ZodObject; e.g., using z.refine()
     if ('_def' in schema && 'schema' in schema._def) {
@@ -44,18 +44,18 @@ class SchemaValidator implements ISchemaValidator {
     return !Array.isArray(param) && typeof param === 'object'
   }
 
-  isZodObject (schema: ZodObjectBasicType): schema is ZodObjectBasicType {
+  isZodObjectSchema (schema: ZodObjectBasicType): schema is ZodObjectBasicType {
     return schema instanceof ZodObject
   }
 
-  isZodEffects (schema: ZodSchemaType): boolean {
+  isZodEffectsSchema (schema: ZodSchemaType): boolean {
     return '_def' in schema &&
       'typeName' in schema._def &&
       schema._def.typeName === ZodFirstPartyTypeKind.ZodEffects
   }
 
   getBaseSchema (schema: ZodSchemaType): ZodObjectBasicType | null {
-    if (this.isZodEffects(schema)) {
+    if (this.isZodEffectsSchema(schema)) {
       return (schema._def as ZodEffectsDef).schema as ZodObjectBasicType
     }
 
@@ -71,7 +71,7 @@ class SchemaValidator implements ISchemaValidator {
       throw new Error('Input is not an object')
     }
 
-    if (this.isZodEffects(this.schema!)) {
+    if (this.isZodEffectsSchema(this.schema!)) {
       schema = this.getBaseSchema(this.schema!) as ZodObjectBasicType
     } else {
       schema = this.schema as ZodObjectBasicType
@@ -139,7 +139,7 @@ class SchemaValidator implements ISchemaValidator {
   get properties (): string[] {
     this.checkSchema()
 
-    if (this.isZodEffects(this.schema!)) {
+    if (this.isZodEffectsSchema(this.schema!)) {
       const schema = this.getBaseSchema(this.schema!) as ZodObjectBasicType
       return Object.keys(schema.shape)
     } else {

@@ -31,7 +31,7 @@ export interface ISchemaValidator {
   schema: ZodSchemaType | null;
 
   /**
-   * Checks if an zod schema is a basic zod schema (`ZodObject`) or an effects schema (`ZodEffects`, e.g., edited with `z.refine()`)
+   * Checks if the input parameter is a zod schema: a basic zod schema (`ZodObject`) or an effects schema (`ZodEffects`, e.g., edited with `z.refine()`)
    * @param {ZodSchemaType} schema zod schema
    * @returns {boolean} Flag that checks if an object is a zod schema
    */
@@ -47,16 +47,16 @@ export interface ISchemaValidator {
   /**
    * Checks if a zod schema is a basic zod schema (`ZodObject`)
    * @param {ZodObjectBasicType} schema zod schema
-   * @returns {boolean} Flag that checks if an object is a zod schema
+   * @returns {boolean} Flag that checks if an object is a ZodObject` zod schema
    */
-  isZodObject (schema: ZodObjectBasicType): schema is ZodObjectBasicType;
+  isZodObjectSchema (schema: ZodObjectBasicType): schema is ZodObjectBasicType;
 
   /**
    * Checks if a zod schema is an effects zod schema (`ZodEffects`)
    * @param {ZodSchemaType} schema zod schema
-   * @returns {boolean} Flag that checks if an object is an effects zod schema
+   * @returns {boolean} Flag that checks if an object is a `ZodEffects` effects zod schema
    */
-  isZodEffects (schema: ZodSchemaType): boolean;
+  isZodEffectsSchema (schema: ZodSchemaType): boolean;
 
   /**
    * @description Get the base schema from a `ZodEffects` schema
@@ -66,7 +66,7 @@ export interface ISchemaValidator {
   getBaseSchema (schema: ZodSchemaType): ZodObjectBasicType | null;
 
   /**
-   * Retrieves only the `ZodObject` base subset of from `this.schema` using `.pick()`. Finds the base `ZodObject` if `this.schema` is a `ZodEffects` schema.
+   * Retrieves only the base `ZodObject` subset from `this.schema` using `.pick()`. Finds the base `ZodObject` if `this.schema` is a `ZodEffects` schema.
    * @param {Record<string, any>} data Object that may possibly be a subset of the local zod `this.schema`
    * @returns {ZodObjectBasicType} `ZodObjectBasicType` subset of the zod `this.schema`
    * @throws {Error} Validation errors. Also throws an error if one (1) or more keys in the `data` parameter are missing in the original `this.schema`
