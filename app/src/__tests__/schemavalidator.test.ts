@@ -4,17 +4,17 @@ import SchemaValidator from '@/lib/validator/schemavalidator.js'
 import type { ZodObjectBasicType } from '@/types/schemavalidator.interface.js'
 
 describe('SchemaValidator class test', () => {
+  // Sample schema validator instance
   let testSchema: SchemaValidator | null = null
 
-  beforeAll(async () => {
-    // Sample zod schema for testing
-    const playerSchema = z.object({
-      name: z.string(),
-      level: z.number(),
-      server: z.string()
-    })
+  // Sample zod schema for testing
+  const playerSchema = z.object({
+    name: z.string(),
+    level: z.number(),
+    server: z.string()
+  })
 
-    // Sample schema validator instance
+  beforeAll(async () => {
     testSchema = new SchemaValidator(playerSchema)
   })
 
@@ -77,5 +77,43 @@ describe('SchemaValidator class test', () => {
     expect(() =>
       testSchema!.validate({ data: correntInputValues, pick: true })
     ).not.toThrow()
+  })
+
+  it ('should extract properties from a ZodEffects schema', async () => {
+    const effectsSchema = z.object({
+      id: z.number(),
+      address: z.string(),
+      name: z.string()
+    }).refine((data) =>
+      (data.address !== undefined),
+    { message: 'Address is required' }
+    )
+
+    const testSchema = new SchemaValidator(effectsSchema)
+    const keys = testSchema?.properties
+
+    expect(keys).toBeDefined()
+    expect(keys).toBeInstanceOf(Array)
+  })
+
+  it ('should validate the subset of properties from a ZodEffects schema', async () => {
+    const effectsSchema = z.object({
+      id: z.number(),
+      address: z.string(),
+      name: z.string()
+    }).refine((data) =>
+      (data.id !== undefined),
+    { message: 'ID is required' }
+    )
+
+    const testSchema = new SchemaValidator(effectsSchema)
+    const data = {
+      address: 123,
+      name: 'some string'
+    }
+
+    expect(() =>
+      testSchema.validate({ data, pick: true })
+    ).toThrow()
   })
 })
