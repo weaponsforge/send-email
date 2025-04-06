@@ -30,7 +30,7 @@ class SchemaValidator implements ISchemaValidator {
   }
 
   isZodSchema (schema: ZodSchemaType): boolean {
-    if (this.isZodObjectSchema(schema as ZodObjectBasicType)) return true
+    if (this.isZodObjectSchema(<ZodObjectBasicType>schema)) return true
 
     // Check if it's a ZodEffects that wraps a ZodObject; e.g., using z.refine()
     if ('_def' in schema && 'schema' in schema._def) {
@@ -54,12 +54,12 @@ class SchemaValidator implements ISchemaValidator {
       schema._def.typeName === ZodFirstPartyTypeKind.ZodEffects
   }
 
-  getBaseSchema (schema: ZodSchemaType): ZodObjectBasicType | null {
+  getBaseSchema (schema: ZodSchemaType): ZodObjectBasicType {
     if (this.isZodEffectsSchema(schema)) {
-      return (schema._def as ZodEffectsDef).schema as ZodObjectBasicType
+      return (<ZodEffectsDef>schema._def).schema as ZodObjectBasicType
     }
 
-    return null
+    return <ZodObjectBasicType>schema
   }
 
   getSubSchema (data: Record<string, ZodRawShape | unknown>): ZodObjectBasicType | null {
@@ -72,9 +72,9 @@ class SchemaValidator implements ISchemaValidator {
     }
 
     if (this.isZodEffectsSchema(this.schema!)) {
-      schema = this.getBaseSchema(this.schema!) as ZodObjectBasicType
+      schema = <ZodObjectBasicType>this.getBaseSchema(this.schema!)
     } else {
-      schema = this.schema as ZodObjectBasicType
+      schema = <ZodObjectBasicType>this.schema
     }
 
     const originalKeys = Object.keys(schema.shape)
@@ -133,17 +133,17 @@ class SchemaValidator implements ISchemaValidator {
 
   get typeName (): string {
     this.checkSchema()
-    return (this.schema as ZodObjectBasicType)._def.typeName
+    return (<ZodObjectBasicType>this.schema)._def.typeName
   }
 
   get properties (): string[] {
     this.checkSchema()
 
     if (this.isZodEffectsSchema(this.schema!)) {
-      const schema = this.getBaseSchema(this.schema!) as ZodObjectBasicType
+      const schema = <ZodObjectBasicType>this.getBaseSchema(this.schema!)
       return Object.keys(schema.shape)
     } else {
-      return Object.keys((this.schema as ZodObjectBasicType).shape)
+      return Object.keys((<ZodObjectBasicType>this.schema).shape)
     }
   }
 }

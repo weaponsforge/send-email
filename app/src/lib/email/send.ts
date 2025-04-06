@@ -17,6 +17,14 @@ export const send = async (params: EmailType, client?: GmailOAuthClient): Promis
     type: TRANSPORT_AUTH_TYPES.OAUTH2
   })
 
+  const properties = handler.schema?.properties
+  const validate = {
+    subject: 'hello'
+  }
+
+  handler.schema?.validate({ data: validate, pick: true })
+  console.log('properties', properties)
+
   try {
     await handler.createTransport3LO(oauthClient)
   } catch (err: unknown) {

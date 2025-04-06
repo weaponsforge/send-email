@@ -59,7 +59,7 @@ export interface ISchemaValidator {
   isZodEffectsSchema (schema: ZodSchemaType): boolean;
 
   /**
-   * @description Get the base schema from a `ZodEffects` schema
+   * @description Get the base `ZodObject` schema from a `ZodEffects` schema
    * @param {ZodSchemaType} schema - The `ZodEffects` schema to get the `ZodObject` base schema from
    * @returns {ZodObjectBasicType | null} The base schema or null if it's not a ZodEffects
    */
@@ -97,13 +97,13 @@ export interface ISchemaValidator {
 
   /**
    * Retrieves the type name of the zod schema
-   * @returns {string} Type name of the zod schema
+   * @returns {string} Type name of the zod schema - `ZodObject` or `ZodEffects`
    */
   get typeName (): string;
 
   /**
-   * Retrieves the object keys of `this.schema`
-   * @returns {string[]} Object keys of `this.schema`
+   * Retrieves the object property keys of `this.schema`
+   * @returns {string[]} Object property keys of `this.schema`
    */
   get properties (): string[];
 }
