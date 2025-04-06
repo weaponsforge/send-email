@@ -59,7 +59,7 @@ class GmailOAuthClient implements IGmailOAuthClient {
 
   init (params: IOauthClient): void {
     try {
-      this.#schema?.validate({ data: { ...params } });
+      this.#schema?.validate({ data: { ...params } })
 
       const { clientId, clientSecret, redirectURI, refreshToken, userEmail } = params
 

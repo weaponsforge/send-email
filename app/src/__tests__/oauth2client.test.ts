@@ -1,5 +1,7 @@
+import { z } from 'zod'
 import { describe, expect, it } from 'vitest'
 import { GmailOAuthClient } from '@/lib/index.js'
+import type { GetAccessTokenResponse } from '@/types/oauth2client.types.js'
 
 describe('Google OAuth2 Client class test', () => {
   it('should generate an access token', async () => {
@@ -31,5 +33,28 @@ describe('Google OAuth2 Client class test', () => {
 
     expect(token).toHaveProperty('token')
     expect(token).toHaveProperty('res')
+  })
+
+  it ('should throw an error if incorrect schema is provided', async () => {
+    // See @/types/oauth2client.schema.ts for the correct schema
+    const wrongSchema = z.object({
+      hello: z.string(),
+      world: z.number()
+    })
+
+    expect(() => new GmailOAuthClient(null, wrongSchema)).toThrow()
+  })
+
+  it ('should throw an error when manually setting an incorrect access token', async () => {
+    const oauthClient = new GmailOAuthClient()
+
+    const accessToken = {
+      token: 123, // Expected to be a string
+      res: 'hello' // Expected to be an object
+    } as unknown as GetAccessTokenResponse
+
+    expect(() =>
+      oauthClient.accessToken = accessToken
+    ).toThrow()
   })
 })
