@@ -47,7 +47,7 @@ describe('Send email test', () => {
     ).resolves.toBeUndefined()
   }, MAX_TIMEOUT)
 
-  test('should send email if there are both recipient and recipients[]', async () => {
+  test('should send email to both recipient and recipients[]', async () => {
     await expect(
       send(
         {
