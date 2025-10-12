@@ -91,12 +91,12 @@ Sends emails using Gmail SMTP with Google OAuth2 or username/pw.
 
 - **Build the image** (Run only once)
    ```bash
-   docker compose -f docker-compose.dev.yml build
+   docker compose build
    ```
 
 - **Run the container** (Run only once)
    ```bash
-   docker compose -f docker-compose.dev.yml up
+   docker compose up
    ```
 
 - **Run an NPM script using Docker compose**<br>
@@ -190,8 +190,8 @@ Run the Docker containers first using options A or B.
 **A. Using Docker compose**
 
 ```
-docker compose -f docker-compose.dev.yml build
-docker compose -f docker-compose.dev.yml up
+docker compose build
+docker compose up
 ```
 
 Use the template:
