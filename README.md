@@ -182,7 +182,7 @@ Fixes lint errors in TypeScript files.
 - Append a double dash `--` to pass arguments to the CLI commands eg., (using Bash)
    ```bash
    npm run send-email -- send \
-     -s "You are Invited" \n
+     -s "You are Invited" \
      -c "Birthday party in December" \
      -r a @gmail.com b@gmail.com c@gmail.com
    ```
@@ -209,7 +209,7 @@ Fixes lint errors in TypeScript files.
 - Sends an email using the command line interface (CLI) in development mode using TypeScript.
 - Append a double dash `--` to pass arguments to the CLI commands.
 - Usage: view the `"npm run send-email"` script for more information. They share similar usage.
-   - > 💡 **NOTE:** Append `:dev` in the script eg., `npm run send-email:dev`
+  - > 💡 **NOTE:** Append `:dev` in the script eg., `npm run send-email:dev`
 
 </details>
 
