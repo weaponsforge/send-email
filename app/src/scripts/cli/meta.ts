@@ -21,8 +21,8 @@ const CLI_ARGS = {
     DESCRIPTION: 'email text content or message enclosed in double-quotes'
   },
   RECIPIENTS: {
-    OPTION: '-r, --recipients [emails...]',
-    DESCRIPTION: 'list of email addresses separated by whitespace or comma'
+    OPTION: '-r, --recipients <emails...>',
+    DESCRIPTION: 'comma-separated list of email addresses'
   },
   ENV_FILE: {
     OPTION: '-e, --env <path>',

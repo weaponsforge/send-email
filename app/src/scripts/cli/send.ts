@@ -38,6 +38,7 @@ program.command(CLI_META.CMD_SEND.NAME)
       const emailRecipients = String(recipients)
         .split(',')
         .map(email => email.trim())
+
       console.log(`Sending email to: ${recipients}`)
 
       await send({
