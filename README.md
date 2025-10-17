@@ -171,6 +171,46 @@ Fixes lint errors in TypeScript files.
 - Spins up a local web server accessible at `http://localhost:4174/`
 - Serves the website contents of a test report from the **/html** directory
 
+### C. CLI 💻
+
+### `npm run send-email`
+
+> ![IMPORTANT]
+> This script requires running the `"npm run transpile"` script before usage.
+
+- Sends an email using the command line interface (CLI) using the transpiled JavaScript.
+- Append a double dash `--` to pass arguments to the CLI commands eg., (using Bash)
+   ```
+   npm run send-email -- send \
+     -s "You are Invited" \n
+     -c "Birthday party in December" \
+     -r a @gmail.com b@gmail.com c@gmail.com
+   ```
+- View available options.
+   ```
+   npm run send-email help send
+   ```
+
+   ```
+   Usage: send-email send [options]
+
+   Send an email to one or multiple recipient/s
+
+   Options:
+   -s, --subject <title>         email subject or title enclosed in double-quotes
+   -c, --content <text>          email text content or message enclosed in double-quotes
+   -r, --recipients [emails...]  list of email addresses separated by whitespace or comma
+   -e, --env <path>              path to .env file (optional)
+   -h, --help                    display help for command
+   ```
+
+### `npm run send-email:dev`
+
+- Sends an email using the command line interface (CLI) in development mode using TypeScript.
+- Append a double dash `--` to pass arguments to the CLI commands.
+- Usage: view the `"npm run send-email"` script for more information. They share similar usage.
+   - > 💡 **NOTE:** Append `:dev` in the script eg., `npm run send-email:dev`
+
 </details>
 
 ## 📦 Docker Scripts
