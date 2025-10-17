@@ -1,8 +1,311 @@
 ## send-email
 
-Sends emails using Gmail SMTP with username/pw or Google OAuth2
+Sends emails using Gmail SMTP with Google OAuth2 or username/pw.
 
----
+### Table of Contents
+
+- [Requirements](#-requirements)
+- [Installation](#%EF%B8%8F-installation)
+- [Usage](#-usage)
+- [Alternate Usage](#alternate-usage)
+- [Available Scripts](#-available-scripts)
+- [Docker Scripts](#-docker-scripts)
+
+## 📋 Requirements
+
+<details>
+<summary>Click to expand the list of requirements</summary>
+
+1. Windows 11/Linux OS
+2. NodeJS LTS v22 or higher
+   ```
+   Recommended:
+   node: 22.14.0
+   npm: 10.9.2
+   ```
+3. Gmail Account
+   - Gmail email/password
+   - Optional:
+      - Google Cloud Platform project configured with [OAuth2](https://developers.google.com/workspace/guides/configure-oauth-consent) settings and [credentials](https://developers.google.com/workspace/guides/manage-credentials)
+      - Read on the Google [Gmail](https://developers.google.com/gmail/api/guides), [SMTP and OAuth2 Setup](https://github.com/weaponsforge/email-sender?tab=readme-ov-file#using-the-oauth-20-playground) sections for more information
+
+### Core Libraries/Frameworks
+
+(Installed via npm)
+
+1. googleapis `v148.0.0`
+2. nodemailer `v6.10.0`
+3. typescript `v5.8.2` - Compile-time error checker
+4. vite-node `v3.0.9`- Runs TS files in development mode
+5. vitest `v3.0.9` - Runs tests
+
+</details>
+
+## 🛠️ Installation
+
+1. Clone the repository.<br>
+`git clone https://github.com/weaponsforge/send-email.git`
+
+2. Install dependencies.<br>
+`npm install`
+
+3. Configure **OAuth2**. Get a refresh token from the Google [OAuth 2 Playground](https://developers.google.com/oauthplayground).
+   - Read on [Using the OAuth 2.0 Playground](https://github.com/weaponsforge/email-sender?tab=readme-ov-file#using-the-oauth-20-playground) for more information about generating a refresh token using the Google OAuth Playground.
+   - _**INFO:** This is an older note, some steps may vary this 2025)_
+
+4. Set up the environment variables. Create a `.env` file inside the **/app** directory with reference to the `.env.example` file.
+
+   | Variable Name | Description |
+   | --- | --- |
+   | GOOGLE_USER_EMAIL | Your google email that you've configured for Gmail SMTP and Google OAuth2 |
+   | GOOGLE_CLIENT_ID | Google Developer Project ID associated with your email |
+   | GOOGLE_CLIENT_SECRET | Client secret for the Google Developer Project CLIENT_ID|
+   | GOOGLE_REDIRECT_URI | Allowed Google API redirect URI. Its value is `https://developers.google.com/oauthplayground` by default. |
+   | GOOGLE_REFRESH_TOKEN | The initial (or any) refresh token obtained from [OAuthPlayground](https://developers.google.com/oauthplayground).<ul><li>Read on [Using the OAuth 2.0 Playground](https://github.com/weaponsforge/email-sender?tab=readme-ov-file#using-the-oauth-20-playground) for more information about generating a refresh token using the Google OAuth Playground.</li><li><blockquote>(_**INFO:** This is an older note, some steps may vary this 2025)_</blockquote></li></ul> |
+
+
+## 🚀 Usage
+
+**Using Node**
+
+1. Run a non-test TypeScript file inside the **/app/src** directory from the project's _**"root directory"**_. For example:
+
+   ```bash
+   cd app
+   npx vite-node src/utils/sample.ts
+   ```
+
+2. Run compiled JavaScript code from the TypeScript files. For example:
+
+   ```bash
+   cd app
+   npm run transpile
+   node dist/utils/sample.js
+   ```
+
+3. See the [Available Scripts](#-available-scripts) section for more information.
+
+## ⚡Alternate Usage
+
+**Using Docker**
+
+- **Build the image** (Run only once)
+   ```bash
+   docker compose build
+   ```
+
+- **Run the container** (Run only once)
+   ```bash
+   docker compose up
+   ```
+
+- **Run an NPM script using Docker compose**<br>
+   Ensure the Docker container is running (see **Run the container**)
+   ```bash
+   docker exec -it weaponsforge-sendemail-dev <AVAILABLE_SCRIPT_OR_DOCKER_SCRIPT>
+   ```
+
+- **Run an NPM script using only Docker**<br>
+   Ensure the Docker container is running (see **Run the container**)
+   ```bash
+   docker run -it -v ${pwd}/app:/opt/app -v /opt/app/node_modules --rm weaponsforge/sendemail:dev <AVAILABLE_SCRIPT_OR_DOCKER_SCRIPT>
+   ```
+
+- **Run a non-test TS file using Vite**<br>
+   (requires **Run an NPM script using Docker compose**)
+   ```bash
+   docker exec -it weaponsforge-sendemail-dev npx vite-node /opt/app/src/<PATH_TO_TS_FILE>.ts
+   ```
+
+- See the [Available Scripts](#-available-scripts) and [Docker Scripts](#-docker-scripts) sections for more information.
+
+
+## 📜 Available Scripts
+
+These scripts, compatible with running in Node and Docker, run various TypeScript scripts and tests.
+
+<details>
+<summary>Click to expand the list of available scripts</summary>
+
+### A. Running the Codes ⚙️➡️
+
+### `npm run dev`
+
+Runs `vitest` in watch mode, watching file changes and errors to files linked with `*.test.ts` files.
+
+### `npm run watch`
+
+Watches file changes in `.ts` files using the `tsc --watch` option.
+
+### `npm run transpile`
+
+Builds JavaScript, `.d.ts` declaration files, and map files from the TypeScript source files in the `/src` directory.
+
+### `npm run transpile:noemit`
+
+Runs type-checking without generating the JavaScript or declaration files from the TypeScript files in the `/src` and `__tests__` directories.
+
+### B. Testing 🚦✅
+
+### `npm run lint`
+Lints TypeScript source codes.
+
+### `npm run lint:fix`
+Fixes lint errors in TypeScript files.
+
+### `npm test`
+- Runs test scripts defined in `*.test.ts` files with coverage.
+- Generates a vitest test report into the **/html** directory.
+- Run `npm run report:view` to preview the generated report.
+
+### `npm run test:ui`
+
+- Runs test scripts defined in `*.test.ts` files with coverage.
+- Spawns a local report-like website showing each test's real-time status and coverage using vitest-ui
+- This script is similar to the vitest **`npm run dev`** script that watches for changes in the `*.test.ts` files but displays the result logs and coverage details in the local website rather than the command line.
+
+### `npm run report:view`
+
+> **NOTE:** This script requires running `npm test` first to generate a test report into the **/html** directory
+
+- Spins up a local web server accessible at `http://localhost:4174/`
+- Serves the website contents of a test report from the **/html** directory
+
+### C. CLI 💻
+
+### `npm run send-email`
+
+> 💡 **IMPORTANT:**
+>  This script requires running the `"npm run transpile"` script before usage.
+
+- Sends an email using the command line interface (CLI) using the transpiled JavaScript.
+- Append a double dash `--` to pass arguments to the CLI commands eg., (using Bash)
+   ```bash
+   npm run send-email -- send \
+     -s "You are Invited" \
+     -c "Birthday party in December" \
+     -r a @gmail.com,b@gmail.com,c@gmail.com
+   ```
+- View available options.
+   ```bash
+   npm run send-email help send
+   ```
+
+   ```bash
+   Usage: send-email send [options]
+
+   Send an email to one or multiple recipient/s
+
+   Options:
+   -s, --subject <title>         email subject or title enclosed in double-quotes
+   -c, --content <text>          email text content or message enclosed in double-quotes
+   -r, --recipients [emails...]  comma-separated list of email addresses
+   -e, --env <path>              path to .env file (optional)
+   -h, --help                    display help for command
+   ```
+
+### `npm run send-email:dev`
+
+- Sends an email using the command line interface (CLI) in development mode using TypeScript.
+- Append a double dash `--` to pass arguments to the CLI commands.
+- Usage: view the `"npm run send-email"` script for more information. They share similar usage.
+  - > 💡 **NOTE:** Append `:dev` in the script eg., `npm run send-email:dev`
+
+</details>
+
+## 📦 Docker Scripts
+
+These scripts allow optional Docker-related processes, such as enabling file watching in Docker containers running in Windows WSL2 and others.
+
+> [!TIP]
+> Scripts with a `":win"` suffix indicate compatibility for Windows Docker running in WSL2.
+
+<details>
+<summary>Click to expand the list of available scripts</summary>
+
+### Docker run command
+
+Run the Docker containers first using options A or B.
+
+**A. Using Docker compose**
+
+```bash
+docker compose build
+docker compose up
+```
+
+Use the template:
+
+```bash
+docker exec -it weaponsforge-sendemail-dev <AVAILABLE_DOCKER_SCRIPT>
+```
+
+**B. Using Only Docker (PowerShell)**
+
+`docker run -it -v ${pwd}/app:/opt/app -v /opt/app/node_modules --rm weaponsforge/sendemail:dev <AVAILABLE_DOCKER_SCRIPT>`
+
+### Scripts
+
+### `npm run docker:debug`
+
+1. Runs the `"/src/utils/sample/sample.ts"` script in containers with debugging enabled in VSCode by default.
+2. Replace the `"/src/utils/sample/sample.ts"` file path in the package.json file's `"docker:debug"` script with a target TypeScript file for debugging.
+3. Map port **`9229`** to enable debugging VSCode while running in Docker (PowerShell).
+   - (A. Using Docker compose):<br>
+   `docker exec -it weaponsforge-sendemail-dev npm run docker:debug`
+   - (B. Using Only Docker (PowerShell))<br>
+   `docker run -it -v ${pwd}/app:/opt/app -v /opt/app/node_modules -p 9229:9229 --rm weaponsforge/sendemail:dev npm run docker:debug`
+4. Launch the VSCode debugger using the following configuration:
+   ```json
+   {
+     "version": "0.2.0",
+     "configurations": [
+       {
+         "type": "node",
+         "request": "attach",
+         "name": "Attach to Docker",
+         "address": "localhost",
+         "port": 9229,
+         "restart": true,
+         "skipFiles": ["<node_internals>/**"],
+         "localRoot": "${workspaceFolder}/app",
+         "remoteRoot": "/opt/app"
+       }
+     ]
+   }
+   ```
+
+### `npm run docker:test:ui`
+
+- Docker command counterpart of the `npm run test:ui` script,  compatible with containers running in **Linux** OS.
+- Runs test scripts defined in `*.test.ts` files in watch mode with coverage from a container.
+- Spawns a local report-like website showing each test's real-time status and coverage using vitest-ui accessible at `http://localhost:51204/__vitest__/`.
+
+### `npm run docker:report:view`
+
+> **NOTE:** This script requires running `npm test` first to generate a test report into the **/html** directory
+
+- Docker command counterpart of the `npm run report:view` script.
+- Spins up a local web server accessible at `http://localhost:4174/`
+- Serves the website contents of a test report from the host's **/html** directory
+
+### `npm run docker:watch:win`
+
+Watches file changes in `.ts` files using the `tsc --watch` option with `dynamicPriorityPolling` in Docker containers running in Windows WSL2.
+
+### `npm run docker:dev:win`
+
+- Sets and exports the environment variables: `CHOKIDAR_USEPOLLING=1` and `CHOKIDAR_INTERVAL=1000`
+- Runs `vitest` in watch mode inside Docker containers running in Windows WSL2, watching file changes and errors to files linked with `*.test.ts` files.
+
+### `npm run docker:test:ui:win`
+
+- Sets and exports the environment variables: `CHOKIDAR_USEPOLLING=1` and `CHOKIDAR_INTERVAL=1000`
+- Runs test scripts defined in `*.test.ts` files in watch mode with coverage inside Docker containers running in **Windows WSL2**.
+- Spawns a local report-like website showing each test's real-time status and coverage using vitest-ui accessible at `http://localhost:51204/__vitest__/`.
+
+</details>
+
 
 ## References
 

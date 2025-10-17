@@ -1,0 +1,48 @@
+{
+  "compilerOptions": {
+    /* Base Options: */
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "target": "ES2022",
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+
+    /* Other options */
+    "lib": ["es2022"],
+    "moduleResolution": "NodeNext", // node
+    "preserveConstEnums": true,
+
+    /* Strictness */
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitReturns": true,
+    "noImplicitOverride": true,
+    "alwaysStrict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+
+    /* If transpiling with TypeScript: */
+    "module": "NodeNext", // commonjs
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "sourceMap": true,
+
+    /* If building for a library: */
+    "declaration": true,
+
+    "baseUrl": "./",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ]
+    }
+  },
+  "watchOptions": {
+    // "watchFile": "dynamicPriorityPolling"
+    "excludeDirectories": ["**/node_modules", "dist"]
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
+}

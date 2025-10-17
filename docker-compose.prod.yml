@@ -1,0 +1,16 @@
+# Docker compose file for production distribution mode
+# Transpiles the app as JS files into a container's "/dist" directory
+services:
+  weaponsforge.sendemail:
+    container_name: weaponsforge-sendemail
+    image: weaponsforge/sendemail:latest
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+      target: production
+    volumes:
+      - /opt/app/node_modules
+    ports:
+      - "9229:9229"
+    stdin_open: true
+    tty: true

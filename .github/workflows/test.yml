@@ -1,0 +1,83 @@
+name: Run CI Tests
+
+on:
+  push:
+    branches-ignore:
+      - main
+
+jobs:
+  lint-app:
+    name: Lint App
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v4
+
+      - name: Use NodeJS v22.14.0
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.14.0
+          registry-url: https://registry.npmjs.org/
+
+      - name: Install Dependencies
+        run: |
+          cd app
+          npm ci
+
+      - name: Lint
+        run: |
+          cd app
+          npm run lint
+
+      - name: Transpile
+        run: |
+          cd app
+          npm run transpile:noemit
+
+  test-app:
+    name: Unit/Integration Tests
+    needs: lint-app
+    runs-on: ubuntu-latest
+    permissions:
+      checks: write
+      pull-requests: write
+    env:
+      GOOGLE_USER_EMAIL: ${{ secrets.GOOGLE_USER_EMAIL }}
+      GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+      GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+      GOOGLE_REDIRECT_URI: ${{ secrets.GOOGLE_REDIRECT_URI }}
+      GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v4
+
+      - name: Use NodeJS v22.14.0
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.14.0
+          registry-url: https://registry.npmjs.org/
+
+      - name: Install Dependencies
+        run: |
+          cd app
+          npm ci
+
+      - name: Test
+        run: |
+          cd app
+          npm test
+
+      - name: Upload Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: app/html/junit.xml
+
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          files: app/html/junit.xml
+          check_name: "Test Results"
