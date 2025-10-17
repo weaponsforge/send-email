@@ -175,8 +175,8 @@ Fixes lint errors in TypeScript files.
 
 ### `npm run send-email`
 
-> ![IMPORTANT]
-> This script requires running the `"npm run transpile"` script before usage.
+> 💡 **IMPORTANT:**
+>  This script requires running the `"npm run transpile"` script before usage.
 
 - Sends an email using the command line interface (CLI) using the transpiled JavaScript.
 - Append a double dash `--` to pass arguments to the CLI commands eg., (using Bash)
@@ -184,7 +184,7 @@ Fixes lint errors in TypeScript files.
    npm run send-email -- send \
      -s "You are Invited" \
      -c "Birthday party in December" \
-     -r a @gmail.com b@gmail.com c@gmail.com
+     -r a @gmail.com,b@gmail.com,c@gmail.com
    ```
 - View available options.
    ```bash
@@ -199,7 +199,7 @@ Fixes lint errors in TypeScript files.
    Options:
    -s, --subject <title>         email subject or title enclosed in double-quotes
    -c, --content <text>          email text content or message enclosed in double-quotes
-   -r, --recipients [emails...]  list of email addresses separated by whitespace or comma
+   -r, --recipients [emails...]  comma-separated list of email addresses
    -e, --env <path>              path to .env file (optional)
    -h, --help                    display help for command
    ```

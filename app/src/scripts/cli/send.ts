@@ -8,7 +8,6 @@ import packageJson from '../../../package.json' with { type: 'json' }
 import { CLI_ARGS, CLI_META } from './meta.js'
 
 const program = new Command()
-  .exitOverride() // Throw errors instead of exiting
 
 program
   .name(CLI_META.PROGRAM.NAME)

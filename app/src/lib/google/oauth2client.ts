@@ -37,7 +37,7 @@ class GmailOAuthClient implements IGmailOAuthClient {
    * @constructor
    * @param {Partial<IOauthClient>} params (Optional) constructor parameters. The corresponding `.env` variables
    * expect to have correct values for the default values.
-   * @param {ZodObjectBasicType} [schema] (Optional) zod Schema. Defaults to the `GmailOAuthClientSchema` if not provided.
+   * @param {ZodObjectBasicType} [schema] (Optional) zod Schema. Defaults to the `ZodSchemaTypes` if not provided.
    */
   constructor (params?: Partial<IOauthClient> | null, schema?: ZodObjectBasicType) {
     const clientId = params?.clientId || process.env.GOOGLE_CLIENT_ID
