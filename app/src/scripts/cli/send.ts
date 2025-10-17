@@ -35,7 +35,9 @@ program.command(CLI_META.CMD_SEND.NAME)
         throw new Error('Invalid email recipients format')
       }
 
-      const emailRecipients = String(recipients).split(',')
+      const emailRecipients = String(recipients)
+        .split(',')
+        .map(email => email.trim())
       console.log(`Sending email to: ${recipients}`)
 
       await send({

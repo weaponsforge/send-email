@@ -1,3 +1,6 @@
+import { dirname } from 'path'
+import { fileURLToPath } from 'url'
+
 /**
  * Creates a sequence of N-length `"a"` characters
  * @param {number} length String length
@@ -42,4 +45,13 @@ export const createRandomTextArray = (params: IRandomTextArrayParams) => {
   return Array.from({ length }).map(_ =>
     `${prefix}${Math.random().toString(36).substring(2, 8)}${suffix}`
   )
+}
+
+/**
+ * Get the full file path of the current directory of a module file equivalent to `"__dirname"`
+ * @param {string} moduleFile - File URL of the current module being executed: `"import.meta.url"`
+ * @returns {string} Full file path to the directory of the calling file/module also know as `__dirname` in CommonJS
+ */
+export const directory = (moduleFile: string) => {
+  return dirname(fileURLToPath(moduleFile))
 }
