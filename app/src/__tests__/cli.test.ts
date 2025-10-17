@@ -8,9 +8,9 @@ describe('CLI test suite', () => {
     const { stdout } = await execa('npm', [
       'run', 'send-email:dev', '--',
       'send',
-      '-s \'Hello, World!\'',
-      '-c \'Lorem ipsum dolor sit amet, consectetur adipiscing elit...\'',
-      '-r testor@gmail.com,abc@gmail.com'
+      '-s', 'Hello, World!',
+      '-c', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit...',
+      '-r', 'testor@gmail.com,abc@gmail.com'
     ],
     {
       preferLocal: true

@@ -113,7 +113,7 @@ Sends emails using Gmail SMTP with Google OAuth2 or username/pw.
 
 - **Run a non-test TS file using Vite**<br>
    (requires **Run an NPM script using Docker compose**)
-   ```
+   ```bash
    docker exec -it weaponsforge-sendemail-dev npx vite-node /opt/app/src/<PATH_TO_TS_FILE>.ts
    ```
 
@@ -180,18 +180,18 @@ Fixes lint errors in TypeScript files.
 
 - Sends an email using the command line interface (CLI) using the transpiled JavaScript.
 - Append a double dash `--` to pass arguments to the CLI commands eg., (using Bash)
-   ```
+   ```bash
    npm run send-email -- send \
      -s "You are Invited" \n
      -c "Birthday party in December" \
      -r a @gmail.com b@gmail.com c@gmail.com
    ```
 - View available options.
-   ```
+   ```bash
    npm run send-email help send
    ```
 
-   ```
+   ```bash
    Usage: send-email send [options]
 
    Send an email to one or multiple recipient/s
@@ -229,14 +229,14 @@ Run the Docker containers first using options A or B.
 
 **A. Using Docker compose**
 
-```
+```bash
 docker compose build
 docker compose up
 ```
 
 Use the template:
 
-```
+```bash
 docker exec -it weaponsforge-sendemail-dev <AVAILABLE_DOCKER_SCRIPT>
 ```
 

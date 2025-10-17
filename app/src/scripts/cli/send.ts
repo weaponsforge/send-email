@@ -25,6 +25,10 @@ program.command(CLI_META.CMD_SEND.NAME)
   .action(async (options: Record<string, string>) => {
     const { subject, content, recipients, env } = options
 
+    if (!subject || !content || !recipients) {
+      throw new Error('Invalid agrument/s')
+    }
+
     // Load user-provided .env file
     if (env) {
       dotenv.config({

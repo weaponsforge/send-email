@@ -8,7 +8,7 @@ const CLI_META = {
     NAME: 'send',
     DESCRIPTION: 'Send an email to one or multiple recipient/s'
   }
-}
+} as const
 
 // CLI command arguments
 const CLI_ARGS = {
@@ -28,7 +28,7 @@ const CLI_ARGS = {
     OPTION: '-e, --env <path>',
     DESCRIPTION: 'path to .env file (optional)'
   }
-}
+} as const
 
 export {
   CLI_ARGS,
