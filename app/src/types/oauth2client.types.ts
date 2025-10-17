@@ -1,5 +1,5 @@
 export type { OAuth2Client } from 'google-auth-library'
-export type { GetAccessTokenResponse } from 'google-auth-library/build/src/auth/oauth2client.js'
+export type { GetAccessTokenResponse } from 'google-auth-library/build/src/auth/authclient.js'
 
 /**
  * Optional properties of the `OAuthClient` class constructor.

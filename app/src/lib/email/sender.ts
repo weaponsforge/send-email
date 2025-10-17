@@ -1,5 +1,5 @@
 import dotenv from 'dotenv'
-dotenv.config()
+dotenv.config({ quiet: true })
 
 import EmailTransport from '@/lib/email/transport.js'
 import type { IEmailTransportAuth, SentMessageInfo } from '@/types/transport.types.js'

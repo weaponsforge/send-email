@@ -1,6 +1,6 @@
 import { google } from 'googleapis'
 import dotenv from 'dotenv'
-dotenv.config()
+dotenv.config({ quiet: true })
 
 import SchemaValidator from '@/lib/validator/schemavalidator.js'
 import type { IGmailOAuthClient } from '@/types/oauth2client.interface.js'

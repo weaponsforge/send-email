@@ -91,12 +91,12 @@ Sends emails using Gmail SMTP with Google OAuth2 or username/pw.
 
 - **Build the image** (Run only once)
    ```bash
-   docker compose -f docker-compose.dev.yml build
+   docker compose build
    ```
 
 - **Run the container** (Run only once)
    ```bash
-   docker compose -f docker-compose.dev.yml up
+   docker compose up
    ```
 
 - **Run an NPM script using Docker compose**<br>
@@ -113,7 +113,7 @@ Sends emails using Gmail SMTP with Google OAuth2 or username/pw.
 
 - **Run a non-test TS file using Vite**<br>
    (requires **Run an NPM script using Docker compose**)
-   ```
+   ```bash
    docker exec -it weaponsforge-sendemail-dev npx vite-node /opt/app/src/<PATH_TO_TS_FILE>.ts
    ```
 
@@ -171,6 +171,46 @@ Fixes lint errors in TypeScript files.
 - Spins up a local web server accessible at `http://localhost:4174/`
 - Serves the website contents of a test report from the **/html** directory
 
+### C. CLI 💻
+
+### `npm run send-email`
+
+> ![IMPORTANT]
+> This script requires running the `"npm run transpile"` script before usage.
+
+- Sends an email using the command line interface (CLI) using the transpiled JavaScript.
+- Append a double dash `--` to pass arguments to the CLI commands eg., (using Bash)
+   ```bash
+   npm run send-email -- send \
+     -s "You are Invited" \
+     -c "Birthday party in December" \
+     -r a @gmail.com b@gmail.com c@gmail.com
+   ```
+- View available options.
+   ```bash
+   npm run send-email help send
+   ```
+
+   ```bash
+   Usage: send-email send [options]
+
+   Send an email to one or multiple recipient/s
+
+   Options:
+   -s, --subject <title>         email subject or title enclosed in double-quotes
+   -c, --content <text>          email text content or message enclosed in double-quotes
+   -r, --recipients [emails...]  list of email addresses separated by whitespace or comma
+   -e, --env <path>              path to .env file (optional)
+   -h, --help                    display help for command
+   ```
+
+### `npm run send-email:dev`
+
+- Sends an email using the command line interface (CLI) in development mode using TypeScript.
+- Append a double dash `--` to pass arguments to the CLI commands.
+- Usage: view the `"npm run send-email"` script for more information. They share similar usage.
+  - > 💡 **NOTE:** Append `:dev` in the script eg., `npm run send-email:dev`
+
 </details>
 
 ## 📦 Docker Scripts
@@ -189,14 +229,14 @@ Run the Docker containers first using options A or B.
 
 **A. Using Docker compose**
 
-```
-docker compose -f docker-compose.dev.yml build
-docker compose -f docker-compose.dev.yml up
+```bash
+docker compose build
+docker compose up
 ```
 
 Use the template:
 
-```
+```bash
 docker exec -it weaponsforge-sendemail-dev <AVAILABLE_DOCKER_SCRIPT>
 ```
 
