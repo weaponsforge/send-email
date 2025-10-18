@@ -30,7 +30,8 @@ class EmailSender extends EmailTransport implements IEmailSender {
         recipient,
         recipients = [],
         subject,
-        content
+        content,
+        isHtml = false
       } = params
 
       const receivers = stringsToArray(recipient, recipients)
@@ -42,8 +43,9 @@ class EmailSender extends EmailTransport implements IEmailSender {
       return await this.transporter!.sendMail({
         from: transportOptions.auth?.user || process.env.USER_EMAIL,
         to: receivers,
-        subject: subject,
-        text: content
+        subject,
+        ...(!isHtml && { text: content }),  // Text email
+        ...(isHtml && { html: content })    // HTML content format
       })
     } catch (err: unknown) {
       if (err instanceof Error) {

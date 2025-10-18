@@ -1,0 +1,49 @@
+
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Message</title>
+  <style type="text/css">
+    .message-container {
+      width: 480px;
+      min-height: 100px;
+      padding: 24px;
+      margin: auto;
+      border: 3px solid #8F63FE;
+      border-radius: 16px;
+      background-color: #F0EAFF;
+    }
+
+    .message {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 14px;
+    }
+
+    .sender-section {
+      margin-top: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="message-container">
+    <div class="message">
+      <%if (recipient !== null) { %>
+      <p>
+        Dear <%= recipient %>,
+      </p>
+      <% } %>
+
+      <% messages.forEach((message) => { %>
+        <%= message %>
+      <% }) %>
+
+      <div class="sender-section">
+        <div>Regards,</div>
+        <div><%= sender %></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -38,7 +38,11 @@ export const EmailSchema = z.object({
     .max(200, { message: EmailSchemaMessages.SUBJECT }),
 
   content: z.string()
-    .max(1500, { message: EmailSchemaMessages.CONTENT })
+    .max(1500, { message: EmailSchemaMessages.CONTENT }),
+
+  isHtml: z.boolean()
+    .default(false)
+    .optional()
 }).refine(
   (data: IOptionalParams) =>
     data.recipient !== undefined || (data.recipients !== undefined && data.recipients.length > 0),
@@ -52,5 +56,13 @@ export const EmailSchema = z.object({
  * @property {string[]} [recipients] - (Optional) One (1) or more comma-separated email addresses of recipients that will receive an email. Required if `recipient` is undefined.
  * @property {string} subject - Email message title (max 100 characters)
  * @property {string} content - Email message content can can be a simple text or HTML string (max 1500 characters)
+ * @property {boolean} isHtml - Flag indicating if the `content` field is in HTML format. Defaults to `false`.
  */
 export type EmailType = z.infer<typeof EmailSchema>
+
+export type MultipleMessageEmail = {
+  subject: string;
+  content: string[];
+  recipients: string | string[];
+  sender: string;
+}
