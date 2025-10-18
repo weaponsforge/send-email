@@ -14,16 +14,26 @@ export const buildHtml = async (
   params: MultipleMessageEmail
 ): Promise<string> => {
   const {
-    content: messages,
+    content: messages = [],
     recipients,
     sender,
     subject
   } = params
-  if (!subject || !messages || !recipients || !sender) {
+
+  if (
+    !subject ||
+    !messages || messages.length === 0 ||
+    !recipients ||
+    !sender
+  ) {
     throw new Error('Invalid parameters/s')
   }
 
   const recipientArray = Array.isArray(recipients) ? recipients : [recipients]
+
+  if (recipientArray.length === 0) {
+    throw new Error('Invalid recipients')
+  }
 
   // Format single recipient
   const recipient = recipientArray.length === 1
