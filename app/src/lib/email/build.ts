@@ -3,15 +3,15 @@ import path from 'path'
 import ejs from 'ejs'
 
 import { directory } from '@/utils/helpers.js'
-import type {  MultipleMessageEmail } from '@/types/email.schema.js'
+import type {  HtmlEmailBuild } from '@/types/email.schema.js'
 
 /**
  * Builds the HTML-form email content to send in emails.
- * @param {MultipleMessageEmail} params - HTML Email parameters with multiple `content[]` for paragraphs
+ * @param {HtmlEmailBuild} params - HTML Email parameters with multiple `content[]` for paragraphs
  * @returns {string} HTML-form email content
  */
 export const buildHtml = async (
-  params: MultipleMessageEmail
+  params: HtmlEmailBuild
 ): Promise<string> => {
   const {
     content: messages = [],

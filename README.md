@@ -55,7 +55,7 @@ Sends emails using Gmail SMTP with Google OAuth2 or username/pw.
    ```
 3. Send a text email using the CLI, eg. using Bash:
    ```bash
-   npm run send-email -- send \
+   npm run send-email -- text \
      -s "You are Invited" \
      -c "Birthday party in December" \
      -r a @gmail.com,b@gmail.com,c@gmail.com
@@ -147,11 +147,15 @@ Sends emails using Gmail SMTP with Google OAuth2 or username/pw.
 ```typescript
 import { send } from '@/lib/index.js'
 
-send({
-  recipient: 'tester@gmail.com',
-  subject: 'Test Message',
-  content: 'How are you?'
-})
+const main = async () => {
+   await send({
+      recipient: 'tester@gmail.com',
+      subject: 'Test Message',
+      content: 'How are you?'
+   })
+}
+
+main()
 ```
 
 ### Send an HTML-format Email
@@ -163,21 +167,25 @@ import { buildHtml } from '@/lib/index.js'
 
 const recipients = ['tester@gmail.com', 'admin@gmail.com']
 
-// Build the HTML email content
-const emailContent = buildHtml({
-  subject: 'Welcome Aboard!',
-  content: ['Lorem ipsum dolor sit amet...'],
-  recipients,
-  sender: process.env.GOOGLE_USER_EMAIL
-})
+const main = async () => {
+   // Build the HTML email content
+   const emailContent = await buildHtml({
+      subject: 'Welcome Aboard!',
+      content: ['Lorem ipsum dolor sit amet...'],
+      recipients,
+      sender: process.env.GOOGLE_USER_EMAIL
+   })
 
-// Send the email
-send({
-   subject: 'Welcome Aboard!',
-   content: emailContent,
-   recipients,
-   isHtml: true
-})
+   // Send the email
+   await send({
+      subject: 'Welcome Aboard!',
+      content: emailContent,
+      recipients,
+      isHtml: true
+   })
+}
+
+main()
 ```
 
 <br>

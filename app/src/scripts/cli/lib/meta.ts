@@ -4,9 +4,9 @@ const CLI_META = {
     NAME: 'send-email',
     DESCRIPTION: 'CLI for sending an email using Gmail SMTP and Google OAuth2'
   },
-  CMD_SEND: {
-    NAME: 'send',
-    DESCRIPTION: 'Send an email to one or multiple recipient/s'
+  CMD_SEND_TEXT: {
+    NAME: 'text',
+    DESCRIPTION: 'Send a text email to one or multiple recipient/s'
   }
 } as const
 

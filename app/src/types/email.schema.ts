@@ -51,7 +51,7 @@ export const EmailSchema = z.object({
 
 /**
  * Type representing a validated email object
- * @typedef {Object} EmailSenderType
+ * @typedef {object} EmailSenderType
  * @property {string} [recipient] - (Optional) Email address of a recipient that will receive an email. Required if `recipients[]` is undefined.
  * @property {string[]} [recipients] - (Optional) One (1) or more comma-separated email addresses of recipients that will receive an email. Required if `recipient` is undefined.
  * @property {string} subject - Email message title (max 100 characters)
@@ -60,9 +60,30 @@ export const EmailSchema = z.object({
  */
 export type EmailType = z.infer<typeof EmailSchema>
 
-export type MultipleMessageEmail = {
+/**
+ * CommanderJS action parameter types for sending email messages
+ * @typedef {object} HtmlEmailParams
+ * @property {string} subject - Email subject or title
+ * @property {string[]} content - Email message content (text-based)
+ * @property {string} recipients - Comma-separated list of email addresses
+ */
+export interface HtmlEmailParams {
   subject: string;
+  content: string;
+  recipients: string;
+  env?: string;
+}
+
+/**
+ * Parameter types for building an HTML-form email message
+ * @property {string[]} content - List of email message text content in a `string[]` array
+ * @property {string[]} recipients - List of email addresses in a `string[]` array
+ * @property {string} sender - Sender email address
+ */
+export interface HtmlEmailBuild extends Omit<
+  HtmlEmailParams, 'recipients' | 'content' | 'env'
+> {
   content: string[];
-  recipients: string | string[];
+  recipients: string[];
   sender: string;
 }
