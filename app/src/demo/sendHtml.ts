@@ -12,11 +12,11 @@ const emailContent = buildHtml({
   subject: dataJson.subject,
   content: [dataJson.content],
   recipients: dataJson.recipients,
-  sender: process.env.GOOGLE_USER_EMAIL!
+  sender: process.env.GOOGLE_USER_EMAIL
 })
 
 // Send the email
-send({
+await send({
   subject: dataJson.subject,
   content: emailContent,
   recipients: dataJson.recipients,
