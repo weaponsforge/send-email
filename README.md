@@ -8,6 +8,7 @@ Sends emails using Gmail SMTP with Google OAuth2 or username/pw.
 - [Installation](#%EF%B8%8F-installation)
 - [Usage](#-usage)
 - [Alternate Usage](#alternate-usage)
+- [Code Samples](#-code-samples)
 - [Available Scripts](#-available-scripts)
 - [Docker Scripts](#-docker-scripts)
 
@@ -119,6 +120,48 @@ Sends emails using Gmail SMTP with Google OAuth2 or username/pw.
 
 - See the [Available Scripts](#-available-scripts) and [Docker Scripts](#-docker-scripts) sections for more information.
 
+## 🧾 Code Samples
+
+### Send a Text-format Email
+
+**app/src/scripts/sendEmail.ts**
+```typescript
+import { send } from '@/lib/index.js'
+
+send({
+  recipient: 'tester@gmail.com',
+  subject: 'Test Message',
+  content: 'How are you?'
+})
+```
+
+### Send an HTML-format Email
+
+**app/src/demo/sendHtml.ts**
+```typescript
+import { send } from '@/lib/index.js'
+import { buildHtml } from '@/lib/index.js'
+
+const recipients = ['tester@gmail.com', 'admin@gmal.com']
+
+// Build the HTML email content
+const emailContent = buildHtml({
+  subject: 'Welcome Aboard!',
+  content: ['Lorem ipsum dolor sit amet...'],
+  recipients,
+  sender: process.env.GOOGLE_USER_EMAIL
+})
+
+// Send the email
+send({
+   subject: 'Welcome Aboard!',
+   content: emailContent,
+   recipients,
+   isHtml: true
+})
+```
+
+<br>
 
 ## 📜 Available Scripts
 
@@ -212,6 +255,7 @@ Fixes lint errors in TypeScript files.
   - > 💡 **NOTE:** Append `:dev` in the script eg., `npm run send-email:dev`
 
 </details>
+<br>
 
 ## 📦 Docker Scripts
 
