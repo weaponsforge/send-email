@@ -48,7 +48,7 @@ Sends emails using Gmail SMTP with Google OAuth2 or username/pw.
 ## 🆕 Quickstart
 
 1. Create a `.env` file in the `/app` directory, replacing the contents of the `.env.example` file with actual values.
-  - See **Installation # 4** for more information about these environment variables.
+   - See **Installation # 4** for more information about these environment variables.
 2. Install dependencies.
    ```bash
    npm install
