@@ -64,5 +64,5 @@ export type MultipleMessageEmail = {
   subject: string;
   content: string[];
   recipients: string | string[];
-  sender?: string;
+  sender: string;
 }
