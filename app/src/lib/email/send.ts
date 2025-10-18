@@ -5,7 +5,7 @@ import { TRANSPORT_AUTH_TYPES, TRANSPORT_SMTP_HOSTS } from '@/types/transport.ty
 import type { EmailType } from '@/types/email.schema.js'
 
 /**
- *  Sends a raw, text-content email to a recipient
+ *  Sends an email to a recipient (text or HTML)
  * @param {EmailType} params Email sending input parameters
  */
 export const send = async (params: EmailType, client?: GmailOAuthClient): Promise<void> => {

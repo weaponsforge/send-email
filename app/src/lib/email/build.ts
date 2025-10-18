@@ -32,14 +32,19 @@ export const buildHtml = (
 
   const dir = directory(import.meta.url)
 
-  const templatePath = path.resolve(dir, '..', '..', 'templates', 'email.ejs')
-  const emailTemplate = fs.readFileSync(templatePath, 'utf-8')
+  try {
+    const templatePath = path.resolve(dir, '..', '..', 'templates', 'email.ejs')
+    const emailTemplate = fs.readFileSync(templatePath, 'utf-8')
 
-  const html = ejs.render(emailTemplate, {
-    recipient,
-    messages,
-    sender
-  })
+    const html = ejs.render(emailTemplate, {
+      recipient,
+      messages,
+      sender
+    })
 
-  return html
+    return html
+  } catch (err) {
+    const errMsg = err instanceof Error ? err.message : String(err)
+    throw new Error(`Failed to render email template: ${errMsg}`)
+  }
 }
