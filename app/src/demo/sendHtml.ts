@@ -8,7 +8,7 @@ if (!process.env.GOOGLE_USER_EMAIL) {
 }
 
 // Build the HTML email content
-const emailContent = buildHtml({
+const emailContent = await buildHtml({
   subject: dataJson.subject,
   content: [dataJson.content],
   recipients: dataJson.recipients,

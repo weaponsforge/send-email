@@ -1,4 +1,4 @@
-import fs from 'fs'
+import { promises as fs } from 'fs'
 import path from 'path'
 import ejs from 'ejs'
 
@@ -10,9 +10,9 @@ import type {  MultipleMessageEmail } from '@/types/email.schema.js'
  * @param {MultipleMessageEmail} params - HTML Email parameters with multiple `content[]` for paragraphs
  * @returns {string} HTML-form email content
  */
-export const buildHtml = (
+export const buildHtml = async (
   params: MultipleMessageEmail
-): string => {
+): Promise<string> => {
   const {
     content: messages,
     recipients,
@@ -34,7 +34,7 @@ export const buildHtml = (
 
   try {
     const templatePath = path.resolve(dir, '..', '..', 'templates', 'email.ejs')
-    const emailTemplate = fs.readFileSync(templatePath, 'utf-8')
+    const emailTemplate = await fs.readFile(templatePath, 'utf-8')
 
     const html = ejs.render(emailTemplate, {
       recipient,
