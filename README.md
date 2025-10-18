@@ -5,6 +5,7 @@ Sends emails using Gmail SMTP with Google OAuth2 or username/pw.
 ### Table of Contents
 
 - [Requirements](#-requirements)
+- [Quickstart](#-quickstart)
 - [Installation](#%EF%B8%8F-installation)
 - [Usage](#-usage)
 - [Alternate Usage](#alternate-usage)
@@ -34,13 +35,31 @@ Sends emails using Gmail SMTP with Google OAuth2 or username/pw.
 
 (Installed via npm)
 
-1. googleapis `v148.0.0`
-2. nodemailer `v6.10.0`
-3. typescript `v5.8.2` - Compile-time error checker
-4. vite-node `v3.0.9`- Runs TS files in development mode
-5. vitest `v3.0.9` - Runs tests
+1. googleapis `v162.0.0`
+2. nodemailer `v7.0.9`
+3. typescript `v5.9.3` - Compile-time error checker
+4. vite-node `v3.2.4`- Runs TS files in development mode
+5. vitest `v3.2.4` - Runs tests
+6. commander `v14.0.1` - CLI library
 
 </details>
+<br>
+
+## 🆕 Quickstart
+
+1. Create a `.env` file in the `/app` directory, replacing the contents of the `.env.example` file with actual values.
+  - See **Installation # 4** for more information about these environment variables.
+2. Install dependencies.
+   ```bash
+   npm install
+   ```
+3. Send a text email using the CLI, eg. using Bash:
+   ```bash
+   npm run send-email -- send \
+     -s "You are Invited" \
+     -c "Birthday party in December" \
+     -r a @gmail.com,b@gmail.com,c@gmail.com
+   ```
 
 ## 🛠️ Installation
 
@@ -124,7 +143,7 @@ Sends emails using Gmail SMTP with Google OAuth2 or username/pw.
 
 ### Send a Text-format Email
 
-**app/src/scripts/sendEmail.ts**
+**app/src/demo/sendEmail.ts**
 ```typescript
 import { send } from '@/lib/index.js'
 
@@ -221,7 +240,7 @@ Fixes lint errors in TypeScript files.
 > 💡 **IMPORTANT:**
 >  This script requires running the `"npm run transpile"` script before usage.
 
-- Sends an email using the command line interface (CLI) using the transpiled JavaScript.
+- Sends an email using the command line interface (CLI) using transpiled JavaScript.
 - Append a double dash `--` to pass arguments to the CLI commands eg., (using Bash)
    ```bash
    npm run send-email -- send \
@@ -242,7 +261,7 @@ Fixes lint errors in TypeScript files.
    Options:
    -s, --subject <title>         email subject or title enclosed in double-quotes
    -c, --content <text>          email text content or message enclosed in double-quotes
-   -r, --recipients [emails...]  comma-separated list of email addresses
+   -r, --recipients <emails...>  comma-separated list of email addresses
    -e, --env <path>              path to .env file (optional)
    -h, --help                    display help for command
    ```
