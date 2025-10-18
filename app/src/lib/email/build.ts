@@ -23,9 +23,11 @@ export const buildHtml = (
     throw new Error('Invalid parameters/s')
   }
 
+  const recipientArray = Array.isArray(recipients) ? recipients : [recipients]
+
   // Format single recipient
-  const recipient = recipients.length === 1
-    ? recipients[0]
+  const recipient = recipientArray.length === 1
+    ? recipientArray[0]
     : null
 
   const dir = directory(import.meta.url)
