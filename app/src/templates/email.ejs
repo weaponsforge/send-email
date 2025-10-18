@@ -1,9 +1,9 @@
 
-<!-- DOCTYPE HTML-->
+<!DOCTYPE HTML>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="with=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Message</title>
   <style type="text/css">
     .message-container {
@@ -20,6 +20,10 @@
       font-family: Arial, Helvetica, sans-serif;
       font-size: 14px;
     }
+
+    .sender-section {
+      margin-top: 16px;
+    }
   </style>
 </head>
 <body>
@@ -32,13 +36,13 @@
       <% } %>
 
       <% messages.forEach((message) => { %>
-        <%- message %>
+        <%= message %>
       <% }) %>
 
-      <p>
+      <div class="sender-section">
         <div>Regards,</div>
         <div><%= sender %></div>
-      </p>
+      </div>
     </div>
   </div>
 </body>

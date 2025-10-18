@@ -161,7 +161,7 @@ send({
 import { send } from '@/lib/index.js'
 import { buildHtml } from '@/lib/index.js'
 
-const recipients = ['tester@gmail.com', 'admin@gmal.com']
+const recipients = ['tester@gmail.com', 'admin@gmail.com']
 
 // Build the HTML email content
 const emailContent = buildHtml({
