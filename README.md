@@ -41,6 +41,7 @@ Sends emails using Gmail SMTP with Google OAuth2 or username/pw.
 4. vite-node `v3.2.4`- Runs TS files in development mode
 5. vitest `v3.2.4` - Runs tests
 6. commander `v14.0.1` - CLI library
+7. sanitize-html `v2.17.0` - Sanitizes WYSIWYG HTML input
 
 </details>
 <br>
@@ -254,11 +255,13 @@ Fixes lint errors in TypeScript files.
 > **NOTE:** This script requires running `npm test` first to generate a test report into the **/html** directory
 
 - Spins up a local web server accessible at `http://localhost:4174/`
-- Serves the website contents of a test report from the **/html**
+- Serves the website contents of a test report from the **/html** directory
 
 ### `npm run copy:files`
 
 Copies the EJS email template into the `/dist/templates` directory.
+
+This script runs automatically after `"npm run transpile"`, copying the `"/app/src/templates/email.ejs"` to the `"/dist/templates"` directory.
 
 ### C. CLI 💻
 

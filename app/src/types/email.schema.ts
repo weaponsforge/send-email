@@ -67,7 +67,7 @@ export type EmailType = z.infer<typeof EmailSchema>
  * @typedef {object} EmailTextOptions
  * @property {string} subject - Email subject or title
  * @property {string[]} content - Email message content (text-based)
- * @property {string} recipients - Comma-separated list of email
+ * @property {string} recipients - Array of recipient email addresses
  * @property {string} env - Path to a custom `.env` file.
  */
 export interface EmailTextOptions {
@@ -98,7 +98,7 @@ export const HtmlBuildSchema = BaseEmailSchema
   .extend({
     content: z.array(
       z.string().max(1500, { message: EmailSchemaMessages.CONTENT })
-    ),
+    ).optional(),
 
     recipients: z.array(
       z.string()
@@ -112,3 +112,14 @@ export const HtmlBuildSchema = BaseEmailSchema
 
     wysiwyg: z.string().nullable().optional()
   })
+  .refine(
+    (data) => {
+      const hasContent = data.content && data.content.length > 0
+      const hasWysiwyg = data.wysiwyg && data.wysiwyg.trim().length > 0
+      return hasContent || hasWysiwyg
+    },
+    {
+      message: 'Either \'content\' or \'wysiwyg\' must be provided',
+      path: ['content', 'wysiwyg']
+    }
+  )

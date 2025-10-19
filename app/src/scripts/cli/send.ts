@@ -26,7 +26,7 @@ program.command(CLI_META.CMD_SEND_TEXT.NAME)
   .requiredOption(
     CLI_ARGS.COMMON.RECIPIENTS.OPTION,
     CLI_ARGS.COMMON.RECIPIENTS.DESCRIPTION,
-    (val) => val.split(',')
+    (val) => val.split(',').map(s => s.trim()).filter(Boolean)
   )
   .action(async (options: EmailTextOptions) => {
     const { env } = options
@@ -54,7 +54,7 @@ program.command(CLI_META.CMD_SEND_HTML.NAME)
   .requiredOption(
     CLI_ARGS.COMMON.RECIPIENTS.OPTION,
     CLI_ARGS.COMMON.RECIPIENTS.DESCRIPTION,
-    (val) => val.split(',')
+    (val) => val.split(',').map(s => s.trim()).filter(Boolean)
   )
   .option(CLI_ARGS.CMD_HTML.CONTENT_HTML.OPTION, CLI_ARGS.CMD_HTML.CONTENT_HTML.DESCRIPTION)
   .option(CLI_ARGS.CMD_HTML.CONTENT_WYSIWYG.OPTION, CLI_ARGS.CMD_HTML.CONTENT_WYSIWYG.DESCRIPTION)
