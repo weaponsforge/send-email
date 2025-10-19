@@ -17,9 +17,9 @@ interface IOptionalParams {
 /**
  * Base schema for email validation within the `EmailTransport.sendEmail()` method
  * @property {string} [recipient] - (Optional) Email address of a recipient that will receive an email. Required if `recipients[]` is undefined.
- * @property {string[]} [recipients] - (Optional) One (1) or more comma-separated email addresses of of recipients that will receive an email. Required if `recipient` is undefined.
+ * @property {string[]} [recipients] - (Optional) Array of one or more email addresses of recipients that will receive an email. Required if `recipient` is undefined.
  * @property {string} subject Email message title (max 100 characters)
- * @property {string} content Email message content can can be a simple text or HTML string (max 1500 characters)
+ * @property {string} content Email message content can be a simple text or HTML string (max 1500 characters)
  */
 export const BaseEmailSchema = z.object({
   recipient: z.string({ message: EmailSchemaMessages.RECIPIENT_EMAIL })

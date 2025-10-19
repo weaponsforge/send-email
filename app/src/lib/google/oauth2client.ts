@@ -75,7 +75,7 @@ class GmailOAuthClient implements IGmailOAuthClient {
       this.#refreshToken = refreshToken
     } catch (err: unknown) {
       if (err instanceof Error) {
-        throw new Error(err.message)
+        throw err
       }
     }
   }

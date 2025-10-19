@@ -54,7 +54,7 @@ class EmailTransport implements IEmailTransport {
       })
     } catch (err: unknown) {
       if (err instanceof Error) {
-        throw new Error(err.message)
+        throw err
       }
     }
   }
