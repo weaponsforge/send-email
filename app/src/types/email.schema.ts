@@ -66,8 +66,8 @@ export type EmailType = z.infer<typeof EmailSchema>
  * CommanderJS action parameter types for sending text email messages
  * @typedef {object} EmailTextOptions
  * @property {string} subject - Email subject or title
- * @property {string[]} content - Email message content (text-based)
- * @property {string} recipients - Array of recipient email addresses
+ * @property {string} content - Email message content (text-based)
+ * @property {string[]} recipients - Array of recipient email addresses
  * @property {string} env - Path to a custom `.env` file.
  */
 export interface EmailTextOptions {
