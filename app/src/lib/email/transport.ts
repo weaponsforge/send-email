@@ -55,6 +55,8 @@ class EmailTransport implements IEmailTransport {
     } catch (err: unknown) {
       if (err instanceof Error) {
         throw err
+      } else {
+        throw new Error(`Unexpected error type: ${String(err)}`)
       }
     }
   }
