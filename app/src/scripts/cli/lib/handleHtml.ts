@@ -2,7 +2,7 @@ import { buildHtml, send } from '@/lib/index.js'
 import { type EmailHtmlOptions } from '@/types/email.schema.js'
 
 /**
- * Handles the CommanderJS action for sending text-form email messages
+ * Handles the CommanderJS action for sending HTML-format email messages
  * @param {EmailHtmlOptions} options - CommanderJS options object
  */
 export const handleSendHtmlEmail = async (options: EmailHtmlOptions) => {
@@ -22,7 +22,7 @@ export const handleSendHtmlEmail = async (options: EmailHtmlOptions) => {
       throw new Error('One of content or wysiwyg is required')
     }
 
-    console.log(`Sending email to: ${recipients}`)
+    console.log(`Sending email to (${recipients.length}) recipients`)
 
     const emailContent = await buildHtml({
       content: paragraphs,

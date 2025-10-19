@@ -9,7 +9,7 @@ export const handleSendTextEmail = async (options: EmailTextOptions) => {
   try {
     const { subject, content, recipients = [] } = options
 
-    console.log(`Sending email to: ${recipients}`)
+    console.log(`Sending email to (${recipients.length}) recipients`)
 
     await send({
       recipients,
