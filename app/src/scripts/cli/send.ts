@@ -42,7 +42,7 @@ program.command(CLI_META.CMD_SEND_TEXT.NAME)
     try {
       await handleSendTextEmail(options)
     } catch (err: unknown) {
-      const errMsg = (err instanceof Error) ? err.message : 'An unknown error occured.'
+      const errMsg = (err instanceof Error) ? err.message : 'An unknown error occurred.'
       console.log(`[ERROR]: ${errMsg}`)
     }
   })
@@ -73,7 +73,7 @@ program.command(CLI_META.CMD_SEND_HTML.NAME)
     try {
       await handleSendHtmlEmail(options)
     } catch (err) {
-      const errMsg = (err instanceof Error) ? err.message : 'An unknown error occured.'
+      const errMsg = (err instanceof Error) ? err.message : 'An unknown error occurred.'
       console.log(`[ERROR]: ${errMsg}`)
     }
   })

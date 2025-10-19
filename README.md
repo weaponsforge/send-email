@@ -268,8 +268,8 @@ Copies the EJS email template into the `/dist/templates` directory.
 Sends text and HTML emails using the command line interface (CLI) with transpiled JavaScript.
 
 > 💡 **IMPORTANT:**
->  - This script requires running the `"npm run transpile"` script before usage.
->  - If you want to run these without transpiling, append a `:dev` after the NPM script: `"npm run send-email:dev"`
+> - This script requires running the `"npm run transpile"` script before usage.
+> - If you want to run these without transpiling, append a `:dev` after the NPM script: `"npm run send-email:dev"`
 
 #### CLI Usage
 
@@ -330,7 +330,7 @@ Sends text and HTML emails using the command line interface (CLI) with transpile
    Options:
    -s, --subject <title>      email subject or title enclosed in double-quotes
    -r, --recipients <emails>  comma-separated list of email addresses
-   -c, --content <text...>    whitespace-delimited list contaning text/paragraphs enclosed in double-quotes
+   -c, --content <text...>    whitespace-delimited list containing text/paragraphs enclosed in double-quotes
    -w, --wysiwyg [html]       optional HTML tags that form a WYSIWYG layout enclosed in double-quotes
    -e, --env <path>           path to .env file (optional)
    -h, --help                 display help for command

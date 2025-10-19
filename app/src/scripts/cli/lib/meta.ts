@@ -44,14 +44,14 @@ const CLI_ARGS = {
   CMD_HTML: {
     CONTENT_HTML: {
       OPTION: '-c, --content <text...>',
-      DESCRIPTION: 'whitespace-delimited list contaning text/paragraphs enclosed in double-quotes'
+      DESCRIPTION: 'whitespace-delimited list containing text/paragraphs enclosed in double-quotes'
     },
     CONTENT_WYSIWYG: {
       OPTION: '-w, --wysiwyg [html]',
       DESCRIPTION: 'optional HTML tags that form a WYSIWYG layout enclosed in double-quotes'
     },
     TEMPLATE_FILE: {
-      OPTIONS: '-t, --template [path]',
+      OPTION: '-t, --template [path]',
       DESCRIPTION: 'optional path to an EJS template file'
     }
   }
