@@ -22,11 +22,15 @@ export const handleSendHtmlEmail = async (options: EmailHtmlOptions) => {
       throw new Error('One of content or wysiwyg is required')
     }
 
-    console.log(`Sending email to (${recipients.length}) recipients`)
+    // Clean data of whitespace
+    const emails = recipients.map(email => email.trim())
+    const cleanText = paragraphs.map(paragraph =>paragraph.trim())
+
+    console.log(`Sending email to (${emails.length}) recipients`)
 
     const emailContent = await buildHtml({
-      content: paragraphs,
-      recipients,
+      content: cleanText,
+      recipients: emails,
       sender: process.env.GOOGLE_USER_EMAIL,
       wysiwyg
     })
@@ -34,7 +38,7 @@ export const handleSendHtmlEmail = async (options: EmailHtmlOptions) => {
     await send({
       subject,
       content: emailContent,
-      recipients,
+      recipients: emails,
       isHtml: true
     })
   } catch (err: unknown) {

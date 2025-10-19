@@ -18,7 +18,7 @@ export const handleSendTextEmail = async (options: EmailTextOptions) => {
     })
   } catch (err: unknown) {
     if (err instanceof Error) {
-      console.log('[ERROR]: handle text email')
+      console.error('[ERROR] Failed to send text email:', err.message)
       throw err
     }
   }

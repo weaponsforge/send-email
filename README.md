@@ -186,7 +186,6 @@ const recipients = ['tester@gmail.com', 'admin@gmail.com']
 const main = async () => {
    // Build the HTML email content
    const emailContent = await buildHtml({
-      subject: 'Welcome Aboard!',
       content: ['Lorem ipsum dolor sit amet...'],
       recipients,
       sender: process.env.GOOGLE_USER_EMAIL

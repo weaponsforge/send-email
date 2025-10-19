@@ -24,7 +24,7 @@ export const buildHtml = async (
 
   // Format single recipient
   const recipient = recipients.length === 1
-    ? recipients[0]
+    ? recipients[0]?.trim()
     : null
 
   const dir = directory(import.meta.url)
