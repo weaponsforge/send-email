@@ -1,43 +1,44 @@
+import sanitizeHtml from 'sanitize-html'
+
 import { promises as fs } from 'fs'
 import path from 'path'
 import ejs from 'ejs'
 
 import { directory } from '@/utils/helpers.js'
-import type {  MultipleMessageEmail } from '@/types/email.schema.js'
+import { HtmlBuildSchema, type EmailHtmlOptions } from '@/types/email.schema.js'
+
+type EmailBuildOptions = Omit<EmailHtmlOptions, 'subject'>
 
 /**
  * Builds the HTML-form email content to send in emails.
- * @param {MultipleMessageEmail} params - HTML Email parameters with multiple `content[]` for paragraphs
+ * @param {EmailBuildOptions} params - HTML Email parameters with multiple `content[]` for paragraphs
  * @returns {string} HTML-form email content
  */
 export const buildHtml = async (
-  params: MultipleMessageEmail
+  params: EmailBuildOptions
 ): Promise<string> => {
   const {
     content: messages = [],
     recipients,
     sender,
-    subject
+    wysiwyg = null
   } = params
 
-  if (
-    !subject ||
-    !messages || messages.length === 0 ||
-    !recipients ||
-    !sender
-  ) {
-    throw new Error('Invalid parameters/s')
-  }
+  HtmlBuildSchema.parse(params)
 
-  const recipientArray = Array.isArray(recipients) ? recipients : [recipients]
+  // Sanitize HTML
+  const wysiwygHtml = typeof wysiwyg === 'string'
+    ? sanitizeHtml(wysiwyg.trim())
+    : null
 
-  if (recipientArray.length === 0) {
-    throw new Error('Invalid recipients')
-  }
+  // Clean messages
+  const cleanMessages = messages
+    .map(message => message.trim())
+    .filter(message => message.length > 0)
 
   // Format single recipient
-  const recipient = recipientArray.length === 1
-    ? recipientArray[0]
+  const recipient = recipients.length === 1
+    ? recipients[0]?.trim() || null
     : null
 
   const dir = directory(import.meta.url)
@@ -48,12 +49,13 @@ export const buildHtml = async (
 
     const html = ejs.render(emailTemplate, {
       recipient,
-      messages,
-      sender
+      messages: cleanMessages,
+      sender,
+      wysiwyg: wysiwygHtml
     })
 
     return html
-  } catch (err) {
+  } catch (err: unknown) {
     const errMsg = err instanceof Error ? err.message : String(err)
     throw new Error(`Failed to render email template: ${errMsg}`)
   }

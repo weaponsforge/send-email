@@ -10,7 +10,6 @@ import dataJson from '../templates/data.json' with { type: 'json' }
 
   // Build the HTML email content
   const emailContent = await buildHtml({
-    subject: dataJson.subject,
     content: [dataJson.content],
     recipients: dataJson.recipients,
     sender: process.env.GOOGLE_USER_EMAIL

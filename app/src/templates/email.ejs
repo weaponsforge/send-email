@@ -33,11 +33,19 @@
       <p>
         Dear <%= recipient %>,
       </p>
+      <% } else { %>
+        <p>Hello,</p>
       <% } %>
 
-      <% messages.forEach((message) => { %>
-        <%= message %>
-      <% }) %>
+      <%if (messages) { %>
+        <% messages.forEach((message) => { %>
+          <p><%= message %></p>
+        <% }) %>
+      <% } %>
+
+      <%if (wysiwyg) { %>
+        <%- wysiwyg %>
+      <% } %>
 
       <div class="sender-section">
         <div>Regards,</div>

@@ -21,7 +21,7 @@ export const send = async (params: EmailType, client?: GmailOAuthClient): Promis
     await handler.createTransport3LO(oauthClient)
   } catch (err: unknown) {
     if (err instanceof Error) {
-      throw new Error(err.message)
+      throw err
     }
   }
 
@@ -34,10 +34,11 @@ export const send = async (params: EmailType, client?: GmailOAuthClient): Promis
       isHtml
     })
 
-    console.log('Email sent to', result?.accepted)
+    const acceptedCount = (result?.accepted || []).length
+    console.log(`Email sent to (${acceptedCount}) recipients`)
   } catch (err: unknown) {
     if (err instanceof Error) {
-      throw new Error(err.message)
+      throw err
     }
   }
 }

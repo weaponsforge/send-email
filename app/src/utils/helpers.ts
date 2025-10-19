@@ -1,5 +1,8 @@
-import { dirname } from 'path'
+import { promises as fs } from 'node:fs'
+import path, { dirname } from 'node:path'
 import { fileURLToPath } from 'url'
+
+import dotenv from 'dotenv'
 
 /**
  * Creates a sequence of N-length `"a"` characters
@@ -54,4 +57,32 @@ export const createRandomTextArray = (params: IRandomTextArrayParams) => {
  */
 export const directory = (moduleFile: string) => {
   return dirname(fileURLToPath(moduleFile))
+}
+
+/**
+ * Copies files to an output directory
+ * @param outDir File path to the output directory
+ * @param files Array containing a list of file paths
+ */
+export const copyFiles = async (outDir: string, files: string[]) => {
+  await fs.mkdir(outDir, { recursive: true })
+
+  for (const src of files) {
+    const dest = path.join(outDir, path.basename(src))
+    await fs.copyFile(src, dest)
+    console.log(`Copied to ${dest}`)
+  }
+}
+
+/**
+ * Loads the `.env` environment variable from a path
+ * @param {string} pathToEnv - Path to a `.env` file
+ */
+export const loadEnv = (pathToEnv: string | undefined) => {
+  if (!pathToEnv) return
+
+  dotenv.config({
+    path: pathToEnv,
+    quiet: true
+  })
 }

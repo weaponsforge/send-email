@@ -49,7 +49,9 @@ class EmailSender extends EmailTransport implements IEmailSender {
       })
     } catch (err: unknown) {
       if (err instanceof Error) {
-        throw new Error(err.message)
+        throw err
+      } else {
+        throw new Error(`Unexpected error type: ${String(err)}`)
       }
     }
   }
