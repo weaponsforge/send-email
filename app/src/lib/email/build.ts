@@ -26,17 +26,15 @@ export const buildHtml = async (
 
   HtmlBuildSchema.parse(params)
 
-  if (!sender?.trim()) {
-    throw new Error('Sender is required')
-  }
-
   // Sanitize HTML
   const wysiwygHtml = typeof wysiwyg === 'string'
     ? sanitizeHtml(wysiwyg.trim())
     : null
 
   // Clean messages
-  const cleanMessages = messages.map(message => message.trim())
+  const cleanMessages = messages
+    .map(message => message.trim())
+    .filter(message => message.length > 0)
 
   // Format single recipient
   const recipient = recipients.length === 1
@@ -57,7 +55,7 @@ export const buildHtml = async (
     })
 
     return html
-  } catch (err) {
+  } catch (err: unknown) {
     const errMsg = err instanceof Error ? err.message : String(err)
     throw new Error(`Failed to render email template: ${errMsg}`)
   }

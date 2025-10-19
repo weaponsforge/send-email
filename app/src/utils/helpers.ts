@@ -2,6 +2,8 @@ import { promises as fs } from 'node:fs'
 import path, { dirname } from 'node:path'
 import { fileURLToPath } from 'url'
 
+import dotenv from 'dotenv'
+
 /**
  * Creates a sequence of N-length `"a"` characters
  * @param {number} length String length
@@ -70,4 +72,17 @@ export const copyFiles = async (outDir: string, files: string[]) => {
     await fs.copyFile(src, dest)
     console.log(`Copied to ${dest}`)
   }
+}
+
+/**
+ * Loads the `.env` environment variable from a path
+ * @param {string} pathToEnv - Path to a `.env` file
+ */
+export const loadEnv = (pathToEnv: string | undefined) => {
+  if (!pathToEnv) return
+
+  dotenv.config({
+    path: pathToEnv,
+    quiet: true
+  })
 }

@@ -82,7 +82,7 @@ export interface EmailTextOptions {
  * @property {string[]} content - List of email message text content in a `string[]` array
  * @property {string[]} recipients - List of email addresses in a `string[]` array
  * @property {string} sender - Sender email address
- * @property {string} wysiwyg - HTML tags that form a WYSIWYG layout
+ * @property {string|null} wysiwyg - HTML tags that form a WYSIWYG layout
  */
 export interface EmailHtmlOptions extends Omit<
   EmailTextOptions, 'recipients' | 'content'

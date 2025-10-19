@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander'
-import dotenv from 'dotenv'
 
 import packageJson from '../../../package.json' with { type: 'json' }
 import { CLI_ARGS, CLI_META } from './lib/meta.js'
@@ -9,6 +8,7 @@ import { CLI_ARGS, CLI_META } from './lib/meta.js'
 import { handleSendTextEmail } from './lib/handleText.js'
 import { handleSendHtmlEmail } from './lib/handleHtml.js'
 import type { EmailHtmlOptions, EmailTextOptions } from '@/types/email.schema.js'
+import { loadEnv } from '@/utils/helpers.js'
 
 const program = new Command()
 
@@ -32,12 +32,7 @@ program.command(CLI_META.CMD_SEND_TEXT.NAME)
     const { env } = options
 
     // Load user-provided .env file
-    if (env) {
-      dotenv.config({
-        path: env,
-        quiet: true
-      })
-    }
+    loadEnv(env)
 
     try {
       await handleSendTextEmail(options)
@@ -63,16 +58,11 @@ program.command(CLI_META.CMD_SEND_HTML.NAME)
     const { env } = options
 
     // Load user-provided .env file
-    if (env) {
-      dotenv.config({
-        path: env,
-        quiet: true
-      })
-    }
+    loadEnv(env)
 
     try {
       await handleSendHtmlEmail(options)
-    } catch (err) {
+    } catch (err: unknown) {
       const errMsg = (err instanceof Error) ? err.message : 'An unknown error occurred.'
       console.log(`[ERROR]: ${errMsg}`)
     }
