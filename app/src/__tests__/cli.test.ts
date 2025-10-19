@@ -7,7 +7,7 @@ describe('CLI test suite', () => {
   test('Sends a text email using CLI options', async () => {
     const { stdout } = await execa('npm', [
       'run', 'send-email:dev', '--',
-      'send',
+      'text',
       '-s', 'Hello, World!',
       '-c', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit...',
       '-r', 'testor@gmail.com,abc@gmail.com'
