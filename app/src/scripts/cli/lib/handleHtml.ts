@@ -24,12 +24,11 @@ export const handleSendHtmlEmail = async (options: EmailHtmlOptions) => {
 
     // Clean data of whitespace
     const emails = recipients.map(email => email.trim())
-    const cleanText = paragraphs.map(paragraph =>paragraph.trim())
 
     console.log(`Sending email to (${emails.length}) recipients`)
 
     const emailContent = await buildHtml({
-      content: cleanText,
+      content: paragraphs,
       recipients: emails,
       sender: process.env.GOOGLE_USER_EMAIL,
       wysiwyg

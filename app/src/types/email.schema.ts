@@ -22,22 +22,22 @@ interface IOptionalParams {
  * @property {string} content Email message content can can be a simple text or HTML string (max 1500 characters)
  */
 export const BaseEmailSchema = z.object({
-  recipient: z.string()
+  recipient: z.string({ message: EmailSchemaMessages.RECIPIENT_EMAIL })
     .email({ message: EmailSchemaMessages.RECIPIENT_EMAIL })
     .max(150, { message: EmailSchemaMessages.RECIPIENT_EMAIL_LENGTH })
     .optional(),
 
   recipients: z.array(
-    z.string()
+    z.string({ message: EmailSchemaMessages.RECIPIENT_EMAIL })
       .email({ message: EmailSchemaMessages.RECIPIENT_EMAIL })
       .max(150, { message: EmailSchemaMessages.RECIPIENT_EMAIL_LENGTH })
   ).max(20, { message: EmailSchemaMessages.RECIPIENT_EMAIL_MAX })
     .optional(),
 
-  subject: z.string()
+  subject: z.string({ message: EmailSchemaMessages.SUBJECT })
     .max(200, { message: EmailSchemaMessages.SUBJECT }),
 
-  content: z.string()
+  content: z.string({ message: EmailSchemaMessages.CONTENT })
     .max(1500, { message: EmailSchemaMessages.CONTENT }),
 
   isHtml: z.boolean()
@@ -92,3 +92,23 @@ export interface EmailHtmlOptions extends Omit<
   sender: string;
   wysiwyg?: null | string;
 }
+
+export const HtmlBuildSchema = BaseEmailSchema
+  .omit({ recipient: true, isHtml: true, subject: true })
+  .extend({
+    content: z.array(
+      z.string().max(1500, { message: EmailSchemaMessages.CONTENT })
+    ),
+
+    recipients: z.array(
+      z.string()
+        .email({ message: EmailSchemaMessages.RECIPIENT_EMAIL })
+        .max(150, { message: EmailSchemaMessages.RECIPIENT_EMAIL_LENGTH })
+    ).max(20, { message: EmailSchemaMessages.RECIPIENT_EMAIL_MAX }),
+
+    sender: z.string({ message: EmailSchemaMessages.RECIPIENT_EMAIL })
+      .email({ message: EmailSchemaMessages.RECIPIENT_EMAIL })
+      .max(150, { message: EmailSchemaMessages.RECIPIENT_EMAIL_LENGTH }),
+
+    wysiwyg: z.string().nullable().optional()
+  })

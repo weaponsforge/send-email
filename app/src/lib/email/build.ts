@@ -1,9 +1,11 @@
+import sanitizeHtml from 'sanitize-html'
+
 import { promises as fs } from 'fs'
 import path from 'path'
 import ejs from 'ejs'
 
 import { directory } from '@/utils/helpers.js'
-import { type EmailHtmlOptions } from '@/types/email.schema.js'
+import { HtmlBuildSchema, type EmailHtmlOptions } from '@/types/email.schema.js'
 
 type EmailBuildOptions = Omit<EmailHtmlOptions, 'subject'>
 
@@ -22,9 +24,19 @@ export const buildHtml = async (
     wysiwyg = null
   } = params
 
+  HtmlBuildSchema.parse(params)
+
   if (!sender?.trim()) {
     throw new Error('Sender is required')
   }
+
+  // Sanitize HTML
+  const wysiwygHtml = typeof wysiwyg === 'string'
+    ? sanitizeHtml(wysiwyg.trim())
+    : null
+
+  // Clean messages
+  const cleanMessages = messages.map(message => message.trim())
 
   // Format single recipient
   const recipient = recipients.length === 1
@@ -39,9 +51,9 @@ export const buildHtml = async (
 
     const html = ejs.render(emailTemplate, {
       recipient,
-      messages,
+      messages: cleanMessages,
       sender,
-      wysiwyg
+      wysiwyg: wysiwygHtml
     })
 
     return html
