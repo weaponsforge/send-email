@@ -293,7 +293,7 @@ Sends text and HTML emails using the command line interface (CLI) with transpile
    npm run send-email -- text \
      -s "You are Invited" \
      -c "Birthday party in December" \
-     -r a @gmail.com,b@gmail.com,c@gmail.com
+     -r a@gmail.com,b@gmail.com,c@gmail.com
    ```
 - View available options for the **send-email text [options]** command.
    ```bash

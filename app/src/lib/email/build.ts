@@ -22,9 +22,13 @@ export const buildHtml = async (
     wysiwyg = null
   } = params
 
+  if (!sender?.trim()) {
+    throw new Error('Sender is required')
+  }
+
   // Format single recipient
   const recipient = recipients.length === 1
-    ? recipients[0]?.trim()
+    ? recipients[0]?.trim() || null
     : null
 
   const dir = directory(import.meta.url)
