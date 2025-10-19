@@ -53,13 +53,29 @@ Sends emails using Gmail SMTP with Google OAuth2 or username/pw.
    ```bash
    npm install
    ```
-3. Send a text email using the CLI, eg. using Bash:
+3. Transpile to JavaScript.
+   ```bash
+   npm run transpile
+   ```
+4. Send a **text email** using the CLI, eg. using Bash:
    ```bash
    npm run send-email -- text \
      -s "You are Invited" \
      -c "Birthday party in December" \
-     -r a @gmail.com,b@gmail.com,c@gmail.com
+     -r a@gmail.com,b@gmail.com,c@gmail.com
    ```
+
+   > 💡 **TIP:** Use `send-email:dev` to work on development mode without needing to run `"npm run transpile"`
+
+5. Send a **styled HTML email** using the CLI, eg. using Bash:
+   ```bash
+   npm run send-email -- html \
+     -s "Reading Materials" \
+     -c "Lorem ipsum dolor sit amet" "this is paragraph 1" "this is paragraph 2" \
+     -r test@gmail.com,one@gmail.com,two@gmail.com
+   ```
+
+   > 💡 **TIP:** Use `send-email:dev` to work on development mode without needing to run `"npm run transpile"`
 
 ## 🛠️ Installation
 
@@ -239,39 +255,85 @@ Fixes lint errors in TypeScript files.
 > **NOTE:** This script requires running `npm test` first to generate a test report into the **/html** directory
 
 - Spins up a local web server accessible at `http://localhost:4174/`
-- Serves the website contents of a test report from the **/html** directory
+- Serves the website contents of a test report from the **/html**
+
+### `npm run copy:files`
+
+Copies the EJS email template into the `/dist/templates` directory.
 
 ### C. CLI 💻
 
 ### `npm run send-email`
 
-> 💡 **IMPORTANT:**
->  This script requires running the `"npm run transpile"` script before usage.
+Sends text and HTML emails using the command line interface (CLI) with transpiled JavaScript.
 
-- Sends an email using the command line interface (CLI) using transpiled JavaScript.
+> 💡 **IMPORTANT:**
+>  - This script requires running the `"npm run transpile"` script before usage.
+>  - If you want to run these without transpiling, append a `:dev` after the NPM script: `"npm run send-email:dev"`
+
+#### CLI Usage
+
+- To view the list of available commands: `npm run send-email help`
+   ```text
+   Usage: send-email [options] [command]
+
+   CLI for sending an email using Gmail SMTP and Google OAuth2
+
+   Options:
+   -V, --version   output the version number
+   -h, --help      display help for command
+
+   Commands:
+   text [options]  Send raw text email to one or multiple recipient/s
+   html [options]  Send paragraphs of text or WYSIWYG content as styled
+                     HTML email to one or multiple recipient/s.
+   help [command]  display help for command
+   ```
 - Append a double dash `--` to pass arguments to the CLI commands eg., (using Bash)
    ```bash
-   npm run send-email -- send \
+   npm run send-email -- text \
      -s "You are Invited" \
      -c "Birthday party in December" \
      -r a @gmail.com,b@gmail.com,c@gmail.com
    ```
-- View available options.
+- View available options for the **send-email text [options]** command.
    ```bash
-   npm run send-email help send
+   # Usage options for the send "text" email command
+   npm run send-email help text
    ```
 
-   ```bash
-   Usage: send-email send [options]
+   ```text
+   Usage: send-email text [options]
 
-   Send an email to one or multiple recipient/s
+   Send raw text email to one or multiple recipient/s
 
    Options:
-   -s, --subject <title>         email subject or title enclosed in double-quotes
-   -c, --content <text>          email text content or message enclosed in double-quotes
-   -r, --recipients <emails...>  comma-separated list of email addresses
-   -e, --env <path>              path to .env file (optional)
-   -h, --help                    display help for command
+   -s, --subject <title>      email subject or title enclosed in double-quotes
+   -c, --content <text>       email text content enclosed in double-quotes
+   -e, --env <path>           path to .env file (optional)
+   -r, --recipients <emails>  comma-separated list of email addresses
+   -h, --help                 display help for command
+   ```
+
+- View available options for the **send-email html [options]** command.
+   ```bash
+   # Usage options for the send "html" email command
+   npm run send-email help html
+   ```
+
+   ```text
+   Usage: send-email html [options]
+
+   Send paragraphs of text or WYSIWYG content as styled
+   HTML email to one or multiple recipient/s.
+
+   Options:
+   -s, --subject <title>      email subject or title enclosed in double-quotes
+   -r, --recipients <emails>  comma-separated list of email addresses
+   -c, --content <text...>    whitespace-delimited list contaning text/paragraphs enclosed in double-quotes
+   -w, --wysiwyg [html]       optional HTML tags that form a WYSIWYG layout enclosed in double-quotes
+   -e, --env <path>           path to .env file (optional)
+   -h, --help                 display help for command
    ```
 
 ### `npm run send-email:dev`

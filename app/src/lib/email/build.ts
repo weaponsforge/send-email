@@ -3,41 +3,28 @@ import path from 'path'
 import ejs from 'ejs'
 
 import { directory } from '@/utils/helpers.js'
-import type {  HtmlEmailBuild } from '@/types/email.schema.js'
+import { type EmailHtmlOptions } from '@/types/email.schema.js'
+
+type EmailBuildOptions = Omit<EmailHtmlOptions, 'subject'>
 
 /**
  * Builds the HTML-form email content to send in emails.
- * @param {HtmlEmailBuild} params - HTML Email parameters with multiple `content[]` for paragraphs
+ * @param {EmailBuildOptions} params - HTML Email parameters with multiple `content[]` for paragraphs
  * @returns {string} HTML-form email content
  */
 export const buildHtml = async (
-  params: HtmlEmailBuild
+  params: EmailBuildOptions
 ): Promise<string> => {
   const {
     content: messages = [],
     recipients,
     sender,
-    subject
+    wysiwyg = null
   } = params
 
-  if (
-    !subject ||
-    !messages || messages.length === 0 ||
-    !recipients ||
-    !sender
-  ) {
-    throw new Error('Invalid parameters/s')
-  }
-
-  const recipientArray = Array.isArray(recipients) ? recipients : [recipients]
-
-  if (recipientArray.length === 0) {
-    throw new Error('Invalid recipients')
-  }
-
   // Format single recipient
-  const recipient = recipientArray.length === 1
-    ? recipientArray[0]
+  const recipient = recipients.length === 1
+    ? recipients[0]
     : null
 
   const dir = directory(import.meta.url)
@@ -49,7 +36,8 @@ export const buildHtml = async (
     const html = ejs.render(emailTemplate, {
       recipient,
       messages,
-      sender
+      sender,
+      wysiwyg
     })
 
     return html

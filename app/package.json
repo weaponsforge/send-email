@@ -12,11 +12,12 @@
   },
   "scripts": {
     "dev": "vitest",
-    "transpile": "tsc -p tsconfig.prod.json && tsc-alias",
+    "transpile": "tsc -p tsconfig.prod.json && tsc-alias && npm run copy:files",
     "transpile:noemit": "tsc -p tsconfig.json --noEmit",
     "watch": "tsc -p tsconfig.json --watch",
     "lint": "eslint \"src/**/*.ts\" *.mjs *.ts",
     "lint:fix": "eslint \"src/**/*.ts\" *.mjs *.ts --fix",
+    "copy:files": "vite-node ./src/scripts/build/copyTemplate.ts",
     "test": "vitest run",
     "test:ui": "vitest --ui",
     "report:view": "vite preview --outDir html",
