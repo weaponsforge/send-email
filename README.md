@@ -444,10 +444,10 @@ Watches file changes in `.ts` files using the `tsc --watch` option with `dynamic
 
 ## References
 
-- Gmail API <sup>[[1]](https://developers.google.com/gmail/api/guides)</sup>
-- Gmail Quickstart <sup>[[2]](https://developers.google.com/gmail/api/quickstart/js)</sup>
-- AMP for Gmail <sup>[[3]](https://developers.google.com/gmail/ampemail)</sup>
-- Google Workspace Guide <sup>[[4]](https://developers.google.com/workspace/guides/get-started)</sup>
+- Gmail API <sup>[[1]](https://developers.google.com/gmail/api/guides) [[2]](https://github.com/googleapis/google-api-nodejs-client)</sup>
+- Gmail Quickstart <sup>[[3]](https://developers.google.com/gmail/api/quickstart/js)</sup>
+- AMP for Gmail <sup>[[4]](https://developers.google.com/gmail/ampemail)</sup>
+- Google Workspace Guide <sup>[[5]](https://developers.google.com/workspace/guides/get-started)</sup>
 
 @weaponsforge<br>
 20250323
