@@ -8,6 +8,19 @@ set -e
 
 export IS_BUILD_SEA=true
 
+# Constants
+BUILD_DIR="build"
+SEA_CONFIG="sea-config.json"
+APP_NAME="sendemail"
+ENTRY_FILE="./src/scripts/cli/send.ts"
+BUNDLE_FILE="$BUILD_DIR/${APP_NAME}.cjs"
+SEA_BLOB="$BUILD_DIR/sea-prep.blob"
+SENTINEL="NODE_SEA_FUSE_fce680ab2cc467b6e072b8b5df1996b2"
+
+# Node download URLs
+NODE_VERSION="v22.9.0"
+NODE_WIN_URL="https://nodejs.org/dist/${NODE_VERSION}/node-${NODE_VERSION}-win-x64.zip"
+
 # Change to app directory to ensure relative paths work correctly
 cd "$(dirname "$0")/.."
 
@@ -16,29 +29,44 @@ mkdir -p build
 
 echo "Building Single Executable Application in $(pwd)..."
 
-# Step 1: Initialze the build directory
-echo "Step 1: Removing existing build directory..."
-rm -rf build
-mkdir -p build
+# Step 1: Bundle with esbuild
+echo "Step 1: Bundling with esbuild..."
+npx esbuild "$ENTRY_FILE" --bundle --platform=node --format=cjs --target=node22 --outfile="$BUNDLE_FILE"
 
-# Step 2: Bundle with esbuild
-echo "Step 2: Bundling with esbuild..."
-npx esbuild ./src/scripts/cli/send.ts --bundle --platform=node --format=cjs --target=node22 --outfile=build/sendemail.cjs
+# Step 2: Clean the bundle file - remove NODE_SEA_FUSE bundled by esbuild
+echo "Step 2: Cleaning bundle file..."
+sed -i "/$SENTINEL/d" build/sendemail.cjs
 
-# Step 3: Clean the bundle file - remove NODE_SEA_FUSE bundled by esbuild
-echo "Step 3: Cleaning bundle file..."
-sed -i '/NODE_SEA_FUSE_fce680ab2cc467b6e072b8b5df1996b2/d' build/sendemail.cjs
+# Step 3: Generate SEA blob
+echo "Step 3: Generating SEA blob..."
+node --experimental-sea-config "$SEA_CONFIG"
 
-# Step 4: Generate SEA blob
-echo "Step 4: Generating SEA blob..."
-node --experimental-sea-config sea-config.json
+# Step 4: Prepare the Windows Node binary
+echo "Step 4: Preparing Windows binary..."
+# Copies the installed Node binary into build/sendemail.exe
+# node -e "require('fs').copyFileSync(process.execPath, 'build/sendemail.exe')"
 
-# Step 5: Copy Node.js executable
-echo "Step 5: Copying Node.js executable..."
-node -e "require('fs').copyFileSync(process.execPath, 'build/sendemail.exe')"
+WIN_NODE_DIR="$BUILD_DIR/node-win-x64"
+WIN_NODE_EXE="$WIN_NODE_DIR/node.exe"
 
-# Step 6: Inject SEA blob into executable
+if [ ! -f "$WIN_NODE_EXE" ]; then
+  echo "⬇️ Downloading Windows Node binary..."
+  curl -sSL "$NODE_WIN_URL" -o "$BUILD_DIR/node-win-x64.zip"
+  unzip -q "$BUILD_DIR/node-win-x64.zip" -d "$BUILD_DIR"
+  # move into known path
+  mv "$BUILD_DIR/node-${NODE_VERSION}-win-x64" "$WIN_NODE_DIR"
+fi
+
+# Step 5: Inject SEA blob into executable
 echo "Step 5: Injecting SEA blob..."
-npx postject build/sendemail.exe NODE_SEA_BLOB build/sea-prep.blob --sentinel-fuse NODE_SEA_FUSE_fce680ab2cc467b6e072b8b5df1996b2
 
-echo "Build complete! Executable: build/sendemail.exe"
+if [ -f "$WIN_NODE_EXE" ]; then
+  echo "Injecting SEA blob into Windows node.exe..."
+  cp "$WIN_NODE_EXE" "$BUILD_DIR/${APP_NAME}.exe"
+  npx postject "$BUILD_DIR/${APP_NAME}.exe" NODE_SEA_BLOB "$SEA_BLOB" --sentinel-fuse "$SENTINEL"
+  echo "✅ Windows executable ready at: $BUILD_DIR/${APP_NAME}.exe"
+else
+  echo "⚠️ Skipping Windows build — node.exe not found!"
+fi
+
+echo "Build complete! Executable: $BUILD_DIR/$APP_NAME.exe"

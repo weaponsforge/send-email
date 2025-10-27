@@ -457,14 +457,29 @@ Watches file changes in `.ts` files using the `tsc --watch` option with `dynamic
 
 ## 🏗️ Building the Windows Executable File
 
-This project packages the CLI app into a **Windows (.exe)** Node Single Executable Application [(SEA)](https://nodejs.org/api/single-executable-applications.html) using esbuild and postject.
+This project packages the CLI app into a **Windows (.exe)** Node Single Executable Application [(SEA)](https://nodejs.org/api/single-executable-applications.html) into the `"/app/build/sendemail.exe"` file using esbuild and postject.
 
-Run the Bash script using GitBash when working in a Windows OS:
+**Using Node**
+
+Run the Bash script using GitBash when working in a Windows OS.
 
 ```bash
 chmod u+x ./app/scripts/build-sea-win.sh
 ./app/scripts/build-sea-win.sh
 ```
+
+**Using Docker**
+
+This steps needs to have the Docker container up and running first (`"docker compose up"`).
+
+```bash
+docker-compose exec -it weaponsforge.sendemail-dev sh ./scripts/build-sea-win.sh
+```
+
+#### Using the Executable File
+
+- Refer to [Available Scripts - C. CLI](#-available-scripts) for usage information, and remove the `"--"` operator eg., <br>
+   ~~`"~npm run send-email:dev -- text"`~~ -> `"npm run send-email -- text"`
 
 ## References
 
