@@ -100,7 +100,7 @@ NPM scripts and CLI for sending text and HTML emails using Gmail SMTP with Googl
 
 3. Configure **OAuth2**. Get a refresh token from the Google [OAuth 2 Playground](https://developers.google.com/oauthplayground).
    - Read on [Using the OAuth 2.0 Playground](https://github.com/weaponsforge/email-sender?tab=readme-ov-file#using-the-oauth-20-playground) for more information about generating a refresh token using the Google OAuth Playground.
-   - _**INFO:** This is an older note, some steps may vary this 2025)_
+   - _**INFO:** This is an older note, some steps may vary in 2025)_
 
 4. Set up the environment variables. Create a `.env` file inside the **/app** directory with reference to the `.env.example` file.
 
@@ -194,11 +194,13 @@ main()
 import { send } from '@/lib/index.js'
 import { buildHtml } from '@/lib/index.js'
 
+const emails = ['tester@gmail.com', 'admin@gmail.com']
+
 const main = async () => {
    // Build the HTML email content
    const emailContent = await buildHtml({
       content: ['Lorem ipsum dolor sit amet...', 'paragraph #2', 'paragraph #3'],
-      recipients: ['tester@gmail.com', 'admin@gmail.com'],
+      recipients: emails,
       sender: process.env.GOOGLE_USER_EMAIL
    })
 
@@ -206,7 +208,7 @@ const main = async () => {
    await send({
       subject: 'Welcome Aboard!',
       content: emailContent,
-      recipients,
+      recipients: emails,
       isHtml: true
    })
 }
