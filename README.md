@@ -1,6 +1,6 @@
 ## send-email
 
-Sends emails using Gmail SMTP with Google OAuth2 or username/pw.
+NPM scripts and CLI for sending text and HTML emails using Gmail SMTP with Google OAuth2.
 
 ### Table of Contents
 
@@ -16,7 +16,7 @@ Sends emails using Gmail SMTP with Google OAuth2 or username/pw.
 ## 📋 Requirements
 
 <details>
-<summary>Click to expand the list of requirements</summary>
+<summary>👉 Click to expand the list of requirements</summary>
 
 1. Windows 11/Linux OS
 2. NodeJS LTS v22 or higher
@@ -35,13 +35,13 @@ Sends emails using Gmail SMTP with Google OAuth2 or username/pw.
 
 (Installed via npm)
 
-1. googleapis `v162.0.0`
-2. nodemailer `v7.0.9`
-3. typescript `v5.9.3` - Compile-time error checker
-4. vite-node `v3.2.4`- Runs TS files in development mode
-5. vitest `v3.2.4` - Runs tests
-6. commander `v14.0.1` - CLI library
-7. sanitize-html `v2.17.0` - Sanitizes WYSIWYG HTML input
+1. [googleapis](https://www.npmjs.com/package/googleapis) `v164.1.0`
+2. [nodemailer](https://www.npmjs.com/package/nodemailer) `v7.0.10`
+3. [typescript](https://www.npmjs.com/package/typescript) `v5.9.3` - Compile-time error checker
+4. [vite-node](https://www.npmjs.com/package/vite-node) `v3.2.4`- Runs TS files in development mode
+5. [vitest](https://www.npmjs.com/package/vitest) `v4.0.4` - Runs tests
+6. [commander](https://www.npmjs.com/package/commander) `v14.0.2` - CLI library
+7. [sanitize-html](https://www.npmjs.com/package/sanitize-html) `v2.17.0` - Sanitizes WYSIWYG HTML input
 
 </details>
 <br>
@@ -182,13 +182,11 @@ main()
 import { send } from '@/lib/index.js'
 import { buildHtml } from '@/lib/index.js'
 
-const recipients = ['tester@gmail.com', 'admin@gmail.com']
-
 const main = async () => {
    // Build the HTML email content
    const emailContent = await buildHtml({
-      content: ['Lorem ipsum dolor sit amet...'],
-      recipients,
+      content: ['Lorem ipsum dolor sit amet...', 'paragraph #2', 'paragraph #3'],
+      recipients: ['tester@gmail.com', 'admin@gmail.com'],
       sender: process.env.GOOGLE_USER_EMAIL
    })
 
@@ -211,7 +209,7 @@ main()
 These scripts, compatible with running in Node and Docker, run various TypeScript scripts and tests.
 
 <details>
-<summary>Click to expand the list of available scripts</summary>
+<summary>👉 Click to expand the list of available scripts</summary>
 
 ### A. Running the Codes ⚙️➡️
 
@@ -356,7 +354,7 @@ These scripts allow optional Docker-related processes, such as enabling file wat
 > Scripts with a `":win"` suffix indicate compatibility for Windows Docker running in WSL2.
 
 <details>
-<summary>Click to expand the list of available scripts</summary>
+<summary>👉 Click to expand the list of available scripts</summary>
 
 ### Docker run command
 

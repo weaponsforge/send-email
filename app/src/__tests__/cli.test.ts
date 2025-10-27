@@ -40,7 +40,7 @@ describe('CLI test suite', () => {
     -s ${'WYSIWYG Email Content Message'}
     -c ${'This is paragraph #1'} ${'This is paragraph #2'} ${'This is paragraph #3'}
     -w ${htmlContent}
-    -r ${'acetiercel@yahoo.com'}`
+    -r ${'abc@gmail.com'}`
 
     expect(stdout).toContain('Process success')
   }, MAX_TIMEOUT)
