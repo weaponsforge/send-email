@@ -1,6 +1,6 @@
 ## send-email
 
-Sends emails using Gmail SMTP with Google OAuth2 or username/pw.
+NPM scripts and CLI for sending text and HTML emails using Gmail SMTP with Google OAuth2.
 
 ### Table of Contents
 
@@ -16,7 +16,7 @@ Sends emails using Gmail SMTP with Google OAuth2 or username/pw.
 ## 📋 Requirements
 
 <details>
-<summary>Click to expand the list of requirements</summary>
+<summary>👉 Click to expand the list of requirements</summary>
 
 1. Windows 11/Linux OS
 2. NodeJS LTS v22 or higher
@@ -35,13 +35,13 @@ Sends emails using Gmail SMTP with Google OAuth2 or username/pw.
 
 (Installed via npm)
 
-1. googleapis `v162.0.0`
-2. nodemailer `v7.0.9`
-3. typescript `v5.9.3` - Compile-time error checker
-4. vite-node `v3.2.4`- Runs TS files in development mode
-5. vitest `v3.2.4` - Runs tests
-6. commander `v14.0.1` - CLI library
-7. sanitize-html `v2.17.0` - Sanitizes WYSIWYG HTML input
+1. [googleapis](https://www.npmjs.com/package/googleapis) `v164.1.0`
+2. [nodemailer](https://www.npmjs.com/package/nodemailer) `v7.0.10`
+3. [typescript](https://www.npmjs.com/package/typescript) `v5.9.3` - Compile-time error checker
+4. [vite-node](https://www.npmjs.com/package/vite-node) `v3.2.4`- Runs TS files in development mode
+5. [vitest](https://www.npmjs.com/package/vitest) `v4.0.4` - Runs tests
+6. [commander](https://www.npmjs.com/package/commander) `v14.0.2` - CLI library
+7. [sanitize-html](https://www.npmjs.com/package/sanitize-html) `v2.17.0` - Sanitizes WYSIWYG HTML input
 
 </details>
 <br>
@@ -76,7 +76,19 @@ Sends emails using Gmail SMTP with Google OAuth2 or username/pw.
      -r test@gmail.com,one@gmail.com,two@gmail.com
    ```
 
-   > 💡 **TIP:** Use `send-email:dev` to work on development mode without needing to run `"npm run transpile"`
+   > 💡 **TIP:** No transpilation needed with `"send-email:dev"`
+
+6. Send **WYSIWYG** HTML content using the CLI, eg. using Bash:<br>
+   _(Adjust `@/utils/config/sanitizeHtml.ts` to allow more styles.)_
+
+   ```bash
+   npm run send-email -- html \
+     -s "WYSIWYG Email" \
+     -w "<div style='width:100px; height:100px; border:5px solid blue; border-radius: 3px; padding: 8px; text-align: center; background-color: azure;'><h3>Hello, World</h3></div>" \
+     -r "tester@gmail.com"
+   ```
+
+   > 💡 **TIP:** Development mode via `"send-email:dev"` skips transpilation
 
 ## 🛠️ Installation
 
@@ -88,7 +100,7 @@ Sends emails using Gmail SMTP with Google OAuth2 or username/pw.
 
 3. Configure **OAuth2**. Get a refresh token from the Google [OAuth 2 Playground](https://developers.google.com/oauthplayground).
    - Read on [Using the OAuth 2.0 Playground](https://github.com/weaponsforge/email-sender?tab=readme-ov-file#using-the-oauth-20-playground) for more information about generating a refresh token using the Google OAuth Playground.
-   - _**INFO:** This is an older note, some steps may vary this 2025)_
+   - _**INFO:** This is an older note, some steps may vary in 2025)_
 
 4. Set up the environment variables. Create a `.env` file inside the **/app** directory with reference to the `.env.example` file.
 
@@ -128,7 +140,7 @@ Sends emails using Gmail SMTP with Google OAuth2 or username/pw.
 
 - **Build the image** (Run only once)
    ```bash
-   docker compose build
+   docker compose build --no-cache
    ```
 
 - **Run the container** (Run only once)
@@ -182,13 +194,13 @@ main()
 import { send } from '@/lib/index.js'
 import { buildHtml } from '@/lib/index.js'
 
-const recipients = ['tester@gmail.com', 'admin@gmail.com']
+const emails = ['tester@gmail.com', 'admin@gmail.com']
 
 const main = async () => {
    // Build the HTML email content
    const emailContent = await buildHtml({
-      content: ['Lorem ipsum dolor sit amet...'],
-      recipients,
+      content: ['Lorem ipsum dolor sit amet...', 'paragraph #2', 'paragraph #3'],
+      recipients: emails,
       sender: process.env.GOOGLE_USER_EMAIL
    })
 
@@ -196,7 +208,7 @@ const main = async () => {
    await send({
       subject: 'Welcome Aboard!',
       content: emailContent,
-      recipients,
+      recipients: emails,
       isHtml: true
    })
 }
@@ -211,7 +223,7 @@ main()
 These scripts, compatible with running in Node and Docker, run various TypeScript scripts and tests.
 
 <details>
-<summary>Click to expand the list of available scripts</summary>
+<summary>👉 Click to expand the list of available scripts</summary>
 
 ### A. Running the Codes ⚙️➡️
 
@@ -332,8 +344,8 @@ Sends text and HTML emails using the command line interface (CLI) with transpile
    Options:
    -s, --subject <title>      email subject or title enclosed in double-quotes
    -r, --recipients <emails>  comma-separated list of email addresses
-   -c, --content <text...>    whitespace-delimited list containing text/paragraphs enclosed in double-quotes
-   -w, --wysiwyg [html]       optional HTML tags that form a WYSIWYG layout enclosed in double-quotes
+   -c, --content <text...>    whitespace-delimited of text/paragraphs enclosed in double-quotes
+   -w, --wysiwyg [html]       optional HTML tags that form a WYSIWYG content enclosed in double-quotes
    -e, --env <path>           path to .env file (optional)
    -h, --help                 display help for command
    ```
@@ -356,7 +368,7 @@ These scripts allow optional Docker-related processes, such as enabling file wat
 > Scripts with a `":win"` suffix indicate compatibility for Windows Docker running in WSL2.
 
 <details>
-<summary>Click to expand the list of available scripts</summary>
+<summary>👉 Click to expand the list of available scripts</summary>
 
 ### Docker run command
 
@@ -444,10 +456,10 @@ Watches file changes in `.ts` files using the `tsc --watch` option with `dynamic
 
 ## References
 
-- Gmail API <sup>[[1]](https://developers.google.com/gmail/api/guides)</sup>
-- Gmail Quickstart <sup>[[2]](https://developers.google.com/gmail/api/quickstart/js)</sup>
-- AMP for Gmail <sup>[[3]](https://developers.google.com/gmail/ampemail)</sup>
-- Google Workspace Guide <sup>[[4]](https://developers.google.com/workspace/guides/get-started)</sup>
+- Gmail API <sup>[[1]](https://developers.google.com/gmail/api/guides) [[2]](https://github.com/googleapis/google-api-nodejs-client)</sup>
+- Gmail Quickstart <sup>[[3]](https://developers.google.com/gmail/api/quickstart/js)</sup>
+- AMP for Gmail <sup>[[4]](https://developers.google.com/gmail/ampemail)</sup>
+- Google Workspace Guide <sup>[[5]](https://developers.google.com/workspace/guides/get-started)</sup>
 
 @weaponsforge<br>
 20250323
