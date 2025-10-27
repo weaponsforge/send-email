@@ -128,7 +128,7 @@ NPM scripts and CLI for sending text and HTML emails using Gmail SMTP with Googl
 
 - **Build the image** (Run only once)
    ```bash
-   docker compose build
+   docker compose build --no-cache
    ```
 
 - **Run the container** (Run only once)

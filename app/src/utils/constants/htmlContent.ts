@@ -1,5 +1,5 @@
 /**
- * Sample WYSIWYG HTMl body content using inline CSS.
+ * Sample WYSIWYG HTML body content using inline CSS.
  * Adjust `@/utils/config/sanitizeHtml.js` to allow specific styles.
  */
 
