@@ -6,11 +6,12 @@ import ejs from 'ejs'
 
 import { directory } from '@/utils/helpers.js'
 import { HtmlBuildSchema, type EmailHtmlOptions } from '@/types/email.schema.js'
+import config from '@/utils/config/sanitizeHtml.js'
 
 type EmailBuildOptions = Omit<EmailHtmlOptions, 'subject'>
 
 /**
- * Builds the HTML-form email content to send in emails.
+ * Builds and sanitizes the HTML-form email content to send in emails.
  * @param {EmailBuildOptions} params - HTML Email parameters with multiple `content[]` for paragraphs
  * @returns {string} HTML-form email content
  */
@@ -28,7 +29,7 @@ export const buildHtml = async (
 
   // Sanitize HTML
   const wysiwygHtml = typeof wysiwyg === 'string'
-    ? sanitizeHtml(wysiwyg.trim())
+    ? sanitizeHtml(wysiwyg.trim(), config)
     : null
 
   // Clean messages
