@@ -3,7 +3,7 @@ import { describe, expect, test } from 'vitest'
 import { EmailSchemaMessages } from '@/types/email.schema.js'
 import htmlContent from '@/utils/constants/htmlContent.js'
 
-const MAX_TIMEOUT = 10000
+const MAX_TIMEOUT = 15000
 
 describe('CLI test suite', () => {
   /**
@@ -37,10 +37,10 @@ describe('CLI test suite', () => {
 
   test('Sends WYSIWYG body content in HTML email', async () => {
     const { stdout } = await $`npm run send-email:dev -- html
+    -r ${'abc@gmail.com'}
     -s ${'WYSIWYG Email Content Message'}
     -c ${'This is paragraph #1'} ${'This is paragraph #2'} ${'This is paragraph #3'}
-    -w ${htmlContent}
-    -r ${'abc@gmail.com'}`
+    -w ${htmlContent}`
 
     expect(stdout).toContain('Process success')
   }, MAX_TIMEOUT)

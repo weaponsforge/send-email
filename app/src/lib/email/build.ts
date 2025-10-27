@@ -13,7 +13,7 @@ type EmailBuildOptions = Omit<EmailHtmlOptions, 'subject'>
 /**
  * Builds and sanitizes the HTML-form email content to send in emails.
  * @param {EmailBuildOptions} params - HTML Email parameters with multiple `content[]` for paragraphs
- * @returns {string} HTML-form email content
+ * @returns {Promise<string>} HTML-form email content
  */
 export const buildHtml = async (
   params: EmailBuildOptions
@@ -28,9 +28,16 @@ export const buildHtml = async (
   HtmlBuildSchema.parse(params)
 
   // Sanitize HTML
-  const wysiwygHtml = typeof wysiwyg === 'string'
-    ? sanitizeHtml(wysiwyg.trim(), config)
-    : null
+  let wysiwygHtml = null
+
+  if (typeof wysiwyg === 'string') {
+    wysiwygHtml = sanitizeHtml(
+      wysiwyg
+        .replace(/(\r\n|\n|\r|\t)/g, '')
+        .trim(),
+      config
+    )
+  }
 
   // Clean messages
   const cleanMessages = messages
