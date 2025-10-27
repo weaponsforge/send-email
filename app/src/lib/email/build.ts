@@ -52,7 +52,9 @@ export const buildHtml = async (
     ? recipients[0]?.trim() || null
     : null
 
-  const dir = directory(import.meta.url)
+  const dir = process.env.IS_BUILD_SEA === 'true'
+    ? __dirname
+    : directory(import.meta.url)
 
   try {
     const templatePath = path.resolve(dir, '..', '..', 'templates', 'email.ejs')

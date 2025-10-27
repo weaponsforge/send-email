@@ -12,6 +12,7 @@ NPM scripts and CLI for sending text and HTML emails using Gmail SMTP with Googl
 - [Code Samples](#-code-samples)
 - [Available Scripts](#-available-scripts)
 - [Docker Scripts](#-docker-scripts)
+- [Building the Windows Executable File](#️-building-the-windows-executable-file)
 
 ## 📋 Requirements
 
@@ -452,7 +453,18 @@ Watches file changes in `.ts` files using the `tsc --watch` option with `dynamic
 - Spawns a local report-like website showing each test's real-time status and coverage using vitest-ui accessible at `http://localhost:51204/__vitest__/`.
 
 </details>
+<br>
 
+## 🏗️ Building the Windows Executable File
+
+This project packages the CLI app into a **Windows (.exe)** Node Single Executable Application [(SEA)](https://nodejs.org/api/single-executable-applications.html) using esbuild and postject.
+
+Run the Bash script using GitBash when working in a Windows OS:
+
+```bash
+chmod u+x ./app/scripts/build-sea-win.sh
+./app/scripts/build-sea-win.sh
+```
 
 ## References
 

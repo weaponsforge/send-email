@@ -1,3 +1,4 @@
+import { promises as fs } from 'node:fs'
 import path from 'node:path'
 import { directory, copyFiles } from '@/utils/helpers.js'
 
@@ -5,7 +6,10 @@ import { directory, copyFiles } from '@/utils/helpers.js'
  * Copies the EJS email templates to the `/dist` directory
  */
 const main = async () => {
-  const currentPath = directory(import.meta.url)
+  const currentPath = process.env.IS_BUILD_SEA
+    ? __dirname
+    : directory(import.meta.url)
+
   const outDir = path.resolve(currentPath, '../../../', 'dist', 'templates')
   const templatesDir = path.resolve(currentPath, '../../', 'templates')
 

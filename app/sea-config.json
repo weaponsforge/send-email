@@ -1,0 +1,8 @@
+{
+  "main": "build/sendemail.cjs",
+  "output": "build/sea-prep.blob",
+  "format": "module",
+  "disableExperimentalSEAWarning": true,
+  "useCodeCache": false,
+  "useSnapshot": false
+}
