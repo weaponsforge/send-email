@@ -76,7 +76,7 @@ NPM scripts and CLI for sending text and HTML emails using Gmail SMTP with Googl
      -r test@gmail.com,one@gmail.com,two@gmail.com
    ```
 
-   > 💡 **TIP:** Use `send-email:dev` to work on development mode without needing to run `"npm run transpile"`
+   > 💡 **TIP:** No transpilation needed with `"send-email:dev"`
 
 6. Send **WYSIWYG** HTML content using the CLI, eg. using Bash:<br>
    _(Adjust `@/utils/config/sanitizeHtml.js` to allow more styles.)_
@@ -88,7 +88,7 @@ NPM scripts and CLI for sending text and HTML emails using Gmail SMTP with Googl
      -r "tester@gmail.com"
    ```
 
-   > 💡 **TIP:** Use `send-email:dev` to work on development mode without needing to run `"npm run transpile"`
+   > 💡 **TIP:** Development mode via `"send-email:dev"` skips transpilation
 
 ## 🛠️ Installation
 
