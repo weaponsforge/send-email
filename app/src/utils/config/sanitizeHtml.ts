@@ -1,10 +1,12 @@
+import type { IOptions } from 'sanitize-html'
+
 /**
  * Custom configuration settings for `sanitize-html`
  * https://www.npmjs.com/package/sanitize-html
  * (See Default options)
  */
 
-const config = {
+const config: IOptions = {
   allowedAttributes: {
     '*': ['style'] // allow style attribute on all tags
   },

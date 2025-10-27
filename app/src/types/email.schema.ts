@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import type { IOptions } from 'sanitize-html'
 
 export enum EmailSchemaMessages {
   RECIPIENT_EMAIL = 'Please enter valid email address',
@@ -82,7 +83,7 @@ export interface EmailTextOptions {
  * @property {string[]} content - List of email message text content in a `string[]` array
  * @property {string[]} recipients - List of email addresses in a `string[]` array
  * @property {string} sender - Sender email address
- * @property {string|null} [wysiwyg] - HTML tags that form a WYSIWYG layout
+ * @property {string|null} [wysiwyg] - HTML tags that form a WYSIWYG content
  */
 export interface EmailHtmlOptions extends Omit<
   EmailTextOptions, 'recipients' | 'content'
@@ -91,6 +92,7 @@ export interface EmailHtmlOptions extends Omit<
   recipients: string[];
   sender: string;
   wysiwyg?: null | string;
+  sanitizeConfig?: undefined | IOptions;
 }
 
 export const HtmlBuildSchema = BaseEmailSchema

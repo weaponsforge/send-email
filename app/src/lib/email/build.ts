@@ -22,7 +22,8 @@ export const buildHtml = async (
     content: messages = [],
     recipients,
     sender,
-    wysiwyg = null
+    wysiwyg = null,
+    sanitizeConfig
   } = params
 
   HtmlBuildSchema.parse(params)
@@ -31,11 +32,13 @@ export const buildHtml = async (
   let wysiwygHtml = null
 
   if (typeof wysiwyg === 'string') {
+    const configOptions = sanitizeConfig ?? config
+
     wysiwygHtml = sanitizeHtml(
       wysiwyg
         .replace(/(\r\n|\n|\r|\t)/g, '')
         .trim(),
-      config
+      configOptions
     )
   }
 
