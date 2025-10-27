@@ -79,7 +79,7 @@ NPM scripts and CLI for sending text and HTML emails using Gmail SMTP with Googl
    > 💡 **TIP:** No transpilation needed with `"send-email:dev"`
 
 6. Send **WYSIWYG** HTML content using the CLI, eg. using Bash:<br>
-   _(Adjust `@/utils/config/sanitizeHtml.js` to allow more styles.)_
+   _(Adjust `@/utils/config/sanitizeHtml.ts` to allow more styles.)_
 
    ```bash
    npm run send-email -- html \
