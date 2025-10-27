@@ -1,6 +1,7 @@
 import { $, execa } from 'execa'
 import { describe, expect, test } from 'vitest'
 import { EmailSchemaMessages } from '@/types/email.schema.js'
+import htmlContent from '@/utils/constants/htmlContent.js'
 
 const MAX_TIMEOUT = 10000
 
@@ -34,6 +35,15 @@ describe('CLI test suite', () => {
     expect(stdout).toContain('Process success')
   }, MAX_TIMEOUT)
 
+  test('Sends WYSIWYG body content in HTML email', async () => {
+    const { stdout } = await $`npm run send-email:dev -- html
+    -s ${'WYSIWYG Email Content Message'}
+    -c ${'This is paragraph #1'} ${'This is paragraph #2'} ${'This is paragraph #3'}
+    -w ${htmlContent}
+    -r ${'acetiercel@yahoo.com'}`
+
+    expect(stdout).toContain('Process success')
+  }, MAX_TIMEOUT)
 
   /**
    * ---------- CLI parameters ----------
