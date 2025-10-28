@@ -55,9 +55,11 @@ export const buildHtml = async (
     let emailTemplate
 
     if (process.env.IS_BUILD_SEA === 'true') {
+      // Use import to bake/build the ejs template into the SEA
       const mod = await import('@/utils/templates/email.ejs')
       emailTemplate = (mod as unknown as { default: string }).default
     } else {
+      // Read the ejs template from file
       const templatePath = path.resolve(__dirname, '..', '..', 'utils', 'templates', 'email.ejs')
       emailTemplate = await fs.readFile(templatePath, 'utf-8')
     }

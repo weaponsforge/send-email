@@ -457,7 +457,7 @@ Watches file changes in `.ts` files using the `tsc --watch` option with `dynamic
 
 ## 🏗️ Building the Windows Executable File
 
-This project packages the CLI app into a **Windows (.exe)** Node Single Executable Application [(SEA)](https://nodejs.org/api/single-executable-applications.html) into the `"/app/build/sendemail.exe"` file using esbuild and postject.
+This project packages the CLI app into a **Windows (.exe)** Node Single Executable Application [(SEA)](https://nodejs.org/api/single-executable-applications.html) file into `"/app/build/sendemail.exe"` using esbuild and postject.
 
 **Using Node**
 
