@@ -1,6 +1,6 @@
-## app/src/templates
+## app/src/utils/templates
 
-This directory contains the raw HTML email template and its corresponding [EJS](https://ejs.co/). The scripts use the EJS template when sending an HTML-format email.
+This directory contains the raw HTML email template and its corresponding [EJS](https://ejs.co/) file. The scripts use the EJS template when sending an HTML-format email.
 
 ### Usage
 

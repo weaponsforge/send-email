@@ -12,6 +12,7 @@ NPM scripts and CLI for sending text and HTML emails using Gmail SMTP with Googl
 - [Code Samples](#-code-samples)
 - [Available Scripts](#-available-scripts)
 - [Docker Scripts](#-docker-scripts)
+- [Building the Windows Executable File](#️-building-the-windows-executable-file)
 
 ## 📋 Requirements
 
@@ -115,7 +116,7 @@ NPM scripts and CLI for sending text and HTML emails using Gmail SMTP with Googl
 
 ## 🚀 Usage
 
-**Using Node**
+### Using Node
 
 1. Run a non-test TypeScript file inside the **/app/src** directory from the project's _**"root directory"**_. For example:
 
@@ -136,7 +137,7 @@ NPM scripts and CLI for sending text and HTML emails using Gmail SMTP with Googl
 
 ## ⚡Alternate Usage
 
-**Using Docker**
+### Using Docker
 
 - **Build the image** (Run only once)
    ```bash
@@ -452,7 +453,35 @@ Watches file changes in `.ts` files using the `tsc --watch` option with `dynamic
 - Spawns a local report-like website showing each test's real-time status and coverage using vitest-ui accessible at `http://localhost:51204/__vitest__/`.
 
 </details>
+<br>
 
+## 🏗️ Building the Windows Executable File
+
+This project packages the CLI app into a **Windows (.exe)** Node Single Executable Application [(SEA)](https://nodejs.org/api/single-executable-applications.html) file into `"/app/build/sendemail.exe"` using esbuild and postject.
+
+**Using Node**
+
+Run the Bash script using GitBash when working in a Windows OS.
+
+```bash
+chmod u+x ./app/scripts/build-sea-win.sh
+./app/scripts/build-sea-win.sh
+```
+
+**Using Docker**
+
+This steps needs to have the Docker container up and running first (`"docker compose up"`).
+
+```bash
+docker compose exec -it weaponsforge-sendemail-dev sh ./scripts/build-sea-win.sh
+```
+
+### Using the Executable File
+
+- Refer to [Available Scripts - C. CLI](#-available-scripts) for CLI argument syntax. When running the executable directly, invoke it without npm (no `"--"` needed), for example:
+   ```bash
+   sendemail text -s "You are Invited" -c "Birthday party" -r a@gmail.com,b@gmail.com
+   ```
 
 ## References
 

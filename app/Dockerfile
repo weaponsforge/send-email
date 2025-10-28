@@ -1,5 +1,6 @@
 FROM node:22.14.0-alpine AS base
-RUN mkdir -p /opt/app
+RUN mkdir -p /opt/ && \
+  apk add --no-cache curl
 WORKDIR /opt/app
 
 # Use the node image's default user

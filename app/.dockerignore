@@ -1,5 +1,6 @@
 node_modules/
 dist/
+build/
 .vscode
 .dockerignore
 Dockerfile
@@ -8,6 +9,8 @@ Dockerfile
 *.tgz
 *.txt
 *.json
+*.blob
+*.exe
 
 !package.json
 !package-lock.json

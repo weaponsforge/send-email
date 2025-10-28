@@ -8,7 +8,12 @@ import { CLI_ARGS, CLI_META } from './lib/meta.js'
 import { handleSendTextEmail } from './lib/handleText.js'
 import { handleSendHtmlEmail } from './lib/handleHtml.js'
 import type { EmailHtmlOptions, EmailTextOptions } from '@/types/email.schema.js'
-import { loadEnv } from '@/utils/helpers.js'
+import { loadEnv, directory } from '@/utils/helpers.js'
+
+// IS_BUILD_SEA set in `npx esbuild --define` during SEA build time
+globalThis.__dirname = process.env.IS_BUILD_SEA === 'true'
+  ? process.cwd()
+  : directory(import.meta.url)
 
 const program = new Command()
 
