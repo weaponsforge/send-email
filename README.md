@@ -116,7 +116,7 @@ NPM scripts and CLI for sending text and HTML emails using Gmail SMTP with Googl
 
 ## 🚀 Usage
 
-**Using Node**
+### Using Node
 
 1. Run a non-test TypeScript file inside the **/app/src** directory from the project's _**"root directory"**_. For example:
 
@@ -137,7 +137,7 @@ NPM scripts and CLI for sending text and HTML emails using Gmail SMTP with Googl
 
 ## ⚡Alternate Usage
 
-**Using Docker**
+### Using Docker
 
 - **Build the image** (Run only once)
    ```bash
@@ -473,7 +473,7 @@ chmod u+x ./app/scripts/build-sea-win.sh
 This steps needs to have the Docker container up and running first (`"docker compose up"`).
 
 ```bash
-docker compose exec -it weaponsforge.sendemail-dev sh ./scripts/build-sea-win.sh
+docker compose exec -it weaponsforge-sendemail-dev sh ./scripts/build-sea-win.sh
 ```
 
 ### Using the Executable File
