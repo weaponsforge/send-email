@@ -43,6 +43,6 @@
     // "watchFile": "dynamicPriorityPolling"
     "excludeDirectories": ["**/node_modules", "dist"]
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "src/**/*.d.ts"],
   "exclude": ["node_modules"]
 }

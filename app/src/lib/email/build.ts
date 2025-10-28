@@ -4,7 +4,6 @@ import { promises as fs } from 'fs'
 import path from 'path'
 import ejs from 'ejs'
 
-import { directory } from '@/utils/helpers.js'
 import { HtmlBuildSchema, type EmailHtmlOptions } from '@/types/email.schema.js'
 import config from '@/utils/config/sanitizeHtml.js'
 
@@ -52,13 +51,16 @@ export const buildHtml = async (
     ? recipients[0]?.trim() || null
     : null
 
-  const dir = process.env.IS_BUILD_SEA === 'true'
-    ? __dirname
-    : directory(import.meta.url)
-
   try {
-    const templatePath = path.resolve(dir, '..', '..', 'templates', 'email.ejs')
-    const emailTemplate = await fs.readFile(templatePath, 'utf-8')
+    let emailTemplate
+
+    if (process.env.IS_BUILD_SEA === 'true') {
+      const mod = await import('@/utils/templates/email.ejs')
+      emailTemplate = (mod as unknown as { default: string }).default
+    } else {
+      const templatePath = path.resolve(__dirname, '..', '..', 'utils', 'templates', 'email.ejs')
+      emailTemplate = await fs.readFile(templatePath, 'utf-8')
+    }
 
     const html = ejs.render(emailTemplate, {
       recipient,

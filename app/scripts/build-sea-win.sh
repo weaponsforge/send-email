@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # This script builds a Node Single Executable Application (SEA) for Windows OS
-# https://nodejs.org/api/single-executable-applications.html
+# https://nodejs.org/api/single-executable-applications.
+# NOTE: Requires running `npm run transpile` first
 
 # Exit on error
 set -e
@@ -31,7 +32,15 @@ echo "Building Single Executable Application in $(pwd)..."
 
 # Step 1: Bundle with esbuild
 echo "Step 1: Bundling with esbuild..."
-npx esbuild "$ENTRY_FILE" --bundle --platform=node --format=cjs --target=node22 --outfile="$BUNDLE_FILE"
+npx esbuild "$ENTRY_FILE" \
+  --bundle \
+  --platform=node \
+  --format=cjs \
+  --target=node22 \
+  --loader:.ejs=text \
+  --define:process.env.IS_BUILD_SEA='"true"' \
+  --metafile="build/sendfile.meta.json" \
+  --outfile="$BUNDLE_FILE"
 
 # Step 2: Clean the bundle file - remove NODE_SEA_FUSE bundled by esbuild
 echo "Step 2: Cleaning bundle file..."
@@ -67,6 +76,7 @@ if [ -f "$WIN_NODE_EXE" ]; then
   echo "✅ Windows executable ready at: $BUILD_DIR/${APP_NAME}.exe"
 else
   echo "⚠️ Skipping Windows build — node.exe not found!"
+  exit 1
 fi
 
 echo "Build complete! Executable: $BUILD_DIR/$APP_NAME.exe"

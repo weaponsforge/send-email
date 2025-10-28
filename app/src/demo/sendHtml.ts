@@ -1,7 +1,7 @@
 import { send } from '@/lib/index.js'
 import { buildHtml } from '@/lib/index.js'
 
-import dataJson from '../templates/data.json' with { type: 'json' }
+import dataJson from '@/utils/templates/data.json' with { type: 'json' }
 
 (async () => {
   if (!process.env.GOOGLE_USER_EMAIL) {
