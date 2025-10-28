@@ -473,7 +473,7 @@ chmod u+x ./app/scripts/build-sea-win.sh
 This steps needs to have the Docker container up and running first (`"docker compose up"`).
 
 ```bash
-docker compose exec -it weaponsforge-sendemail-dev sh ./scripts/build-sea-win.sh
+docker exec -it weaponsforge-sendemail-dev sh ./scripts/build-sea-win.sh
 ```
 
 ### Using the Executable File
