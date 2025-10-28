@@ -35,7 +35,7 @@ npx esbuild "$ENTRY_FILE" --bundle --platform=node --format=cjs --target=node22 
 
 # Step 2: Clean the bundle file - remove NODE_SEA_FUSE bundled by esbuild
 echo "Step 2: Cleaning bundle file..."
-sed -i "/$SENTINEL/d" build/sendemail.cjs
+sed -i.bak "/$SENTINEL/d" "$BUNDLE_FILE" && rm -f "${BUNDLE_FILE}.bak"
 
 # Step 3: Generate SEA blob
 echo "Step 3: Generating SEA blob..."
