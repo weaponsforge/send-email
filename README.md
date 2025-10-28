@@ -473,13 +473,15 @@ chmod u+x ./app/scripts/build-sea-win.sh
 This steps needs to have the Docker container up and running first (`"docker compose up"`).
 
 ```bash
-docker-compose exec -it weaponsforge.sendemail-dev sh ./scripts/build-sea-win.sh
+docker compose exec -it weaponsforge.sendemail-dev sh ./scripts/build-sea-win.sh
 ```
 
-#### Using the Executable File
+### Using the Executable File
 
-- Refer to [Available Scripts - C. CLI](#-available-scripts) for usage information, and remove the `"--"` operator eg., <br>
-   ~~`"~npm run send-email:dev -- text"`~~ -> `"npm run send-email -- text"`
+- Refer to [Available Scripts - C. CLI](#-available-scripts) for CLI argument syntax. When running the executable directly, invoke it without npm (no `"--"` needed), for example:
+   ```bash
+   sendemail text -s "You are Invited" -c "Birthday party" -r a@gmail.com,b@gmail.com
+   ```
 
 ## References
 
