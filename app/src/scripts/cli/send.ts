@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import sea from 'node:sea'
 import { Command } from 'commander'
 
 import packageJson from '../../../package.json' with { type: 'json' }
@@ -10,8 +11,9 @@ import { handleSendHtmlEmail } from './lib/handleHtml.js'
 import type { EmailHtmlOptions, EmailTextOptions } from '@/types/email.schema.js'
 import { loadEnv, directory } from '@/utils/helpers.js'
 
-// IS_BUILD_SEA set in `npx esbuild --define` during SEA build time
-globalThis.__dirname = process.env.IS_BUILD_SEA === 'true'
+const isSea = sea.isSea()
+
+globalThis.__dirname = isSea
   ? process.cwd()
   : directory(import.meta.url)
 
@@ -75,7 +77,9 @@ program.command(CLI_META.CMD_SEND_HTML.NAME)
 
 /**
  * Usage:
- * - npm run send-cli:dev -- send [options]
- * - npx vite-node src\scripts\cli\send.ts help send
+ * - npm run send-cli:dev -- text [options]
+ * - npm run send-cli:dev -- html [options]
+ * - npx tsx src\scripts\cli\send.ts help text
+ * - npx tsx src\scripts\cli\send.ts help html
  */
 program.parse(process.argv)
