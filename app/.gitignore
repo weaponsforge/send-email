@@ -9,8 +9,10 @@ build/
 *.txt
 *.d.ts
 *.map
-*.env
+.env*
 *.blob
 *.exe
 src/**/*.js
 __tests__/**/*.js
+
+!.env.example

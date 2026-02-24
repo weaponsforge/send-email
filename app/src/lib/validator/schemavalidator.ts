@@ -65,7 +65,7 @@ class SchemaValidator implements ISchemaValidator {
   getSubSchema (data: Record<string, ZodRawShape | unknown>): ZodObjectBasicType | null {
     this.checkSchema()
 
-    let schema: ZodObjectBasicType | ZodEffectsDef | null = null
+    let schema: ZodObjectBasicType | ZodEffectsDef | null
 
     if (!this.isObject(data)) {
       throw new Error('Input is not an object')

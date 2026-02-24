@@ -1,6 +1,4 @@
-import { send } from '@/lib/index.js'
-import { buildHtml } from '@/lib/index.js'
-
+import { buildHtml, send } from '@/lib/index.js'
 import dataJson from '@/utils/templates/data.json' with { type: 'json' }
 
 (async () => {

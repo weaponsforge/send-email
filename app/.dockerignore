@@ -1,6 +1,8 @@
 node_modules/
 dist/
+html/
 build/
+.git
 .vscode
 .dockerignore
 Dockerfile
@@ -8,10 +10,18 @@ Dockerfile
 *.rar
 *.tgz
 *.txt
+*.d.ts
+*.map
 *.json
 *.blob
 *.exe
+.env*
+src/**/*.js
+__tests__/**/*.js
 
 !package.json
 !package-lock.json
 !tsconfig.json
+!tsconfig.prod.json
+
+!.env.example

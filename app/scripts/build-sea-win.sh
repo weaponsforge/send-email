@@ -19,7 +19,7 @@ SEA_BLOB="$BUILD_DIR/sea-prep.blob"
 SENTINEL="NODE_SEA_FUSE_fce680ab2cc467b6e072b8b5df1996b2"
 
 # Node download URLs
-NODE_VERSION="v22.9.0"
+NODE_VERSION="v24.11.0"
 NODE_WIN_URL="https://nodejs.org/dist/${NODE_VERSION}/node-${NODE_VERSION}-win-x64.zip"
 
 # Change to app directory to ensure relative paths work correctly
@@ -36,7 +36,7 @@ npx esbuild "$ENTRY_FILE" \
   --bundle \
   --platform=node \
   --format=cjs \
-  --target=node22 \
+  --target=node24 \
   --loader:.ejs=text \
   --define:process.env.IS_BUILD_SEA='"true"' \
   --metafile="build/sendfile.meta.json" \
