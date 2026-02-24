@@ -36,12 +36,12 @@ NPM scripts, library and CLI for sending text and HTML emails using Gmail SMTP w
 
 (Installed via npm)
 
-1. [googleapis](https://www.npmjs.com/package/googleapis) `v164.1.0`
-2. [nodemailer](https://www.npmjs.com/package/nodemailer) `v7.0.10`
+1. [googleapis](https://www.npmjs.com/package/googleapis) `v171.4.0`
+2. [nodemailer](https://www.npmjs.com/package/nodemailer) `v7.0.3`
 3. [typescript](https://www.npmjs.com/package/typescript) `v5.9.3` - Compile-time error checker
-4. [vite-node](https://www.npmjs.com/package/vite-node) `v3.2.4`- Runs TS files in development mode
-5. [vitest](https://www.npmjs.com/package/vitest) `v4.0.4` - Runs tests
-6. [commander](https://www.npmjs.com/package/commander) `v14.0.2` - CLI library
+4. [tsx](https://www.npmjs.com/package/tsx) `v4.21.0`- Runs TS files in development mode
+5. [vitest](https://www.npmjs.com/package/vitest) `v4.0.18` - Runs tests
+6. [commander](https://www.npmjs.com/package/commander) `v14.0.3` - CLI library
 7. [sanitize-html](https://www.npmjs.com/package/sanitize-html) `v2.17.0` - Sanitizes WYSIWYG HTML input
 
 </details>
