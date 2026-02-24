@@ -2,7 +2,7 @@
 const CLI_META = {
   PROGRAM: {
     NAME: 'send-email',
-    DESCRIPTION: 'CLI for sending an email using Gmail SMTP and Google OAuth2'
+    DESCRIPTION: 'CLI for sending text and HTML emails using Gmail SMTP and Google OAuth2'
   },
   CMD_SEND_TEXT: {
     NAME: 'text',
@@ -27,7 +27,7 @@ const CLI_ARGS = {
       DESCRIPTION: 'comma-separated list of email addresses'
     },
     ENV_FILE: {
-      OPTION: '-e, --env <path>',
+      OPTION: '-e, --env [path]',
       DESCRIPTION: 'path to .env file (optional)'
     }
   },

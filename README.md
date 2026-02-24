@@ -1,6 +1,6 @@
 ## send-email
 
-NPM scripts and CLI for sending text and HTML emails using Gmail SMTP with Google OAuth2.
+NPM scripts, library and CLI for sending text and HTML emails using Gmail SMTP with Google OAuth2.
 
 ### Table of Contents
 
@@ -20,7 +20,7 @@ NPM scripts and CLI for sending text and HTML emails using Gmail SMTP with Googl
 <summary>👉 Click to expand the list of requirements</summary>
 
 1. Windows 11/Linux OS
-2. NodeJS LTS v22 or higher
+2. NodeJS LTS v24.11.0 or higher
    ```
    Recommended:
    node: 24.11.0
@@ -101,17 +101,17 @@ NPM scripts and CLI for sending text and HTML emails using Gmail SMTP with Googl
 
 3. Configure **OAuth2**. Get a refresh token from the Google [OAuth 2 Playground](https://developers.google.com/oauthplayground).
    - Read on [Using the OAuth 2.0 Playground](https://github.com/weaponsforge/email-sender?tab=readme-ov-file#using-the-oauth-20-playground) for more information about generating a refresh token using the Google OAuth Playground.
-   - _**INFO:** This is an older note, some steps may vary in 2025)_
+   - ⚠️ _**INFO:** This is an older note, some steps may vary in 2025)_
 
 4. Set up the environment variables. Create a `.env` file inside the **/app** directory with reference to the `.env.example` file.
 
    | Variable Name | Description |
    | --- | --- |
-   | GOOGLE_USER_EMAIL | Your google email that you've configured for Gmail SMTP and Google OAuth2 |
-   | GOOGLE_CLIENT_ID | Google Developer Project ID associated with your email |
-   | GOOGLE_CLIENT_SECRET | Client secret for the Google Developer Project CLIENT_ID|
+   | GOOGLE_USER_EMAIL | Your google email that you've configured for Gmail SMTP and Google OAuth2. |
+   | GOOGLE_CLIENT_ID | Google OAuth2 client ID linked with your Google Cloud Platform project. |
+   | GOOGLE_CLIENT_SECRET | Google OAuth2 client secret associated with the `GOOGLE_CLIENT_ID`. |
    | GOOGLE_REDIRECT_URI | Allowed Google API redirect URI. Its value is `https://developers.google.com/oauthplayground` by default. |
-   | GOOGLE_REFRESH_TOKEN | The initial (or any) refresh token obtained from [OAuthPlayground](https://developers.google.com/oauthplayground).<ul><li>Read on [Using the OAuth 2.0 Playground](https://github.com/weaponsforge/email-sender?tab=readme-ov-file#using-the-oauth-20-playground) for more information about generating a refresh token using the Google OAuth Playground.</li><li><blockquote>(_**INFO:** This is an older note, some steps may vary this 2025)_</blockquote></li></ul> |
+   | GOOGLE_REFRESH_TOKEN | The initial (or any) refresh token obtained from the [OAuthPlayground](https://developers.google.com/oauthplayground).<ul><li>Read on [Using the OAuth 2.0 Playground](https://github.com/weaponsforge/email-sender?tab=readme-ov-file#using-the-oauth-20-playground) for more information about generating a refresh token using the Google OAuth Playground.</li><li><blockquote>(⚠️ _**INFO:** This is an older note, some steps may vary this 2025)_</blockquote></li></ul> |
 
 
 ## 🚀 Usage
@@ -192,8 +192,7 @@ main()
 
 **app/src/demo/sendHtml.ts**
 ```typescript
-import { send } from '@/lib/index.js'
-import { buildHtml } from '@/lib/index.js'
+import { buildHtml, send } from '@/lib/index.js'
 
 const emails = ['tester@gmail.com', 'admin@gmail.com']
 
@@ -292,7 +291,7 @@ Sends text and HTML emails using the command line interface (CLI) with transpile
    ```text
    Usage: send-email [options] [command]
 
-   CLI for sending an email using Gmail SMTP and Google OAuth2
+   CLI for sending text and HTML emails using Gmail SMTP and Google OAuth2
 
    Options:
    -V, --version   output the version number
@@ -325,7 +324,7 @@ Sends text and HTML emails using the command line interface (CLI) with transpile
    Options:
    -s, --subject <title>      email subject or title enclosed in double-quotes
    -c, --content <text>       email text content enclosed in double-quotes
-   -e, --env <path>           path to .env file (optional)
+   -e, --env [path]           path to .env file (optional)
    -r, --recipients <emails>  comma-separated list of email addresses
    -h, --help                 display help for command
    ```
@@ -347,7 +346,7 @@ Sends text and HTML emails using the command line interface (CLI) with transpile
    -r, --recipients <emails>  comma-separated list of email addresses
    -c, --content <text...>    whitespace-delimited of text/paragraphs enclosed in double-quotes
    -w, --wysiwyg [html]       optional HTML tags that form a WYSIWYG content enclosed in double-quotes
-   -e, --env <path>           path to .env file (optional)
+   -e, --env [path]           path to .env file (optional)
    -h, --help                 display help for command
    ```
 
@@ -470,7 +469,7 @@ chmod u+x ./app/scripts/build-sea-win.sh
 
 **Using Docker**
 
-This steps needs to have the Docker container up and running first (`"docker compose up"`).
+These steps need to have the Docker container up and running first (`"docker compose up"`).
 
 ```bash
 docker exec -it weaponsforge-sendemail-dev sh ./scripts/build-sea-win.sh
