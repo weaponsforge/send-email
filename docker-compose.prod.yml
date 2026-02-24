@@ -4,6 +4,8 @@ services:
   weaponsforge.sendemail:
     container_name: weaponsforge-sendemail
     image: weaponsforge/sendemail:latest
+    env_file:
+      - ./app/.env
     build:
       context: ./app
       dockerfile: Dockerfile
