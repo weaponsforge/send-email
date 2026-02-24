@@ -12,9 +12,5 @@ services:
       target: production
     volumes:
       - /opt/app/node_modules
-      - /opt/app/dist
-      - /opt/app/html
-    ports:
-      - "9229:9229"
     stdin_open: true
     tty: true

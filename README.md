@@ -482,6 +482,33 @@ docker exec -it weaponsforge-sendemail-dev sh ./scripts/build-sea-win.sh
    sendemail text -s "You are Invited" -c "Birthday party" -r a@gmail.com,b@gmail.com
    ```
 
+## 🚀 Usage with GitHub Actions
+
+### Deployment to Docker Hub
+
+This repository deploys the latest development Docker image `weaponsforge/send-email` to Docker Hub on the **creation of new Tags/Releases from the `main` branch** with GitHub Actions. Supply the following GitHub Secrets and Variable to enable deployment to Docker Hub. It requires a Docker Hub account.
+
+The Docker Hub image is available at:
+
+https://hub.docker.com/r/weaponsforge/send-email
+
+### GitHub Secrets and Variables
+
+#### GitHub Secrets
+
+| GitHub Secret Name | Description |
+| --- | --- |
+| DOCKERHUB_USERNAME | Docker Hub username |
+| DOCKERHUB_TOKEN | Deploy token for the Docker Hub account |
+
+#### GitHub Variables
+
+| GitHub Variable Name | Description |
+| --- | --- |
+| DOCKERHUB_USERNAME | Docker Hub username |
+
+<br>
+
 ## References
 
 - Gmail API <sup>[[1]](https://developers.google.com/gmail/api/guides) [[2]](https://github.com/googleapis/google-api-nodejs-client)</sup>
