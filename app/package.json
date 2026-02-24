@@ -1,6 +1,6 @@
 {
   "name": "send-email",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Sends emails using Gmail SMTP with username/pw or Google OAuth2",
   "main": "dist/index.js",
   "type": "module",

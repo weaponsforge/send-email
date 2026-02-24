@@ -21,7 +21,7 @@ NPM scripts, library and CLI for sending text and HTML emails using Gmail SMTP w
 
 1. Windows 11/Linux OS
 2. NodeJS LTS v24.11.0 or higher
-   ```
+   ```text
    Recommended:
    node: 24.11.0
    npm: 10.9.2
@@ -37,12 +37,12 @@ NPM scripts, library and CLI for sending text and HTML emails using Gmail SMTP w
 (Installed via npm)
 
 1. [googleapis](https://www.npmjs.com/package/googleapis) `v171.4.0`
-2. [nodemailer](https://www.npmjs.com/package/nodemailer) `v7.0.3`
+2. [nodemailer](https://www.npmjs.com/package/nodemailer) `v8.0.1`
 3. [typescript](https://www.npmjs.com/package/typescript) `v5.9.3` - Compile-time error checker
-4. [tsx](https://www.npmjs.com/package/tsx) `v4.21.0`- Runs TS files in development mode
+4. [tsx](https://www.npmjs.com/package/tsx) `v4.21.0` - Runs TS files in development mode
 5. [vitest](https://www.npmjs.com/package/vitest) `v4.0.18` - Runs tests
 6. [commander](https://www.npmjs.com/package/commander) `v14.0.3` - CLI library
-7. [sanitize-html](https://www.npmjs.com/package/sanitize-html) `v2.17.0` - Sanitizes WYSIWYG HTML input
+7. [sanitize-html](https://www.npmjs.com/package/sanitize-html) `v2.17.1` - Sanitizes WYSIWYG HTML input
 
 </details>
 <br>
@@ -101,7 +101,7 @@ NPM scripts, library and CLI for sending text and HTML emails using Gmail SMTP w
 
 3. Configure **OAuth2**. Get a refresh token from the Google [OAuth 2 Playground](https://developers.google.com/oauthplayground).
    - Read on [Using the OAuth 2.0 Playground](https://github.com/weaponsforge/email-sender?tab=readme-ov-file#using-the-oauth-20-playground) for more information about generating a refresh token using the Google OAuth Playground.
-   - ⚠️ _**INFO:** This is an older note, some steps may vary in 2025)_
+   - _(⚠️ **INFO:** This is an older note, some steps may vary in 2025)_
 
 4. Set up the environment variables. Create a `.env` file inside the **/app** directory with reference to the `.env.example` file.
 
@@ -111,7 +111,7 @@ NPM scripts, library and CLI for sending text and HTML emails using Gmail SMTP w
    | GOOGLE_CLIENT_ID | Google OAuth2 client ID linked with your Google Cloud Platform project. |
    | GOOGLE_CLIENT_SECRET | Google OAuth2 client secret associated with the `GOOGLE_CLIENT_ID`. |
    | GOOGLE_REDIRECT_URI | Allowed Google API redirect URI. Its value is `https://developers.google.com/oauthplayground` by default. |
-   | GOOGLE_REFRESH_TOKEN | The initial (or any) refresh token obtained from the [OAuthPlayground](https://developers.google.com/oauthplayground).<ul><li>Read on [Using the OAuth 2.0 Playground](https://github.com/weaponsforge/email-sender?tab=readme-ov-file#using-the-oauth-20-playground) for more information about generating a refresh token using the Google OAuth Playground.</li><li><blockquote>(⚠️ _**INFO:** This is an older note, some steps may vary this 2025)_</blockquote></li></ul> |
+   | GOOGLE_REFRESH_TOKEN | The initial (or any) refresh token obtained from the [OAuthPlayground](https://developers.google.com/oauthplayground).<ul><li>Read on [Using the OAuth 2.0 Playground](https://github.com/weaponsforge/email-sender?tab=readme-ov-file#using-the-oauth-20-playground) for more information about generating a refresh token using the Google OAuth Playground.</li><li><blockquote>_(⚠️ **INFO:** This is an older note, some steps may vary this 2025)_</blockquote></li></ul> |
 
 
 ## 🚀 Usage
