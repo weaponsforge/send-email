@@ -56,7 +56,7 @@ class EmailTransport implements IEmailTransport {
       if (err instanceof Error) {
         throw err
       } else {
-        throw new Error(`Unexpected error type: ${String(err)}`)
+        throw new Error(`Unexpected error type: ${String(err)}`, { cause: err })
       }
     }
   }

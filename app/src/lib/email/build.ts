@@ -74,6 +74,6 @@ export const buildHtml = async (
     return html
   } catch (err: unknown) {
     const errMsg = err instanceof Error ? err.message : String(err)
-    throw new Error(`Failed to render email template: ${errMsg}`)
+    throw new Error(`Failed to render email template: ${errMsg}`, { cause: err })
   }
 }
