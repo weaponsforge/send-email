@@ -1,8 +1,10 @@
 import { promises as fs } from 'node:fs'
 import path, { dirname } from 'node:path'
+import sea from 'node:sea'
 import { fileURLToPath } from 'url'
 
 import dotenv from 'dotenv'
+const isSea = sea.isSea()
 
 /**
  * Creates a sequence of N-length `"a"` characters
@@ -85,4 +87,9 @@ export const loadEnv = (pathToEnv: string | undefined) => {
     path: pathToEnv,
     quiet: true
   })
+
+  if (isSea) {
+    // Disable Node deprecation warnings in the CLI build output
+    process.noDeprecation = true
+  }
 }
