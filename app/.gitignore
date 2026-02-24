@@ -1,6 +1,7 @@
 node_modules/
 dist/
 html/
+build/
 .git
 *.zip
 *.rar
@@ -8,6 +9,10 @@ html/
 *.txt
 *.d.ts
 *.map
-*.env
+.env*
+*.blob
+*.exe
 src/**/*.js
 __tests__/**/*.js
+
+!.env.example
