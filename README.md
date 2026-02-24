@@ -13,6 +13,7 @@ NPM scripts, library and CLI for sending text and HTML emails using Gmail SMTP w
 - [Available Scripts](#-available-scripts)
 - [Docker Scripts](#-docker-scripts)
 - [Building the Windows Executable File](#️-building-the-windows-executable-file)
+- [Usage with GitHub Actions](#-usage-with-github-actions)
 
 ## 📋 Requirements
 
@@ -481,6 +482,33 @@ docker exec -it weaponsforge-sendemail-dev sh ./scripts/build-sea-win.sh
    ```bash
    sendemail text -s "You are Invited" -c "Birthday party" -r a@gmail.com,b@gmail.com
    ```
+
+## 🚀 Usage with GitHub Actions
+
+### Deployment to Docker Hub
+
+This repository deploys the latest development Docker image `weaponsforge/sendemail` to Docker Hub on the **creation of new Tags/Releases from the `main` branch** with GitHub Actions. Supply the following GitHub Secrets and Variable to enable deployment to Docker Hub. It requires a Docker Hub account.
+
+The Docker Hub image is available at:
+
+https://hub.docker.com/r/weaponsforge/sendemail
+
+### GitHub Secrets and Variables
+
+#### GitHub Secrets
+
+| GitHub Secret Name | Description |
+| --- | --- |
+| DOCKERHUB_USERNAME | Docker Hub username |
+| DOCKERHUB_TOKEN | Deploy token for the Docker Hub account |
+
+#### GitHub Variables
+
+| GitHub Variable Name | Description |
+| --- | --- |
+| DOCKERHUB_USERNAME | Docker Hub username |
+
+<br>
 
 ## References
 
