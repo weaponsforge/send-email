@@ -122,7 +122,7 @@ NPM scripts, library and CLI for sending text and HTML emails using Gmail SMTP w
 
    ```bash
    cd app
-   npx vite-node src/utils/sample.ts
+   npx tsx src/utils/sample.ts
    ```
 
 2. Run compiled JavaScript code from the TypeScript files. For example:
@@ -164,7 +164,7 @@ NPM scripts, library and CLI for sending text and HTML emails using Gmail SMTP w
 - **Run a non-test TS file using Vite**<br>
    (requires **Run an NPM script using Docker compose**)
    ```bash
-   docker exec -it weaponsforge-sendemail-dev npx vite-node /opt/app/src/<PATH_TO_TS_FILE>.ts
+   docker exec -it weaponsforge-sendemail-dev npx tsx /opt/app/src/<PATH_TO_TS_FILE>.ts
    ```
 
 - See the [Available Scripts](#-available-scripts) and [Docker Scripts](#-docker-scripts) sections for more information.
