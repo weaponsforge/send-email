@@ -13,6 +13,7 @@ NPM scripts, library and CLI for sending text and HTML emails using Gmail SMTP w
 - [Available Scripts](#-available-scripts)
 - [Docker Scripts](#-docker-scripts)
 - [Building the Windows Executable File](#️-building-the-windows-executable-file)
+- [Usage with GitHub Actions](#-usage-with-github-actions)
 
 ## 📋 Requirements
 
