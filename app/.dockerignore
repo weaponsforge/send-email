@@ -22,5 +22,6 @@ __tests__/**/*.js
 !package.json
 !package-lock.json
 !tsconfig.json
+!tsconfig.prod.json
 
 !.env.example
