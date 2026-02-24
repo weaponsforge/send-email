@@ -486,11 +486,11 @@ docker exec -it weaponsforge-sendemail-dev sh ./scripts/build-sea-win.sh
 
 ### Deployment to Docker Hub
 
-This repository deploys the latest development Docker image `weaponsforge/send-email` to Docker Hub on the **creation of new Tags/Releases from the `main` branch** with GitHub Actions. Supply the following GitHub Secrets and Variable to enable deployment to Docker Hub. It requires a Docker Hub account.
+This repository deploys the latest development Docker image `weaponsforge/sendemail` to Docker Hub on the **creation of new Tags/Releases from the `main` branch** with GitHub Actions. Supply the following GitHub Secrets and Variable to enable deployment to Docker Hub. It requires a Docker Hub account.
 
 The Docker Hub image is available at:
 
-https://hub.docker.com/r/weaponsforge/send-email
+https://hub.docker.com/r/weaponsforge/sendemail
 
 ### GitHub Secrets and Variables
 
