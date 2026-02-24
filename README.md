@@ -23,7 +23,7 @@ NPM scripts and CLI for sending text and HTML emails using Gmail SMTP with Googl
 2. NodeJS LTS v22 or higher
    ```
    Recommended:
-   node: 22.14.0
+   node: 24.11.0
    npm: 10.9.2
    ```
 3. Gmail Account

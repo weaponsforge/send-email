@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "type": "module",
   "engines": {
-    "node": ">=22"
+    "node": ">=24"
   },
   "bin": {
     "send-email": "./dist/scripts/cli/send.js"
