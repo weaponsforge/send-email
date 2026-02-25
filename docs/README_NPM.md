@@ -4,6 +4,10 @@ NPM library for sending text and HTML emails using Gmail SMTP with Google OAuth2
 
 ### CLI Available
 
+> - **Run via npx (no installation required)**
+>   - Requirements: NodeJS LTS v24.11.0 or later
+>   - Run `npx @weaponsforge/sendemail --help`
+>
 > - **Pre-compiled Windows binaries**<br>
 >    Pre-compiled [Windows binaries](https://github.com/weaponsforge/send-email?tab=readme-ov-file#%EF%B8%8F-building-the-windows-executable-file) are available for download in the latest [Releases](https://github.com/weaponsforge/send-email/releases) download page.
 >
@@ -47,7 +51,7 @@ NPM library for sending text and HTML emails using Gmail SMTP with Google OAuth2
 
 ## 🆕 Quickstart
 
-1. Install library.
+1. Install the library.
    ```bash
    npm i @weaponsforge/sendemail
    ```
