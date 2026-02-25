@@ -1,6 +1,6 @@
 {
   "name": "@weaponsforge/sendemail",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Sends emails using Gmail SMTP with username/pw or Google OAuth2",
   "main": "dist/index.js",
   "types": "./dist/index.d.ts",
@@ -9,7 +9,7 @@
     "node": ">=24"
   },
   "bin": {
-    "sendemail": "./dist/scripts/cli/send.js"
+    "sendemail": "dist/scripts/cli/send.js"
   },
   "exports": {
     ".": {
@@ -25,6 +25,7 @@
     "LICENSE"
   ],
   "scripts": {
+    "start": "node ./dist/scripts/cli/send.js",
     "dev": "vitest",
     "transpile": "tsc -p tsconfig.prod.json && tsc-alias && npm run copy:files",
     "transpile:noemit": "tsc -p tsconfig.json --noEmit",
