@@ -86,12 +86,12 @@ jobs:
           key: npm-${{ hashFiles('app/package-lock.json') }}
           restore-keys: npm-
 
-      - name: Install Dependencies and lint
+      - name: Install Dependencies
         run: |
           cd app
           npm ci
 
-      - name: Packge and archive the executable files
+      - name: Package and archive the executable files
         run: |
           cd app
           chmod u+x ./scripts/build-sea-win.sh
@@ -113,6 +113,8 @@ jobs:
     if: github.event.release.target_commitish == 'main'
     needs: [lint-test-app, build-sea]
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Download Artifact
         uses: actions/download-artifact@v4
