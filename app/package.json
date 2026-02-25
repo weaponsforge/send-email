@@ -25,6 +25,7 @@
     "LICENSE"
   ],
   "scripts": {
+    "start": "node ./dist/scripts/cli/send.js",
     "dev": "vitest",
     "transpile": "tsc -p tsconfig.prod.json && tsc-alias && npm run copy:files",
     "transpile:noemit": "tsc -p tsconfig.json --noEmit",

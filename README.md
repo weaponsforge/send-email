@@ -294,6 +294,10 @@ This script runs automatically after `"npm run transpile"`, copying the `"/app/s
 
 ### C. CLI 💻
 
+### `npm start`
+
+Shorthand for `"npm run sendemail"`
+
 ### `npm run sendemail`
 
 Sends text and HTML emails using the command line interface (CLI) with transpiled JavaScript.
