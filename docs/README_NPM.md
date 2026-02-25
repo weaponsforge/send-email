@@ -5,7 +5,7 @@ NPM library for sending text and HTML emails using Gmail SMTP with Google OAuth2
 ### CLI Available
 
 > - **Pre-compiled Windows binaries**<br>
->    Pre-compiled [windows binaries](#️-building-the-windows-executable-file) are available for download in the latest [Releases](https://github.com/weaponsforge/send-email/releases) download page.
+>    Pre-compiled [windows binaries](https://github.com/weaponsforge/send-email?tab=readme-ov-file#%EF%B8%8F-building-the-windows-executable-file) are available for download in the latest [Releases](https://github.com/weaponsforge/send-email/releases) download page.
 >
 > - **Docker image**<br>
 >   A Docker image is available at https://hub.docker.com/r/weaponsforge/sendemail
@@ -77,7 +77,7 @@ NPM library for sending text and HTML emails using Gmail SMTP with Google OAuth2
 ### A. Send a Text-format Email
 
 ```typescript
-import { send } from 'send-email'
+import { send } from '@weaponsforge/sendemail'
 
 const main = async () => {
    await send({
@@ -93,7 +93,7 @@ main()
 ### B. Send an HTML-format Email
 
 ```typescript
-import { buildHtml, send } from 'send-email'
+import { buildHtml, send } from '@weaponsforge/sendemail'
 
 const emails = ['tester@gmail.com', 'admin@gmail.com']
 
@@ -124,16 +124,16 @@ These are classes that manage the email-sending processes and configurations.
 ```typescript
 
 // Sends emails using a Nodemailer transporter
-import { EmailSender } from 'send-email'
+import { EmailSender } from '@weaponsforge/sendemail'
 
 // Initializes the Nodemailer transport with Google OAuth2
-import { EmailTransport } from 'send-email'
+import { EmailTransport } from '@weaponsforge/sendemail'
 
 // Manages API keys, methods and properties of the Google `OAuth2Client`
-import { GmailOAuthClient } from 'send-email'
+import { GmailOAuthClient } from '@weaponsforge/sendemail'
 
 // Wrapper around `ZodObject` and `ZodEffects` zod schemas
-import { SchemaValidator } from 'send-email'
+import { SchemaValidator } from '@weaponsforge/sendemail'
 
 // eg., extend (or override) the EmailSender class
 class MyOAuthClient extends GmailOAuthClient {
@@ -142,7 +142,7 @@ class MyOAuthClient extends GmailOAuthClient {
   }
 }
 
-const client = new MyOauthClient()
+const client = new MyOAuthClient()
 
 const token = await client.getAccessToken()
 client.sayHello('Tester')
