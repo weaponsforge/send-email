@@ -1,7 +1,7 @@
 // CLI metadata
 const CLI_META = {
   PROGRAM: {
-    NAME: 'send-email',
+    NAME: 'sendemail',
     DESCRIPTION: 'CLI for sending text and HTML emails using Gmail SMTP and Google OAuth2'
   },
   CMD_SEND_TEXT: {

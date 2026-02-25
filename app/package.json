@@ -1,15 +1,29 @@
 {
-  "name": "send-email",
-  "version": "1.2.1",
+  "name": "@weaponsforge/sendemail",
+  "version": "1.2.2",
   "description": "Sends emails using Gmail SMTP with username/pw or Google OAuth2",
   "main": "dist/index.js",
+  "types": "./dist/index.d.ts",
   "type": "module",
   "engines": {
     "node": ">=24"
   },
   "bin": {
-    "send-email": "./dist/scripts/cli/send.js"
+    "sendemail": "./dist/scripts/cli/send.js"
   },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "!dist/demo",
+    "!dist/scripts/build",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "dev": "vitest",
     "transpile": "tsc -p tsconfig.prod.json && tsc-alias && npm run copy:files",
@@ -27,8 +41,8 @@
     "docker:dev:win": "export CHOKIDAR_USEPOLLING=1 && export CHOKIDAR_INTERVAL=1000 && vitest",
     "docker:watch:win": "tsc -p tsconfig.json --watch --watchFile dynamicPriorityPolling --watchDirectory dynamicPriorityPolling",
     "docker:test:ui:win": "export CHOKIDAR_USEPOLLING=1 && export CHOKIDAR_INTERVAL=1000 && npm run docker:test:ui",
-    "send-email": "node ./dist/scripts/cli/send.js",
-    "send-email:dev": "tsx ./src/scripts/cli/send.ts"
+    "sendemail": "node ./dist/scripts/cli/send.js",
+    "sendemail:dev": "tsx ./src/scripts/cli/send.ts"
   },
   "repository": {
     "type": "git",
@@ -36,8 +50,10 @@
   },
   "keywords": [
     "email",
-    "gmail",
     "smtp",
+    "gmail",
+    "cli",
+    "send-email",
     "oauth2"
   ],
   "author": "weaponsforge",

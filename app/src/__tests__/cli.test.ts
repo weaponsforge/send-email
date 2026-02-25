@@ -11,7 +11,7 @@ describe('CLI test suite', () => {
    */
   test('Sends a text email using CLI options', async () => {
     const { stdout } = await execa('npm', [
-      'run', 'send-email:dev', '--',
+      'run', 'sendemail:dev', '--',
       'text',
       '-s', 'Hello, World!',
       '-c', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit...',
@@ -27,7 +27,7 @@ describe('CLI test suite', () => {
   test('Sends the default HTML email using CLI options', async () => {
     const correctEmailList = 'testor@gmail.com,abc@gmail.com'
 
-    const { stdout } = await $`npm run send-email:dev -- html
+    const { stdout } = await $`npm run sendemail:dev -- html
     -s ${'Default HTML Message'}
     -c ${'This is paragraph #1'} ${'This is paragraph #2'} ${'This is paragraph #3'}
     -r ${correctEmailList}`
@@ -36,7 +36,7 @@ describe('CLI test suite', () => {
   }, MAX_TIMEOUT)
 
   test('Sends WYSIWYG body content in HTML email', async () => {
-    const { stdout } = await $`npm run send-email:dev -- html
+    const { stdout } = await $`npm run sendemail:dev -- html
     -r ${'abc@gmail.com'}
     -s ${'WYSIWYG Email Content Message'}
     -c ${'This is paragraph #1'} ${'This is paragraph #2'} ${'This is paragraph #3'}
@@ -52,7 +52,7 @@ describe('CLI test suite', () => {
     // Email list should be comma-separated
     const incorrectEmailList = 'testor@gmail.com|abc@gmail.com'
 
-    const { stdout } = await $`npm run send-email:dev -- html
+    const { stdout } = await $`npm run sendemail:dev -- html
       -s ${'Default HTML Message'}
       -c ${'helloooo'}
       -r ${incorrectEmailList}`
