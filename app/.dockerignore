@@ -12,12 +12,16 @@ Dockerfile
 *.txt
 *.d.ts
 *.map
+.env*
 *.json
 *.blob
 *.exe
-.env*
+*.md
 src/**/*.js
 __tests__/**/*.js
+
+LICENSE
+README.md
 
 !package.json
 !package-lock.json

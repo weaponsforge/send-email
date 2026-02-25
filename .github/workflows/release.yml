@@ -123,8 +123,8 @@ jobs:
 
       - name: Prepare App
         run: |
-          mv sendemail.exe sendemail_${{github.ref_name}}.exe
-          tar cvfz sendemail_${{github.ref_name}}.tar.gz sendemail_${{github.ref_name}}.exe
+          mv sendemail.exe sendemail-win_${{github.ref_name}}.exe
+          tar cvfz sendemail-win_${{github.ref_name}}.tar.gz sendemail-win_${{github.ref_name}}.exe
           ls -l -a
 
       - name: Attach Artifact to Release
@@ -132,10 +132,43 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
-            sendemail_${{github.ref_name}}.tar.gz
+            sendemail-win_${{github.ref_name}}.tar.gz
 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  publish-npm:
+    name: Publish to NPM registry
+    if: github.event.release.target_commitish == 'main'
+    needs: [lint-test-app, build-sea]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.release.tag_name }}
+
+      - name: Use NodeJS v24.11.0
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24.11.0
+          registry-url: https://registry.npmjs.org/
+
+      - name: Build distribution package
+        run: |
+          cd app
+          npm ci
+          npm run transpile
+
+      - name: Publish package
+        run: |
+          chmod u+x app/scripts/npm-publish.sh
+          ./app/scripts/npm-publish.sh
+          cd app
+          npm publish --provenance --access public
 
   docker-build-push:
     name: Build and Push Docker Image
