@@ -2,6 +2,9 @@
 
 NPM scripts, library and CLI for sending text and HTML emails using Gmail SMTP with Google OAuth2.
 
+> [!TIP]
+> Pre-compiled [windows binaries](#️-building-the-windows-executable-file) are available for download in the latest [Releases](https://github.com/weaponsforge/send-email/releases) download page.
+
 ### Table of Contents
 
 - [Requirements](#-requirements)
@@ -482,6 +485,8 @@ docker exec -it weaponsforge-sendemail-dev sh ./scripts/build-sea-win.sh
    ```bash
    sendemail text -s "You are Invited" -c "Birthday party" -r a@gmail.com,b@gmail.com
    ```
+
+<br>
 
 ## 🚀 Usage with GitHub Actions
 
