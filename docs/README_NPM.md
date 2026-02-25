@@ -1,8 +1,9 @@
-## send-email
+## @weaponsforge/sendemail
 
-NPM library and CLI for sending text and HTML emails using Gmail SMTP with Google OAuth2.
+NPM library for sending text and HTML emails using Gmail SMTP with Google OAuth2.
 
-> [!TIP]
+### CLI Available
+
 > - **Pre-compiled Windows binaries**<br>
 >    Pre-compiled [windows binaries](#️-building-the-windows-executable-file) are available for download in the latest [Releases](https://github.com/weaponsforge/send-email/releases) download page.
 >
@@ -48,10 +49,13 @@ NPM library and CLI for sending text and HTML emails using Gmail SMTP with Googl
 
 1. Install library.
    ```bash
-   npm install sendemail
+   npm i @weaponsforge/sendemail
    ```
 
 2. Set up the environment variables. Create a `.env` file in your root project directory with the following:
+
+   <details>
+   <summary>👉 Click to view the environment variable definitions</summary>
 
    | Variable Name | Description |
    | --- | --- |
@@ -59,7 +63,10 @@ NPM library and CLI for sending text and HTML emails using Gmail SMTP with Googl
    | GOOGLE_CLIENT_ID | Google OAuth2 client ID linked with your Google Cloud Platform project. |
    | GOOGLE_CLIENT_SECRET | Google OAuth2 client secret associated with the `GOOGLE_CLIENT_ID`. |
    | GOOGLE_REDIRECT_URI | Allowed Google API redirect URI. Its value is `https://developers.google.com/oauthplayground` by default. |
-   | GOOGLE_REFRESH_TOKEN | The initial (or any) refresh token obtained from the [OAuthPlayground](https://developers.google.com/oauthplayground).<ul><li>Read on [Using the OAuth 2.0 Playground](https://github.com/weaponsforge/email-sender?tab=readme-ov-file#using-the-oauth-20-playground) for more information about generating a refresh token using the Google OAuth Playground.</li><li><blockquote>_(⚠️ **INFO:** This is an older note; some steps may vary this 2025)_</blockquote></li></ul> |
+   | GOOGLE_REFRESH_TOKEN | The initial (or any) refresh token obtained from the [OAuthPlayground](https://developers.google.com/oauthplayground).<br><br>Read on [Using the OAuth 2.0 Playground](https://github.com/weaponsforge/email-sender?tab=readme-ov-file#using-the-oauth-20-playground) for more information about generating a refresh token using the Google OAuth Playground.<br><br><blockquote>_(⚠️ **INFO:** This is an older note; some steps may vary this 2025)_</blockquote> |
+
+   </details>
+   <br>
 
 3. Send emails programmatically via code. See the examples under the [Code Samples](#-code-samples) section for more information.
 
@@ -119,15 +126,13 @@ These are classes that manage the email-sending processes and configurations.
 // Sends emails using a Nodemailer transporter
 import { EmailSender } from 'send-email'
 
-// Initializes the Nodemailer transport with Google OAuth2 credentials and initiates
-// sending emails using the Gmail SMTP
+// Initializes the Nodemailer transport with Google OAuth2
 import { EmailTransport } from 'send-email'
 
-// Manages relevant API keys, methods and properties of the Google `OAuth2Client`
+// Manages API keys, methods and properties of the Google `OAuth2Client`
 import { GmailOAuthClient } from 'send-email'
 
-// Wrapper around `ZodObject` and `ZodEffects` zod schemas that returns formatted
-// validation error messages and extracts sub-schemas
+// Wrapper around `ZodObject` and `ZodEffects` zod schemas
 import { SchemaValidator } from 'send-email'
 
 // eg., extend (or override) the EmailSender class
