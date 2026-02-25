@@ -3,6 +3,7 @@
   "version": "1.2.1",
   "description": "Sends emails using Gmail SMTP with username/pw or Google OAuth2",
   "main": "dist/index.js",
+  "types": "./dist/index.d.ts",
   "type": "module",
   "engines": {
     "node": ">=24"
@@ -10,6 +11,19 @@
   "bin": {
     "send-email": "./dist/scripts/cli/send.js"
   },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "!dist/demo",
+    "!dist/scripts/build",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "dev": "vitest",
     "transpile": "tsc -p tsconfig.prod.json && tsc-alias && npm run copy:files",

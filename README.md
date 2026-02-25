@@ -1,9 +1,12 @@
 ## send-email
 
-NPM scripts, library and CLI for sending text and HTML emails using Gmail SMTP with Google OAuth2.
+NPM library and CLI for sending text and HTML emails using Gmail SMTP with Google OAuth2.
 
 > [!TIP]
-> - **Pre-compiled windows binaries**<br>
+> - **Node.js package**<br>
+>    A Node.js package is available at
+>
+> - **Pre-compiled Windows binaries**<br>
 >    Pre-compiled [windows binaries](#️-building-the-windows-executable-file) are available for download in the latest [Releases](https://github.com/weaponsforge/send-email/releases) download page.
 >
 > - **Docker image**<br>
@@ -35,17 +38,15 @@ NPM scripts, library and CLI for sending text and HTML emails using Gmail SMTP w
    npm: 10.9.2
    ```
 3. Gmail Account
-   - Gmail email/password
-   - Optional:
-      - Google Cloud Platform project configured with [OAuth2](https://developers.google.com/workspace/guides/configure-oauth-consent) settings and [credentials](https://developers.google.com/workspace/guides/manage-credentials)
-      - Read on the Google [Gmail](https://developers.google.com/gmail/api/guides), [SMTP and OAuth2 Setup](https://github.com/weaponsforge/email-sender?tab=readme-ov-file#using-the-oauth-20-playground) sections for more information
+   - Google Cloud Platform project configured with [OAuth2](https://developers.google.com/workspace/guides/configure-oauth-consent) settings and [credentials](https://developers.google.com/workspace/guides/manage-credentials)
+   - Read on the Google [Gmail](https://developers.google.com/gmail/api/guides), [SMTP and OAuth2 Setup](https://github.com/weaponsforge/email-sender?tab=readme-ov-file#using-the-oauth-20-playground) sections for more information
 
 ### Core Libraries/Frameworks
 
 (Installed via npm)
 
-1. [googleapis](https://www.npmjs.com/package/googleapis) `v171.4.0`
-2. [nodemailer](https://www.npmjs.com/package/nodemailer) `v8.0.1`
+1. [googleapis](https://www.npmjs.com/package/googleapis) `v171.4.0` - Manages Gmail token access
+2. [nodemailer](https://www.npmjs.com/package/nodemailer) `v8.0.1` - Sends emails using various transport options
 3. [typescript](https://www.npmjs.com/package/typescript) `v5.9.3` - Compile-time error checker
 4. [tsx](https://www.npmjs.com/package/tsx) `v4.21.0` - Runs TS files in development mode
 5. [vitest](https://www.npmjs.com/package/vitest) `v4.0.18` - Runs tests

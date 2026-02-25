@@ -12,7 +12,11 @@ build/
 .env*
 *.blob
 *.exe
+*.md
 src/**/*.js
 __tests__/**/*.js
 
+LICENSE
+
 !.env.example
+!README_NPM.md

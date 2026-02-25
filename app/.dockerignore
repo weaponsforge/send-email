@@ -12,12 +12,15 @@ Dockerfile
 *.txt
 *.d.ts
 *.map
+.env*
 *.json
 *.blob
 *.exe
-.env*
+*.md
 src/**/*.js
 __tests__/**/*.js
+
+LICENSE
 
 !package.json
 !package-lock.json
@@ -25,3 +28,4 @@ __tests__/**/*.js
 !tsconfig.prod.json
 
 !.env.example
+!README_NPM.md
