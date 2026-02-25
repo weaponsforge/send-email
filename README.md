@@ -1,4 +1,4 @@
-## send-email
+## @weaponsforge/sendemail
 
 NPM library and CLI for sending text and HTML emails using Gmail SMTP with Google OAuth2.
 
@@ -7,7 +7,7 @@ NPM library and CLI for sending text and HTML emails using Gmail SMTP with Googl
 >    A Node.js package is available at https://www.npmjs.com/package/@weaponsforge/sendemail
 >
 > - **Pre-compiled Windows binaries**<br>
->    Pre-compiled [windows binaries](#️-building-the-windows-executable-file) are available for download in the latest [Releases](https://github.com/weaponsforge/send-email/releases) download page.
+>    Pre-compiled [windows binaries](#️-building-the-windows-executable-file) are available for download in the latest [Releases](https://github.com/weaponsforge/sendemail/releases) download page.
 >
 > - **Docker image**<br>
 >   A Docker image is available at https://hub.docker.com/r/weaponsforge/sendemail
@@ -70,40 +70,40 @@ NPM library and CLI for sending text and HTML emails using Gmail SMTP with Googl
    ```
 4. Send a **text email** using the CLI, eg. using Bash:
    ```bash
-   npm run send-email -- text \
+   npm run sendemail -- text \
      -s "You are Invited" \
      -c "Birthday party in December" \
      -r a@gmail.com,b@gmail.com,c@gmail.com
    ```
 
-   > 💡 **TIP:** Use `send-email:dev` to work on development mode without needing to run `"npm run transpile"`
+   > 💡 **TIP:** Use `sendemail:dev` to work on development mode without needing to run `"npm run transpile"`
 
 5. Send a **styled HTML email** using the CLI, eg. using Bash:
    ```bash
-   npm run send-email -- html \
+   npm run sendemail -- html \
      -s "Reading Materials" \
      -c "Lorem ipsum dolor sit amet" "this is paragraph 1" "this is paragraph 2" \
      -r test@gmail.com,one@gmail.com,two@gmail.com
    ```
 
-   > 💡 **TIP:** No transpilation needed with `"send-email:dev"`
+   > 💡 **TIP:** No transpilation needed with `"sendemail:dev"`
 
 6. Send **WYSIWYG** HTML content using the CLI, eg. using Bash:<br>
    _(Adjust `@/utils/config/sanitizeHtml.ts` to allow more styles.)_
 
    ```bash
-   npm run send-email -- html \
+   npm run sendemail -- html \
      -s "WYSIWYG Email" \
      -w "<div style='width:100px; height:100px; border:5px solid blue; border-radius: 3px; padding: 8px; text-align: center; background-color: azure;'><h3>Hello, World</h3></div>" \
      -r "tester@gmail.com"
    ```
 
-   > 💡 **TIP:** Development mode via `"send-email:dev"` skips transpilation
+   > 💡 **TIP:** Development mode via `"sendemail:dev"` skips transpilation
 
 ## 🛠️ Installation
 
 1. Clone the repository.<br>
-`git clone https://github.com/weaponsforge/send-email.git`
+`git clone https://github.com/weaponsforge/sendemail.git`
 
 2. Install dependencies.<br>
 `npm install`
@@ -286,19 +286,19 @@ This script runs automatically after `"npm run transpile"`, copying the `"/app/s
 
 ### C. CLI 💻
 
-### `npm run send-email`
+### `npm run sendemail`
 
 Sends text and HTML emails using the command line interface (CLI) with transpiled JavaScript.
 
 > 💡 **IMPORTANT:**
 > - This script requires running the `"npm run transpile"` script before usage.
-> - If you want to run these without transpiling, append a `:dev` after the NPM script: `"npm run send-email:dev"`
+> - If you want to run these without transpiling, append a `:dev` after the NPM script: `"npm run sendemail:dev"`
 
 #### CLI Usage
 
-- To view the list of available commands: `npm run send-email help`
+- To view the list of available commands: `npm run sendemail help`
    ```text
-   Usage: send-email [options] [command]
+   Usage: sendemail [options] [command]
 
    CLI for sending text and HTML emails using Gmail SMTP and Google OAuth2
 
@@ -314,19 +314,19 @@ Sends text and HTML emails using the command line interface (CLI) with transpile
    ```
 - Append a double dash `--` to pass arguments to the CLI commands eg., (using Bash)
    ```bash
-   npm run send-email -- text \
+   npm run sendemail -- text \
      -s "You are Invited" \
      -c "Birthday party in December" \
      -r a@gmail.com,b@gmail.com,c@gmail.com
    ```
-- View available options for the **send-email text [options]** command.
+- View available options for the **sendemail text [options]** command.
    ```bash
    # Usage options for the send "text" email command
-   npm run send-email help text
+   npm run sendemail help text
    ```
 
    ```text
-   Usage: send-email text [options]
+   Usage: sendemail text [options]
 
    Send raw text email to one or multiple recipient/s
 
@@ -338,14 +338,14 @@ Sends text and HTML emails using the command line interface (CLI) with transpile
    -h, --help                 display help for command
    ```
 
-- View available options for the **send-email html [options]** command.
+- View available options for the **sendemail html [options]** command.
    ```bash
    # Usage options for the send "html" email command
-   npm run send-email help html
+   npm run sendemail help html
    ```
 
    ```text
-   Usage: send-email html [options]
+   Usage: sendemail html [options]
 
    Send paragraphs of text or WYSIWYG content as styled
    HTML email to one or multiple recipient/s.
@@ -359,12 +359,12 @@ Sends text and HTML emails using the command line interface (CLI) with transpile
    -h, --help                 display help for command
    ```
 
-### `npm run send-email:dev`
+### `npm run sendemail:dev`
 
 - Sends an email using the command line interface (CLI) in development mode using TypeScript.
 - Append a double dash `--` to pass arguments to the CLI commands.
-- Usage: view the `"npm run send-email"` script for more information. They share similar usage.
-  - > 💡 **NOTE:** Append `:dev` in the script eg., `npm run send-email:dev`
+- Usage: view the `"npm run sendemail"` script for more information. They share similar usage.
+  - > 💡 **NOTE:** Append `:dev` in the script eg., `npm run sendemail:dev`
 
 </details>
 <br>

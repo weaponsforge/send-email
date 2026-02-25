@@ -5,7 +5,7 @@ NPM library for sending text and HTML emails using Gmail SMTP with Google OAuth2
 ### CLI Available
 
 > - **Pre-compiled Windows binaries**<br>
->    Pre-compiled [windows binaries](https://github.com/weaponsforge/send-email?tab=readme-ov-file#%EF%B8%8F-building-the-windows-executable-file) are available for download in the latest [Releases](https://github.com/weaponsforge/send-email/releases) download page.
+>    Pre-compiled [windows binaries](https://github.com/weaponsforge/sendemail?tab=readme-ov-file#%EF%B8%8F-building-the-windows-executable-file) are available for download in the latest [Releases](https://github.com/weaponsforge/sendemail/releases) download page.
 >
 > - **Docker image**<br>
 >   A Docker image is available at https://hub.docker.com/r/weaponsforge/sendemail

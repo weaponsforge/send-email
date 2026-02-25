@@ -41,8 +41,8 @@
     "docker:dev:win": "export CHOKIDAR_USEPOLLING=1 && export CHOKIDAR_INTERVAL=1000 && vitest",
     "docker:watch:win": "tsc -p tsconfig.json --watch --watchFile dynamicPriorityPolling --watchDirectory dynamicPriorityPolling",
     "docker:test:ui:win": "export CHOKIDAR_USEPOLLING=1 && export CHOKIDAR_INTERVAL=1000 && npm run docker:test:ui",
-    "send-email": "node ./dist/scripts/cli/send.js",
-    "send-email:dev": "tsx ./src/scripts/cli/send.ts"
+    "sendemail": "node ./dist/scripts/cli/send.js",
+    "sendemail:dev": "tsx ./src/scripts/cli/send.ts"
   },
   "repository": {
     "type": "git",
