@@ -3,6 +3,10 @@
 NPM library and CLI for sending text and HTML emails using Gmail SMTP with Google OAuth2.
 
 > [!TIP]
+> - **Run via npx (no installation required)**
+>   - Requirements: NodeJS LTS v24.11.0 or later
+>   - Run `npx @weaponsforge/sendemail --help`
+>
 > - **Node.js package**<br>
 >    A Node.js package is available at https://www.npmjs.com/package/@weaponsforge/sendemail
 >
