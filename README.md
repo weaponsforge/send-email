@@ -114,6 +114,9 @@ NPM library and CLI for sending text and HTML emails using Gmail SMTP with Googl
 
 4. Set up the environment variables. Create a `.env` file inside the **/app** directory with reference to the `.env.example` file.
 
+   <details>
+   <summary>👉 Click to view the environment variable definitions</summary>
+
    | Variable Name | Description |
    | --- | --- |
    | GOOGLE_USER_EMAIL | Your Google email that you've configured for Gmail SMTP and Google OAuth2. |
@@ -122,6 +125,7 @@ NPM library and CLI for sending text and HTML emails using Gmail SMTP with Googl
    | GOOGLE_REDIRECT_URI | Allowed Google API redirect URI. Its value is `https://developers.google.com/oauthplayground` by default. |
    | GOOGLE_REFRESH_TOKEN | The initial (or any) refresh token obtained from the [OAuthPlayground](https://developers.google.com/oauthplayground).<ul><li>Read on [Using the OAuth 2.0 Playground](https://github.com/weaponsforge/email-sender?tab=readme-ov-file#using-the-oauth-20-playground) for more information about generating a refresh token using the Google OAuth Playground.</li><li><blockquote>_(⚠️ **INFO:** This is an older note; some steps may vary this 2025)_</blockquote></li></ul> |
 
+   </details>
 
 ## 🚀 Usage
 
