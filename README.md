@@ -103,7 +103,7 @@ NPM library and CLI for sending text and HTML emails using Gmail SMTP with Googl
 ## 🛠️ Installation
 
 1. Clone the repository.<br>
-`git clone https://github.com/weaponsforge/sendemail.git`
+`git clone https://github.com/weaponsforge/send-email.git`
 
 2. Install dependencies.<br>
 `npm install`
