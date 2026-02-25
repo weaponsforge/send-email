@@ -6,8 +6,9 @@ on:
     types: [published]
 
 jobs:
-  lint-transpile-app:
+  lint-test-app:
     name: Lint and Test App
+    if: github.event.release.target_commitish == 'main'
     runs-on: ubuntu-latest
     permissions:
       checks: write
@@ -41,7 +42,7 @@ jobs:
       - name: Transpile
         run: |
           cd app
-          npm run transpile
+          npm run transpile:noemit
 
       - name: Test
         run: |
@@ -62,10 +63,84 @@ jobs:
           files: app/html/junit.xml
           check_name: "Test Results"
 
+  build-sea:
+    name: Build and Package App
+    if: github.event.release.target_commitish == 'main'
+    needs: [lint-test-app]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.release.tag_name }}
+
+      - name: Use NodeJS v24.11.0
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24.11.0
+
+      - name: Cache dependencies
+        uses: actions/cache@v5
+        with:
+          path: ~/.npm
+          key: npm-${{ hashFiles('app/package-lock.json') }}
+          restore-keys: npm-
+
+      - name: Install Dependencies
+        run: |
+          cd app
+          npm ci
+
+      - name: Package and archive the executable files
+        run: |
+          cd app
+          chmod u+x ./scripts/build-sea-win.sh
+          ./scripts/build-sea-win.sh
+          cd build
+          ls -l -a
+          mkdir -p dist
+          mv sendemail.exe dist/
+
+      - name: Archive Development Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build
+          path: app/build/dist/
+          retention-days: 1
+
+  release-binaries:
+    name: Release Built Binary
+    if: github.event.release.target_commitish == 'main'
+    needs: [lint-test-app, build-sea]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Download Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: build
+
+      - name: Prepare App
+        run: |
+          mv sendemail.exe sendemail_${{github.ref_name}}.exe
+          tar cvfz sendemail_${{github.ref_name}}.tar.gz sendemail_${{github.ref_name}}.exe
+          ls -l -a
+
+      - name: Attach Artifact to Release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            sendemail_${{github.ref_name}}.tar.gz
+
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   docker-build-push:
     name: Build and Push Docker Image
     if: github.event.release.target_commitish == 'main' && vars.DOCKERHUB_USERNAME != ''
-    needs: [lint-transpile-app]
+    needs: [lint-test-app, build-sea]
     runs-on: ubuntu-latest
     env:
       REGISTRY: docker.io
@@ -127,7 +202,7 @@ jobs:
           output: 'trivy-results.sarif'
 
       - name: Upload Trivy Scan Results to GitHub Security Tab
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@v4
         if: always()
         with:
           sarif_file: 'trivy-results.sarif'
