@@ -19,7 +19,7 @@ body:
       placeholder: |
         1. Start the application in development (`npm run sendemail:dev -- text -s "Title" -c "Sample body" -r a@gmail.com`)
         2. Press enter
-        3. Y will happen
+        3. An error appears: "[ERROR] Failed to send text email: Required clientId"
     validations:
       required: true
 

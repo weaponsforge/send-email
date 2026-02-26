@@ -112,7 +112,7 @@ This folder contains the [EJS](https://github.com/mde/ejs) HTML template used in
 - Always define the **types** of function parameters and return values. Use TypeScript **interfaces** or **types** for generic parameters when applicable.
    - Avoid `any` unless absolutely necessary (prefer `unknown`, `Record`, etc.)
 - Aim to keep each source file—**under approximately 250 lines of code**. If a file exceeds this size, **consider refactoring** it into smaller, more focused files to improve clarity and maintainability.
-- Use **early `return` statements** to exit a hooks or functions as soon as possible when conditions aren't met, to avoid unnecessary processing and to keep the logic clean and efficient.
+- Use **early `return` statements** to exit hooks or functions as soon as possible when conditions aren't met, to avoid unnecessary processing and to keep the logic clean and efficient.
 - Store constant values (e.g., strings or numbers) in **well-named variables** to improve readability and maintainability.
    ```typescript
    ✅ const PROGRAM_NAME = 'my-app'
