@@ -49,6 +49,10 @@ NPM library for sending text and HTML emails using Gmail SMTP with Google OAuth2
 </details>
 <br>
 
+## Contributing
+
+We welcome contributions! Please see [CONTRIBUTING.md](/CONTRIBUTING.md) and the [CODING STYLE](/docs/CODING_STYLE.md) for guidelines.
+
 ## 🆕 Quickstart
 
 1. Install the library.
