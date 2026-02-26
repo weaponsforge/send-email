@@ -52,12 +52,12 @@ It follows the directory structure within the `/app` directory:
 
 🏗️🚫 **Auto-generated (do not edit):**
 - `dist/**` (TS build output; local, published to NPM)
-- `build/**` (SEA build output; local, published to GitHub Releasees)
+- `build/**` (SEA build output; local, published to GitHub Releases)
 - `html/**` (test coverage output; local)
 
 #### 📂 build
 
-Generated SEA artifacts (Windows EXE + blob output with `build-sea-win.sh`). Local build output only. This is what gets published to thee GitHub Releases page.<br>
+Generated SEA artifacts (Windows EXE + blob output with `build-sea-win.sh`). Local build output only. This is what gets published to the GitHub Releases page.<br>
 Do not edit manually.
 
 #### 📂 dist

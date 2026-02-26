@@ -34,7 +34,7 @@ body:
   - type: textarea
     attributes:
       label: Provide environment information
-      description: Please run `next run info` in the root directory of your project and paste the results.
+      description: Please run `npm run info` in the root directory of your project and paste the results.
       render: bash
       placeholder: |
         Node version: v24.11.0
@@ -66,4 +66,4 @@ body:
       description: |
         Any extra information that might help us investigate.
       placeholder: |
-        I tested my reproduction against different `googleapis` releases, and the first one that introduced the bug was "v164.1.0", since reverting to "v171.4.0" works.
+        I tested my reproduction against different `googleapis` releases, and the first one that introduced the bug was "v171.4.0", since reverting to "v170.0.0" works.

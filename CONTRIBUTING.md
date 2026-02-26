@@ -25,7 +25,7 @@ Welcome to the **send-email** repository! We're excited to have you contribute
 
 2. **Add Your Content:** Make your changes or additions to the project. If you're adding new content, ensure it's placed in the correct directory and follows intuitive naming conventions and TypeScript coding best practices and patterns described in the [CODING STYLE](/docs/CODING_STYLE.md).
 
-   | Before commiting your changes, format your code with `"npm run lint:fix"`, and ensure all updates pass the `"npm run lint"`, `"npm run transpile:noemit"` and `"npm test"` scripts.
+   > Before commiting your changes, format your code with `"npm run lint:fix"`, and ensure all updates pass the `"npm run lint"`, `"npm run transpile:noemit"` and `"npm test"` scripts.
 
 3. **Commit Your Changes:** After making your changes, commit them to your branch. Use clear and concise commit messages to describe your updates.
    ```sh
@@ -62,6 +62,6 @@ Welcome to the **send-email** repository! We're excited to have you contribute
 
 3. **Working functionality:** For pull requests involving new features or major updates, ensure the changes are fully functional and optimized. Aim to keep PRs within **`~700` lines of code changes**, breaking them into smaller, self-contained parts when possible. PRs exceeding **`~1000+` lines** may be accepted when justified (e.g., major refactors or foundational features).
 
-4. **Respect:** Respect the structure and formatting of the existing project. Follow the standard Bione rules defined in its `app/eslint.config.mjs` file.
+4. **Respect:** Respect the structure and formatting of the existing project. Follow the standard ESLint rules defined in its `app/eslint.config.mjs` file.
 
 Thank you for contributing to the **send-email** repository. Your efforts help in sending emails more accessible for everyone.
