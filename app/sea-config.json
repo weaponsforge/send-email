@@ -2,6 +2,7 @@
   "main": "build/sendemail.cjs",
   "output": "build/sea-prep.blob",
   "format": "module",
+  "execArgv": ["--no-warnings"],
   "disableExperimentalSEAWarning": true,
   "useCodeCache": false,
   "useSnapshot": false

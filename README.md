@@ -11,7 +11,7 @@ NPM library and CLI for sending text and HTML emails using Gmail SMTP with Googl
 >    A Node.js package is available at https://www.npmjs.com/package/@weaponsforge/sendemail
 >
 > - **Pre-compiled Windows binaries**<br>
->    Pre-compiled [Windows binaries](#️-building-the-windows-executable-file) are available for download in the latest [Releases](https://github.com/weaponsforge/sendemail/releases) download page.
+>    Pre-compiled [Windows binaries](#️-building-the-windows-executable-file) are available for download in the latest [Releases](https://github.com/weaponsforge/send-email/releases) download page.
 >
 > - **Docker image**<br>
 >   A Docker image is available at https://hub.docker.com/r/weaponsforge/sendemail
