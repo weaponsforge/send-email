@@ -77,8 +77,8 @@ program.command(CLI_META.CMD_SEND_HTML.NAME)
 
 /**
  * Usage:
- * - npm run send-cli:dev -- text [options]
- * - npm run send-cli:dev -- html [options]
+ * - npm run sendemail:dev -- text [options]
+ * - npm run sendemail:dev -- html [options]
  * - npx tsx src\scripts\cli\send.ts help text
  * - npx tsx src\scripts\cli\send.ts help html
  */

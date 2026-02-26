@@ -11,7 +11,7 @@ NPM library and CLI for sending text and HTML emails using Gmail SMTP with Googl
 >    A Node.js package is available at https://www.npmjs.com/package/@weaponsforge/sendemail
 >
 > - **Pre-compiled Windows binaries**<br>
->    Pre-compiled [Windows binaries](#️-building-the-windows-executable-file) are available for download in the latest [Releases](https://github.com/weaponsforge/sendemail/releases) download page.
+>    Pre-compiled [Windows binaries](#️-building-the-windows-executable-file) are available for download in the latest [Releases](https://github.com/weaponsforge/send-email/releases) download page.
 >
 > - **Docker image**<br>
 >   A Docker image is available at https://hub.docker.com/r/weaponsforge/sendemail
@@ -56,9 +56,15 @@ NPM library and CLI for sending text and HTML emails using Gmail SMTP with Googl
 5. [vitest](https://www.npmjs.com/package/vitest) `v4.0.18` - Runs tests
 6. [commander](https://www.npmjs.com/package/commander) `v14.0.3` - CLI library
 7. [sanitize-html](https://www.npmjs.com/package/sanitize-html) `v2.17.1` - Sanitizes WYSIWYG HTML input
+8. [zod](https://www.npmjs.com/package/zod) `v3.24.2` - Run-time input validation
+9. [ejs](https://www.npmjs.com/package/ejs) `v4.0.1` - Composes HTML with dynamic text content
 
 </details>
 <br>
+
+## Contributing
+
+We welcome contributions! Please see [CONTRIBUTING.md](/CONTRIBUTING.md) and the [CODING STYLE](/docs/CODING_STYLE.md) for guidelines.
 
 ## 🆕 Quickstart
 
@@ -291,6 +297,10 @@ Fixes lint errors in TypeScript files.
 Copies the EJS email template into the `/dist/templates` directory.
 
 This script runs automatically after `"npm run transpile"`, copying the `"/app/src/templates/email.ejs"` to the `"/dist/templates"` directory.
+
+### `npm run info`
+
+Logs the installed Node.js and npm version, environment platform, architecture and V8 version.
 
 ### C. CLI 💻
 
