@@ -1,6 +1,6 @@
 {
   "name": "@weaponsforge/sendemail",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "Sends emails using Gmail SMTP with username/pw or Google OAuth2",
   "main": "dist/index.js",
   "types": "./dist/index.d.ts",
@@ -43,7 +43,8 @@
     "docker:watch:win": "tsc -p tsconfig.json --watch --watchFile dynamicPriorityPolling --watchDirectory dynamicPriorityPolling",
     "docker:test:ui:win": "export CHOKIDAR_USEPOLLING=1 && export CHOKIDAR_INTERVAL=1000 && npm run docker:test:ui",
     "sendemail": "node ./dist/scripts/cli/send.js",
-    "sendemail:dev": "tsx ./src/scripts/cli/send.ts"
+    "sendemail:dev": "tsx ./src/scripts/cli/send.ts",
+    "info": "tsx ./src/scripts/envinfo.ts"
   },
   "repository": {
     "type": "git",

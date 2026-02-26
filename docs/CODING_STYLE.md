@@ -6,6 +6,7 @@ This document outlines the general TypeScript and CLI/library coding styles and 
 
 - [Project Folder Structure](#-project-folder-structure)
 - [Coding Practices and Guidelines](#-coding-practices-and-guidelines)
+   - [General Coding Guidelines](#-general-coding-guidelines)
    - [Library Code](#-library-code)
    - [Code Documentation](#-code-documentation)
    - [Linting and Formatting](#-linting-and-formatting)
@@ -43,13 +44,13 @@ It follows the directory structure within the `/app` directory:
 
 ### Main Folders and Content
 
-### What you should (and shouldn't) edit
+**What you should (and shouldn't) edit**
 
-✅ Edit:
+✅ **Edit:**
 - `src/**` (main TypeScript source)
 - Top-level build scripts in `scripts/**` (bash / automation)
 
-🏗️🚫 Auto-generated (do not edit):
+🏗️🚫 **Auto-generated (do not edit):**
 - `dist/**` (TS build output; local, published to NPM)
 - `build/**` (SEA build output; local, published to GitHub Releasees)
 - `html/**` (test coverage output; local)
@@ -160,6 +161,7 @@ This folder contains the [EJS](https://github.com/mde/ejs) HTML template used in
 - Name test files to match the target module, using the suffix: `*.test.ts`.
    > **Example:** `send.ts` → `send.test.ts`
 - **Selectively write tests** for critical or global, features, or business logic as needed.
+- All code should pass `"npm test"` before commit.
 
 @weaponsforge<br>
 20260226

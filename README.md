@@ -298,6 +298,10 @@ Copies the EJS email template into the `/dist/templates` directory.
 
 This script runs automatically after `"npm run transpile"`, copying the `"/app/src/templates/email.ejs"` to the `"/dist/templates"` directory.
 
+### `npm run info`
+
+Logs the installed Node.js and npm version, environment platform, architecture and V8 version.
+
 ### C. CLI 💻
 
 ### `npm start`
