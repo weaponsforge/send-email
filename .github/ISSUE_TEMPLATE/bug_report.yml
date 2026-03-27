@@ -17,7 +17,7 @@ body:
       label: To Reproduce
       description: A step-by-step description of how to reproduce the issue, or a link to the reproducible repository.
       placeholder: |
-        1. Start the application in development (`npm run sendemail:dev -- text -s "Title" -c "Sample body" -r a@gmail.com`)
+        1. Start the application in development (npm run sendemail:dev -- text -s "Title" -c "Sample body" -r a@gmail.com)
         2. Press enter
         3. An error appears: "[ERROR] Failed to send text email: Required clientId"
     validations:

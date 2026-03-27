@@ -41,7 +41,7 @@ class EmailSender extends EmailTransport implements IEmailSender {
       }
 
       return await this.transporter!.sendMail({
-        from: transportOptions.auth?.user || process.env.USER_EMAIL,
+        from: transportOptions.auth?.user || process.env.GOOGLE_USER_EMAIL,
         to: receivers,
         subject,
         ...(!isHtml && { text: content }),  // Text email
