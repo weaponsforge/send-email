@@ -1,6 +1,6 @@
 {
   "name": "@weaponsforge/sendemail",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "Sends emails using Gmail SMTP with username/pw or Google OAuth2",
   "main": "dist/index.js",
   "types": "./dist/index.d.ts",

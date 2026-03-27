@@ -3,7 +3,7 @@
 Welcome to the **send-email** repository! We're excited to have you contribute to sending text and HTML-format emails more accessible via command line interface (CLI). To ensure a smooth contribution process for everyone, please follow these guidelines.
 
 > [!NOTE]
->  **Before Submitting**
+> **Before Submitting**
 >
 > Check if there are other similar [PRs](https://github.com/weaponsforge/send-email/pulls).
 >
