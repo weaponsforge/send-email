@@ -44,11 +44,11 @@ const CLI_ARGS = {
   CMD_HTML: {
     CONTENT_HTML: {
       OPTION: '-c, --content <text...>',
-      DESCRIPTION: 'whitespace-delimited of text/paragraphs enclosed in double-quotes'
+      DESCRIPTION: 'whitespace-delimited text/paragraphs enclosed in double-quotes'
     },
     CONTENT_WYSIWYG: {
       OPTION: '-w, --wysiwyg [html]',
-      DESCRIPTION: 'optional HTML tags that form a WYSIWYG content enclosed in double-quotes'
+      DESCRIPTION: 'optional HTML tags that form a WYSIWYG content enclosed in double-quotes, using inline CSS styles'
     },
     TEMPLATE_FILE: {
       OPTION: '-t, --template [path]',

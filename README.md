@@ -39,7 +39,7 @@ NPM library and CLI for sending text and HTML emails using Gmail SMTP with Googl
    ```text
    Recommended:
    node: 24.11.0
-   npm: 10.9.2
+   npm: 11.6.1
    ```
 3. Gmail Account
    - Google Cloud Platform project configured with [OAuth2](https://developers.google.com/workspace/guides/configure-oauth-consent) settings and [credentials](https://developers.google.com/workspace/guides/manage-credentials)
@@ -72,6 +72,7 @@ We welcome contributions! Please see [CONTRIBUTING.md](/CONTRIBUTING.md) and the
    - See **Installation # 4** for more information about these environment variables.
 2. Install dependencies.
    ```bash
+   cd app
    npm install
    ```
 3. Transpile to JavaScript.
@@ -184,7 +185,7 @@ We welcome contributions! Please see [CONTRIBUTING.md](/CONTRIBUTING.md) and the
    docker run -it -v ${pwd}/app:/opt/app -v /opt/app/node_modules --rm weaponsforge/sendemail:dev <AVAILABLE_SCRIPT_OR_DOCKER_SCRIPT>
    ```
 
-- **Run a non-test TS file using Vite**<br>
+- **Run a non-test TS file using TypeScript Execute (tsx)**<br>
    (requires **Run an NPM script using Docker compose**)
    ```bash
    docker exec -it weaponsforge-sendemail-dev npx tsx /opt/app/src/<PATH_TO_TS_FILE>.ts
@@ -375,8 +376,8 @@ Sends text and HTML emails using the command line interface (CLI) with transpile
    Options:
    -s, --subject <title>      email subject or title enclosed in double-quotes
    -r, --recipients <emails>  comma-separated list of email addresses
-   -c, --content <text...>    whitespace-delimited of text/paragraphs enclosed in double-quotes
-   -w, --wysiwyg [html]       optional HTML tags that form a WYSIWYG content enclosed in double-quotes
+   -c, --content <text...>    whitespace-delimited text/paragraphs enclosed in double-quotes
+   -w, --wysiwyg [html]       optional HTML tags that form a WYSIWYG content enclosed in double-quotes, using inline CSS styles
    -e, --env [path]           path to .env file (optional)
    -h, --help                 display help for command
    ```

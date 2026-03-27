@@ -47,8 +47,8 @@ It follows the directory structure within the `/app` directory:
 **What you should (and shouldn't) edit**
 
 ✅ **Edit:**
-- `src/**` (main TypeScript source)
-- Top-level build scripts in `scripts/**` (bash / automation)
+- `app/src/**` (main TypeScript source)
+- Top-level build scripts in `app/scripts/**` (bash / automation)
 
 🏗️🚫 **Auto-generated (do not edit):**
 - `dist/**` (TS build output; local, published to NPM)
@@ -72,7 +72,7 @@ Do not edit manually.
 
 #### 📂 scripts
 
-Contains Build automation scripts (bash)
+Contains build automation scripts (bash)
 
 #### 📂 src
 
@@ -160,7 +160,7 @@ This folder contains the [EJS](https://github.com/mde/ejs) HTML template used in
 - Place test files in the `/src/__tests__` directory.
 - Name test files to match the target module, using the suffix: `*.test.ts`.
    > **Example:** `send.ts` → `send.test.ts`
-- **Selectively write tests** for critical or global, features, or business logic as needed.
+- **Selectively write tests** for critical or global features, or business logic as needed.
 - All code should pass `"npm test"` before commit.
 
 @weaponsforge<br>
