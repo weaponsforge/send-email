@@ -29,11 +29,13 @@ NPM library for sending text and HTML emails using Gmail SMTP with Google OAuth2
    ```text
    Recommended:
    node: 24.11.0
-   npm: 10.9.2
+   npm: 11.6.1
    ```
 2. Gmail Account
    - Google Cloud Platform project configured with [OAuth2](https://developers.google.com/workspace/guides/configure-oauth-consent) settings and [credentials](https://developers.google.com/workspace/guides/manage-credentials)
    - Read on the Google [Gmail](https://developers.google.com/gmail/api/guides), [SMTP and OAuth2 Setup](https://github.com/weaponsforge/email-sender?tab=readme-ov-file#using-the-oauth-20-playground) sections for more information
+
+3. A `.env` file containing the environment variables described under **Quickstart - step #2**.
 
 ### Core Libraries/Frameworks
 

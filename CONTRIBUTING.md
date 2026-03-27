@@ -2,6 +2,19 @@
 
 Welcome to the **send-email** repository! We're excited to have you contribute to sending text and HTML-format emails more accessible via command line interface (CLI). To ensure a smooth contribution process for everyone, please follow these guidelines.
 
+> [!NOTE]
+> **Before Submitting**
+>
+> Check if there are other similar [PRs](https://github.com/weaponsforge/send-email/pulls).
+>
+> **New Feature**
+>
+> Before submitting a new feature, please open a **Feature Request issue** that clearly explains the proposed functionality and the reasons behind it. Once the request has been reviewed and approved, you may proceed with submitting a pull request.
+>
+> **Bug Fixes**
+>
+> Provide a detailed description of the bug (with live demo if possible). OR open a bug report and link it in your PR.
+
 ## Getting Started
 
 1. **Fork the Repository:** Start by forking the repository's `"dev"` branch to your GitHub account. This creates your own copy of the project where you can make changes.
@@ -64,4 +77,4 @@ Welcome to the **send-email** repository! We're excited to have you contribute
 
 4. **Respect:** Respect the structure and formatting of the existing project. Follow the standard ESLint rules defined in its `app/eslint.config.mjs` file.
 
-Thank you for contributing to the **send-email** repository. Your efforts help in sending emails more accessible for everyone.
+Thank you for contributing to the **send-email** repository. Your efforts help in making sending emails more accessible for everyone.
