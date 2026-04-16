@@ -10,5 +10,5 @@ export {
   EmailSender,
   EmailTransport,
   GmailOAuthClient,
-  SchemaValidator
+  SchemaValidator,
 }

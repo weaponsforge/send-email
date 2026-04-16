@@ -26,7 +26,7 @@ describe('Google OAuth2 Client class test', () => {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       redirectURI: process.env.GOOGLE_REDIRECT_URI,
       refreshToken: process.env.GOOGLE_REFRESH_TOKEN,
-      userEmail: process.env.GOOGLE_USER_EMAIL
+      userEmail: process.env.GOOGLE_USER_EMAIL,
     })
 
     const token = await oauthClient.getAccessToken()
@@ -39,7 +39,7 @@ describe('Google OAuth2 Client class test', () => {
     // See @/types/oauth2client.schema.ts for the correct schema
     const wrongSchema = z.object({
       hello: z.string(),
-      world: z.number()
+      world: z.number(),
     })
 
     expect(() => new GmailOAuthClient(null, wrongSchema)).toThrow()
@@ -50,11 +50,11 @@ describe('Google OAuth2 Client class test', () => {
 
     const accessToken = {
       token: 123, // Expected to be a string
-      res: 'hello' // Expected to be an object
+      res: 'hello', // Expected to be an object
     } as unknown as GetAccessTokenResponse
 
     expect(() =>
-      oauthClient.accessToken = accessToken
+      oauthClient.accessToken = accessToken,
     ).toThrow()
   })
 })

@@ -32,11 +32,8 @@
     /* If building for a library: */
     "declaration": true,
 
-    "baseUrl": "./",
     "paths": {
-      "@/*": [
-        "src/*"
-      ]
+      "@/*": ["./src/*"]
     }
   },
   "watchOptions": {

@@ -4,13 +4,13 @@ import { configDefaults, defineConfig } from 'vitest/config'
 export default defineConfig({
   resolve: {
     alias: {
-      '@': resolve(__dirname, 'src')
-    }
+      '@': resolve(__dirname, 'src'),
+    },
   },
   test: {
     reporters: ['verbose', 'html', 'junit'],
     outputFile: {
-      junit: './html/junit.xml'
+      junit: './html/junit.xml',
     },
     coverage: {
       provider: 'v8',
@@ -23,15 +23,17 @@ export default defineConfig({
         'html/',
         '**/*.html',
         '**/*.md',
-        '**/*.ejs'
-      ]
+        '**/*.ejs',
+      ],
     },
     exclude: [
       ...configDefaults.exclude,
       'node_modules/**',
       'dist/**',
+      '.cursor/**',
       '.git/**',
-      '.vscode/**'
-    ]
-  }
+      '.github/**',
+      '.vscode/**',
+    ],
+  },
 })

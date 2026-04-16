@@ -15,7 +15,7 @@ export const handleSendHtmlEmail = async (options: EmailHtmlOptions) => {
       subject,
       content: paragraphs = [],
       recipients = [],
-      wysiwyg = null
+      wysiwyg = null,
     } = options
 
     if (paragraphs.length === 0 && typeof wysiwyg !== 'string') {
@@ -31,14 +31,14 @@ export const handleSendHtmlEmail = async (options: EmailHtmlOptions) => {
       content: paragraphs,
       recipients: emails,
       sender: process.env.GOOGLE_USER_EMAIL,
-      wysiwyg
+      wysiwyg,
     })
 
     await send({
       subject,
       content: emailContent,
       recipients: emails,
-      isHtml: true
+      isHtml: true,
     })
   } catch (err: unknown) {
     if (err instanceof Error) {

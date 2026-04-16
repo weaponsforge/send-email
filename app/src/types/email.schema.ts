@@ -31,7 +31,7 @@ export const BaseEmailSchema = z.object({
   recipients: z.array(
     z.string({ message: EmailSchemaMessages.RECIPIENT_EMAIL })
       .email({ message: EmailSchemaMessages.RECIPIENT_EMAIL })
-      .max(150, { message: EmailSchemaMessages.RECIPIENT_EMAIL_LENGTH })
+      .max(150, { message: EmailSchemaMessages.RECIPIENT_EMAIL_LENGTH }),
   ).max(20, { message: EmailSchemaMessages.RECIPIENT_EMAIL_MAX })
     .optional(),
 
@@ -43,13 +43,13 @@ export const BaseEmailSchema = z.object({
 
   isHtml: z.boolean()
     .default(false)
-    .optional()
+    .optional(),
 })
 
 export const EmailSchema = BaseEmailSchema.refine(
   (data: IOptionalParams) =>
     data.recipient !== undefined || (data.recipients !== undefined && data.recipients.length > 0),
-  { message: EmailSchemaMessages.RECIPIENT_REQUIRED }
+  { message: EmailSchemaMessages.RECIPIENT_REQUIRED },
 )
 
 /**
@@ -99,29 +99,30 @@ export const HtmlBuildSchema = BaseEmailSchema
   .omit({ recipient: true, isHtml: true, subject: true })
   .extend({
     content: z.array(
-      z.string().max(1500, { message: EmailSchemaMessages.CONTENT })
+      z.string().max(1500, { message: EmailSchemaMessages.CONTENT }),
     ).optional(),
 
     recipients: z.array(
       z.string()
         .email({ message: EmailSchemaMessages.RECIPIENT_EMAIL })
-        .max(150, { message: EmailSchemaMessages.RECIPIENT_EMAIL_LENGTH })
+        .max(150, { message: EmailSchemaMessages.RECIPIENT_EMAIL_LENGTH }),
     ).max(20, { message: EmailSchemaMessages.RECIPIENT_EMAIL_MAX }),
 
     sender: z.string({ message: EmailSchemaMessages.RECIPIENT_EMAIL })
       .email({ message: EmailSchemaMessages.RECIPIENT_EMAIL })
       .max(150, { message: EmailSchemaMessages.RECIPIENT_EMAIL_LENGTH }),
 
-    wysiwyg: z.string().nullable().optional()
+    wysiwyg: z.string().nullable().optional(),
   })
   .refine(
     (data) => {
       const hasContent = data.content && data.content.length > 0
       const hasWysiwyg = data.wysiwyg && data.wysiwyg.trim().length > 0
+
       return hasContent || hasWysiwyg
     },
     {
       message: 'Either \'content\' or \'wysiwyg\' must be provided',
-      path: ['content', 'wysiwyg']
-    }
+      path: ['content', 'wysiwyg'],
+    },
   )

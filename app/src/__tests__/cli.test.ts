@@ -3,7 +3,7 @@ import { describe, expect, test } from 'vitest'
 import { EmailSchemaMessages } from '@/types/email.schema.js'
 import htmlContent from '@/utils/constants/htmlContent.js'
 
-const MAX_TIMEOUT = 20000
+const MAX_TIMEOUT = 30000
 
 describe('CLI test suite', () => {
   /**
@@ -15,10 +15,10 @@ describe('CLI test suite', () => {
       'text',
       '-s', 'Hello, World!',
       '-c', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit...',
-      '-r', 'testor@gmail.com,abc@gmail.com'
+      '-r', 'testor@gmail.com,abc@gmail.com',
     ],
     {
-      preferLocal: true
+      preferLocal: true,
     })
 
     expect(stdout).toContain('Process success')

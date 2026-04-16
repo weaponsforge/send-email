@@ -2,7 +2,7 @@ import { z } from 'zod'
 
 export const GmailOAuthAccessTokenSchema = z.object({
   token: z.string(),
-  res: z.record(z.any())
+  res: z.record(z.any()),
 })
 
 export const GmailOAuthClientSchema = z.object({
@@ -11,5 +11,5 @@ export const GmailOAuthClientSchema = z.object({
   redirectURI: z.string().max(300),
   refreshToken: z.string().max(500),
   userEmail: z.string().email().max(150),
-  accessToken: GmailOAuthAccessTokenSchema.optional()
+  accessToken: GmailOAuthAccessTokenSchema.optional(),
 })
