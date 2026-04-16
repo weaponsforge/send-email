@@ -32,8 +32,8 @@ npm run lint:fix      # Auto-fix lint errors
 npm run transpile:noemit   # Type-check only (no output)
 npm run transpile          # Compile TypeScript to dist/
 
-# Testing
-npm test              # Run all tests with coverage (outputs to html/coverage/)
+# Testing (coverage always enabled, outputs to html/coverage/ and html/junit.xml)
+npm test              # Run all tests once
 npm run dev           # Vitest watch mode
 npm run test:ui       # Vitest UI dashboard (port 51204)
 
@@ -41,8 +41,12 @@ npm run test:ui       # Vitest UI dashboard (port 51204)
 npx vitest run src/__tests__/cli.test.ts
 
 # CLI (development)
-npm run sendemail:dev -- text --to recipient@email.com --subject "Test" --body "Hello"
-npm run sendemail:dev -- html --to recipient@email.com --subject "Test" --htmlFile path/to/file.html
+npm run sendemail:dev -- text --recipients recipient@email.com --subject "Test" --content "Hello"
+npm run sendemail:dev -- html --recipients recipient@email.com --subject "Test" --content "Paragraph 1" "Paragraph 2"
+npm run sendemail:dev -- html --recipients recipient@email.com --subject "Test" --wysiwyg "<p style='color:red'>Hello</p>"
+
+# Optional --env flag to load a custom .env file
+npm run sendemail:dev -- text --recipients r@email.com --subject "Test" --content "Hi" --env ./custom.env
 
 # Docker
 npm run docker:debug         # Run dev container with debugger (port 9229)
@@ -59,26 +63,35 @@ EmailTransport (lib/email/transport.ts)
   └── EmailSender (lib/email/sender.ts)
 ```
 
-- **`GmailOAuthClient`** (`lib/google/oauth2client.ts`) — Manages Google OAuth2 credentials; validates env vars via Zod schema on instantiation
-- **`EmailTransport`** — Base class; initializes Nodemailer transporter with OAuth2 credentials
-- **`EmailSender`** — Extends `EmailTransport`; exposes `send()` method; validates email params with Zod schema
-- **`SchemaValidator`** (`lib/validator/schemavalidator.ts`) — Generic Zod validation wrapper used by both classes
+- **`GmailOAuthClient`** (`lib/google/oauth2client.ts`) — Manages Google OAuth2 credentials; validates env vars via Zod schema on instantiation. Accepts optional constructor params; falls back to env vars.
+- **`EmailTransport`** — Base class; initializes Nodemailer transporter via `createTransport3LO()`, which fetches a fresh access token from `GmailOAuthClient` if one hasn't been pre-generated.
+- **`EmailSender`** — Extends `EmailTransport`; exposes `sendEmail()` method; validates email params with Zod schema. Supports a single `recipient` string or a `recipients[]` array (max 20 total).
+- **`SchemaValidator`** (`lib/validator/schemavalidator.ts`) — Generic Zod validation wrapper; handles both `ZodObject` and `ZodEffects` (`.refine()`) schemas; supports partial validation via `pick`.
 
 ### Key Data Flow
 
-1. **Library usage**: `send()` (lib/email/send.ts) → creates `EmailSender` → validates params → sends via Nodemailer
-2. **CLI usage**: Commander.js (`scripts/cli/send.ts`) → `handleText` / `handleHtml` handlers → calls `send()`
-3. **HTML emails**: EJS template (`utils/templates/email.ejs`) rendered via `build.ts`, then sanitized with `sanitize-html` before sending
+1. **Library usage**: `send()` (`lib/email/send.ts`) → creates `GmailOAuthClient` + `EmailSender` → `createTransport3LO()` → `sendEmail()`
+2. **CLI text**: Commander.js (`scripts/cli/send.ts`) → `handleSendTextEmail` → `send()`
+3. **CLI HTML**: Commander.js → `handleSendHtmlEmail` → `buildHtml()` (renders EJS template, sanitizes HTML) → `send()` with `isHtml: true`
+4. **SEA builds**: `build.ts` checks `IS_BUILD_SEA=true` to import the EJS template via `import()` (baked into the binary) rather than reading it from disk.
 
-### Public API (src/index.ts)
+### Public API (`src/index.ts`)
 
-Exports: `send`, `EmailSender`, `GmailOAuthClient`, `SchemaValidator`, plus all types from `src/types/`.
+Exports: `send`, `buildHtml`, `EmailSender`, `EmailTransport`, `GmailOAuthClient`, `SchemaValidator`, plus all types from `src/types/`.
 
 ### Validation
 
 All input validation uses Zod schemas in `src/types/`:
-- `email.schema.ts` — email send params (to, subject, body, etc.)
+- `email.schema.ts` — `EmailSchema` for `send()` params; `HtmlBuildSchema` for `buildHtml()` params; `EmailTextOptions` / `EmailHtmlOptions` interfaces for CLI handlers
 - `oauth2client.schema.ts` — Google OAuth2 env vars
+
+### ESM Compatibility
+
+`globalThis.__dirname` is set in the CLI entry point (`scripts/cli/send.ts`) to handle `__dirname` in ESM. It resolves to `process.cwd()` in SEA mode or the module's directory otherwise. Other files that need `__dirname` use the `directory(import.meta.url)` helper from `utils/helpers.ts`.
+
+### Post-Build Step
+
+After `tsc` compiles to `dist/`, `npm run copy:files` (`scripts/build/copyTemplate.ts`) copies the EJS email template into `dist/` so it's available at runtime for non-SEA usage.
 
 ### File Naming Conventions
 
@@ -91,7 +104,7 @@ All input validation uses Zod schemas in `src/types/`:
 
 ### Path Aliases
 
-`@/` maps to `src/` (configured in tsconfig.json and resolved by `tsc-alias` post-build).
+`@/` maps to `src/` (configured in `tsconfig.json`; resolved at runtime by `tsx`, and rewritten post-build by `tsc-alias`).
 
 ## Code Style
 
@@ -109,6 +122,7 @@ All input validation uses Zod schemas in `src/types/`:
 | `dist/` | Compiled JS + type declarations (npm package output) |
 | `build/` | Windows SEA binary (`sendemail.exe`) |
 | `html/coverage/` | Vitest coverage reports |
+| `html/junit.xml` | JUnit test results (used by CI) |
 
 ## CI/CD
 
