@@ -1,7 +1,6 @@
 export {
   EmailSender,
   EmailTransport,
-  GmailOAuthClient,
   SchemaValidator,
   buildHtml,
   send,

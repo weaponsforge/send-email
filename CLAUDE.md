@@ -15,7 +15,6 @@ All source code lives in the `/app` directory. Run all npm commands from `/app`.
 GOOGLE_USER_EMAIL
 GOOGLE_CLIENT_ID
 GOOGLE_CLIENT_SECRET
-GOOGLE_REDIRECT_URI    # https://developers.google.com/oauthplayground
 GOOGLE_REFRESH_TOKEN
 ```
 
@@ -63,27 +62,26 @@ EmailTransport (lib/email/transport.ts)
   └── EmailSender (lib/email/sender.ts)
 ```
 
-- **`GmailOAuthClient`** (`lib/google/oauth2client.ts`) — Manages Google OAuth2 credentials; validates env vars via Zod schema on instantiation. Accepts optional constructor params; falls back to env vars.
-- **`EmailTransport`** — Base class; initializes Nodemailer transporter via `createTransport3LO()`, which fetches a fresh access token from `GmailOAuthClient` if one hasn't been pre-generated.
+- **`EmailTransport`** — Base class; initializes Nodemailer transporter via `createTransport3LO(options?)`. Reads Google OAuth2 credentials from `options` fields, falling back to `GOOGLE_*` env vars. Nodemailer handles token refresh internally via the `refreshToken` field.
 - **`EmailSender`** — Extends `EmailTransport`; exposes `sendEmail()` method; validates email params with Zod schema. Supports a single `recipient` string or a `recipients[]` array (max 20 total).
 - **`SchemaValidator`** (`lib/validator/schemavalidator.ts`) — Generic Zod validation wrapper; handles both `ZodObject` and `ZodEffects` (`.refine()`) schemas; supports partial validation via `pick`.
 
 ### Key Data Flow
 
-1. **Library usage**: `send()` (`lib/email/send.ts`) → creates `GmailOAuthClient` + `EmailSender` → `createTransport3LO()` → `sendEmail()`
+1. **Library usage**: `send(params, oauth2?)` (`lib/email/send.ts`) → creates `EmailSender` → `createTransport3LO(oauth2?)` → `sendEmail()`
 2. **CLI text**: Commander.js (`scripts/cli/send.ts`) → `handleSendTextEmail` → `send()`
 3. **CLI HTML**: Commander.js → `handleSendHtmlEmail` → `buildHtml()` (renders EJS template, sanitizes HTML) → `send()` with `isHtml: true`
 4. **SEA builds**: `build.ts` checks `IS_BUILD_SEA=true` to import the EJS template via `import()` (baked into the binary) rather than reading it from disk.
 
 ### Public API (`src/index.ts`)
 
-Exports: `send`, `buildHtml`, `EmailSender`, `EmailTransport`, `GmailOAuthClient`, `SchemaValidator`, plus all types from `src/types/`.
+Exports: `send`, `buildHtml`, `EmailSender`, `EmailTransport`, `SchemaValidator`, plus all types from `src/types/`.
 
 ### Validation
 
 All input validation uses Zod schemas in `src/types/`:
 - `email.schema.ts` — `EmailSchema` for `send()` params; `HtmlBuildSchema` for `buildHtml()` params; `EmailTextOptions` / `EmailHtmlOptions` interfaces for CLI handlers
-- `oauth2client.schema.ts` — Google OAuth2 env vars
+- `transport.schema.ts` — `TransportOath2Schema` / `TransportOath2SchemaType` for optional OAuth2 credentials passed to `send()` and `createTransport3LO()`
 
 ### ESM Compatibility
 

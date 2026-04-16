@@ -1,6 +1,7 @@
 import nodemailer from 'nodemailer'
-import GmailOAuthClient from '@/lib/google/oauth2client.js'
 
+import SchemaValidator from '@/lib/validator/schemavalidator.js'
+import { TransportOath2Schema, type TransportOath2SchemaType } from '@/types/transport.schema.js'
 import { TRANSPORT_SMTP_HOSTS, TRANSPORT_AUTH_TYPES } from '@/types/transport.types.js'
 import type { IEmailTransportAuth, SMTPTransport } from '@/types/transport.types.js'
 import type { IEmailTransport } from '@/types/transport.interface.js'
@@ -11,6 +12,8 @@ import type { IEmailTransport } from '@/types/transport.interface.js'
  * and initiates sending emails using the Gmail SMTP
  */
 class EmailTransport implements IEmailTransport {
+  /** Zod schema wrapper methods and functions */
+  #schema: SchemaValidator | null = null
   /** Nodemailer tansport */
   #transporter: nodemailer.Transporter | null = null
 
@@ -27,29 +30,30 @@ class EmailTransport implements IEmailTransport {
   constructor (params?: IEmailTransportAuth) {
     this.#host = params?.host || TRANSPORT_SMTP_HOSTS.GMAIL
     this.#type = params?.type || TRANSPORT_AUTH_TYPES.OAUTH2
+    this.#schema = new SchemaValidator(TransportOath2Schema)
   }
 
-  async createTransport3LO (oauth2Client: GmailOAuthClient): Promise<void> {
+  async createTransport3LO (options?: TransportOath2SchemaType): Promise<void> {
     try {
-      let token = oauth2Client.accessToken
-
-      // Generate and retrieve a fresh access token
-      if (!token) {
-        token = await oauth2Client.getAccessToken()
+      const inputData = {
+        googleUserEmail: options?.googleUserEmail || process.env.GOOGLE_USER_EMAIL,
+        googleClientId: options?.googleClientId || process.env.GOOGLE_CLIENT_ID,
+        googleClientSecret: options?.googleClientSecret || process.env.GOOGLE_CLIENT_SECRET,
+        googleRereshToken: options?.googleRereshToken || process.env.GOOGLE_REFRESH_TOKEN,
       }
 
-      // Initialize the nodemailer transport with a fresh access token
+      this.#schema?.validate({ data: inputData })
+
       this.#transporter = nodemailer.createTransport(<SMTPTransport.Options>{
         host: this.#host,
         port: 465,
         secure: true,
         auth: {
           type: this.#type,
-          user: oauth2Client.email,
-          clientId: oauth2Client.client?._clientId,
-          clientSecret: oauth2Client.client?._clientSecret,
-          refreshToken: oauth2Client?.refreshToken,
-          accessToken: token,
+          user: inputData.googleUserEmail,
+          clientId: inputData.googleClientId,
+          clientSecret: inputData.googleClientSecret,
+          refreshToken: inputData.googleRereshToken,
         },
       })
     } catch (err: unknown) {
