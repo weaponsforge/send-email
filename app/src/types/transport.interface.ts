@@ -1,19 +1,20 @@
-import nodemailer from 'nodemailer'
-import GmailOAuthClient from '@/lib/google/oauth2client.js'
+import type { Transporter } from 'nodemailer'
 import type { SMTPTransport } from './transport.types.js'
+import type { TransportOath2SchemaType } from './transport.schema.js'
 
 /**
- * Public properties and methods types of the `GmailOAuthClient` class
+ * Public properties and methods types of the `EmailTransport` class
  * @interface IEmailTransport
  */
 export interface IEmailTransport {
   /**
    * Initializes `this.#transporter` with a Nodemailer transport using the 3-Legged OAuth (3LO) authentication.
-   * @param {GmailOAuthClient} oauth2Client Instance of the `GmailOAuthClient` class
-   * @returns {Promise<void>} A completed Promise that intialized `this.#transporter`with a Nodemailer transport
+   * Reads Google OAuth2 credentials from environment variables.
+   * @param {TransportOath2SchemaType} options Google OAuth2 settings
+   * @returns {Promise<void>} A completed Promise that initialized `this.#transporter` with a Nodemailer transport
    * @see https://nodemailer.com/smtp/oauth2/#example-3
    */
-  createTransport3LO (oauth2Client: GmailOAuthClient): Promise<void>;
+  createTransport3LO (options?: TransportOath2SchemaType): Promise<void>;
 
   /**
    * Retrieves the options used to initialize the Nodemailer transport
@@ -26,5 +27,5 @@ export interface IEmailTransport {
    * Retrieves the local Nodemailer transporter instance
    * @returns {nodemailer.Transporter | null} Nodemailer instance
    */
-  get transporter (): nodemailer.Transporter | null;
+  get transporter (): Transporter | null;
 }
