@@ -10,7 +10,7 @@ describe('Send email test', () => {
       googleUserEmail: process.env.GOOGLE_USER_EMAIL || '',
       googleClientId: process.env.GOOGLE_CLIENT_ID || '',
       googleClientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
-      googleRereshToken: process.env.GOOGLE_REFRESH_TOKEN || '',
+      googleRefreshToken: process.env.GOOGLE_REFRESH_TOKEN || '',
     }
 
     await expect(

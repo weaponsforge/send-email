@@ -8,7 +8,7 @@ export const TransportOath2Schema = z.object({
   googleUserEmail: z.string().email().max(150),
   googleClientId: z.string().max(200),
   googleClientSecret: z.string().max(200),
-  googleRereshToken: z.string().max(500),
+  googleRefreshToken: z.string().max(500),
 })
 
 export type TransportOath2SchemaType = z.infer<typeof TransportOath2Schema>;
