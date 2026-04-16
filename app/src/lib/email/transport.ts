@@ -39,7 +39,7 @@ class EmailTransport implements IEmailTransport {
         googleUserEmail: options?.googleUserEmail || process.env.GOOGLE_USER_EMAIL,
         googleClientId: options?.googleClientId || process.env.GOOGLE_CLIENT_ID,
         googleClientSecret: options?.googleClientSecret || process.env.GOOGLE_CLIENT_SECRET,
-        googleRereshToken: options?.googleRereshToken || process.env.GOOGLE_REFRESH_TOKEN,
+        googleRefreshToken: options?.googleRefreshToken || process.env.GOOGLE_REFRESH_TOKEN,
       }
 
       this.#schema?.validate({ data: inputData })
@@ -53,7 +53,7 @@ class EmailTransport implements IEmailTransport {
           user: inputData.googleUserEmail,
           clientId: inputData.googleClientId,
           clientSecret: inputData.googleClientSecret,
-          refreshToken: inputData.googleRereshToken,
+          refreshToken: inputData.googleRefreshToken,
         },
       })
     } catch (err: unknown) {
