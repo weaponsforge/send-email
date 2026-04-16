@@ -61,9 +61,9 @@ export interface ISchemaValidator {
   /**
    * @description Get the base `ZodObject` schema from a `ZodEffects` schema
    * @param {ZodSchemaType} schema - The `ZodEffects` schema to get the `ZodObject` base schema from
-   * @returns {ZodObjectBasicType | null} The base schema or null if it's not a ZodEffects
+   * @returns {ZodObjectBasicType} The base schema
    */
-  getBaseSchema (schema: ZodSchemaType): ZodObjectBasicType | null;
+  getBaseSchema (schema: ZodSchemaType): ZodObjectBasicType;
 
   /**
    * Retrieves only the base `ZodObject` subset from `this.schema` using `.pick()`. Finds the base `ZodObject` if `this.schema` is a `ZodEffects` schema.
