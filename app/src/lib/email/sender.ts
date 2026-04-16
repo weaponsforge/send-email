@@ -68,7 +68,7 @@ class EmailSender extends EmailTransport implements IEmailSender {
 }
 
 const TransportMessages: Record<string, string> = {
-  MISSING_SENDER_EMAIL: 'Sender email address is not set. Ensure GOOGLE_USER_EMAIL is defined or pass it via oauth2 options.'
+  MISSING_SENDER_EMAIL: 'Sender email address is not set. Ensure GOOGLE_USER_EMAIL is defined or pass it via oauth2 options.',
 }
 
 export default EmailSender
