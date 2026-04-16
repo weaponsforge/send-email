@@ -8,23 +8,39 @@ export default defineConfig([
     files: ['**/*.{js,mjs,cjs,ts,mts,cts}'],
     plugins: { js },
     extends: ['js/recommended'],
-    languageOptions: { globals: globals.node }
+    languageOptions: { globals: globals.node },
   },
   tseslint.configs.recommended,
   { ignores: ['node_modules/**'] },
   {
     rules: {
-      // 'no-unused-vars': 'off',
-      'no-undef': 'error',
-      'no-trailing-spaces': 'error',
-      '@typescript-eslint/no-unused-vars': ['error'],
+      'comma-dangle': ['error', 'always-multiline'],
+      'eol-last': ['error', 'always'],
       'indent': ['error', 2],
+      'keyword-spacing': ['error', { before: true, after: true }],
       'linebreak-style': ['error', 'unix'],
+      'object-curly-spacing': ['error', 'always'],
       'quotes': ['error', 'single'],
       'semi': ['error', 'never'],
-      'comma-dangle': ['error', 'never'],
-      'object-curly-spacing': ['error', 'always'],
-      'eol-last': ['error', 'always']
-    }
-  }
+      // 'no-console': ['error', { allow: ['error'] }],
+      'no-multi-spaces': 'error',
+      'no-multiple-empty-lines': ['error', { max: 1, maxEOF: 1, maxBOF: 0 }],
+      'no-trailing-spaces': 'error',
+      'no-undef': 'error',
+      'no-unused-vars': 'off',
+      'padding-line-between-statements': [
+        'error',
+        { blankLine: 'always', prev: '*', next: 'return' },
+      ],
+      'space-before-blocks': ['error', 'always'],
+      '@typescript-eslint/no-require-imports': 'error',
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          'argsIgnorePattern': '^_',
+          'varsIgnorePattern': '^_',
+        },
+      ],
+    },
+  },
 ])
