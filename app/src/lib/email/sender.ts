@@ -40,8 +40,14 @@ class EmailSender extends EmailTransport implements IEmailSender {
         throw new Error(EmailSchemaMessages.RECIPIENT_EMAIL_MAX)
       }
 
+      const from = transportOptions.auth?.user || process.env.GOOGLE_USER_EMAIL
+
+      if (!from) {
+        throw new Error(TransportMessages.MISSING_SENDER_EMAIL)
+      }
+
       return await this.transporter!.sendMail({
-        from: transportOptions.auth?.user || process.env.GOOGLE_USER_EMAIL,
+        from,
         to: receivers,
         subject,
         ...(!isHtml && { text: content }), // Text email
@@ -59,6 +65,10 @@ class EmailSender extends EmailTransport implements IEmailSender {
   get schema (): SchemaValidator | null {
     return this.#schema
   }
+}
+
+const TransportMessages: Record<string, string> = {
+  MISSING_SENDER_EMAIL: 'Sender email address is not set. Ensure GOOGLE_USER_EMAIL is defined or pass it via oauth2 options.'
 }
 
 export default EmailSender
