@@ -10,42 +10,35 @@ export const handleSendHtmlEmail = async (options: EmailHtmlOptions) => {
     throw new Error('GOOGLE_USER_EMAIL .env variable is required')
   }
 
-  try {
-    const {
-      subject,
-      content: paragraphs = [],
-      recipients = [],
-      wysiwyg = null,
-    } = options
+  const {
+    subject,
+    content: paragraphs = [],
+    recipients = [],
+    wysiwyg = null,
+  } = options
 
-    if (paragraphs.length === 0 && typeof wysiwyg !== 'string') {
-      throw new Error('One of content or wysiwyg is required')
-    }
-
-    // Clean data of whitespace
-    const emails = recipients.map(email => email.trim())
-
-    console.log(`Sending email to (${emails.length}) recipients`)
-
-    const emailContent = await buildHtml({
-      content: paragraphs,
-      recipients: emails,
-      sender: process.env.GOOGLE_USER_EMAIL,
-      wysiwyg,
-    })
-
-    await send({
-      subject,
-      content: emailContent,
-      recipients: emails,
-      isHtml: true,
-    })
-  } catch (err: unknown) {
-    if (err instanceof Error) {
-      console.log('[ERROR]: handle HTML email')
-      throw err
-    }
+  if (paragraphs.length === 0 && typeof wysiwyg !== 'string') {
+    throw new Error('One of content or wysiwyg is required')
   }
+
+  // Clean data of whitespace
+  const emails = recipients.map(email => email.trim())
+
+  console.log(`Sending email to (${emails.length}) recipients`)
+
+  const emailContent = await buildHtml({
+    content: paragraphs,
+    recipients: emails,
+    sender: process.env.GOOGLE_USER_EMAIL,
+    wysiwyg,
+  })
+
+  await send({
+    subject,
+    content: emailContent,
+    recipients: emails,
+    isHtml: true,
+  })
 
   console.log('Process success')
 }
