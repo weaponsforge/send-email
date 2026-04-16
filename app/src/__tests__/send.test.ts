@@ -7,10 +7,10 @@ const TEST_RECIPIENT = 'tester@gmail.com'
 describe('Send email test', () => {
   test('Accept OAuth2 settings from parameters', async () => {
     const auth = {
-      googleUserEmail: process.env.GOOGLE_USER_EMAIL,
-      googleClientId: process.env.GOOGLE_CLIENT_ID,
-      googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      googleRereshToken: process.env.GOOGLE_REFRESH_TOKEN,
+      googleUserEmail: process.env.GOOGLE_USER_EMAIL || '',
+      googleClientId: process.env.GOOGLE_CLIENT_ID || '',
+      googleClientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
+      googleRereshToken: process.env.GOOGLE_REFRESH_TOKEN || '',
     }
 
     await expect(
