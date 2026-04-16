@@ -33,7 +33,7 @@ export default defineConfig({
       '.cursor/**',
       '.git/**',
       '.github/**',
-      '.vscode/**',
+      '.vscode/**'
     ]
   }
 })
