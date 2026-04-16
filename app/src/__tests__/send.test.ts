@@ -5,6 +5,23 @@ const MAX_TIMEOUT = 10000
 const TEST_RECIPIENT = 'tester@gmail.com'
 
 describe('Send email test', () => {
+  test('Accept OAuth2 settings from parameters', async () => {
+    const auth = {
+      googleUserEmail: process.env.GOOGLE_USER_EMAIL,
+      googleClientId: process.env.GOOGLE_CLIENT_ID,
+      googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      googleRereshToken: process.env.GOOGLE_REFRESH_TOKEN,
+    }
+
+    await expect(
+      send({
+        recipient: TEST_RECIPIENT,
+        subject: 'Test Simple Message',
+        content: 'Henlo!',
+      }, auth),
+    ).resolves.toBeUndefined()
+  }, MAX_TIMEOUT)
+
   // Ensure .env file contains the required GOOGLE_* variables before running tests below
   test('Send a text email', async () => {
     await expect(send({
