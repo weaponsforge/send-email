@@ -15,10 +15,10 @@ describe('CLI test suite', () => {
       'text',
       '-s', 'Hello, World!',
       '-c', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit...',
-      '-r', 'testor@gmail.com,abc@gmail.com'
+      '-r', 'testor@gmail.com,abc@gmail.com',
     ],
     {
-      preferLocal: true
+      preferLocal: true,
     })
 
     expect(stdout).toContain('Process success')

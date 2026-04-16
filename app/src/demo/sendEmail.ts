@@ -5,6 +5,6 @@ import { send } from '@/lib/index.js'
   await send({
     recipient: 'tester@gmail.com',
     subject: 'Test Message',
-    content: 'How are you?'
+    content: 'How are you?',
   })
 })()

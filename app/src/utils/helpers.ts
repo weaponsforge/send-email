@@ -44,9 +44,8 @@ interface IRandomTextArrayParams {
 export const createRandomTextArray = (params: IRandomTextArrayParams) => {
   const { length = 1, prefix = '', suffix = '' } = params
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   return Array.from({ length }).map(_ =>
-    `${prefix}${Math.random().toString(36).substring(2, 8)}${suffix}`
+    `${prefix}${Math.random().toString(36).substring(2, 8)}${suffix}`,
   )
 }
 
@@ -83,6 +82,6 @@ export const loadEnv = (pathToEnv: string | undefined) => {
 
   dotenv.config({
     path: pathToEnv,
-    quiet: true
+    quiet: true,
   })
 }

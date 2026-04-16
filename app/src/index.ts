@@ -4,5 +4,5 @@ export {
   GmailOAuthClient,
   SchemaValidator,
   buildHtml,
-  send
+  send,
 } from './lib/index.js'

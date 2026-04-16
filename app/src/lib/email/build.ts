@@ -15,14 +15,14 @@ type EmailBuildOptions = Omit<EmailHtmlOptions, 'subject'>
  * @returns {Promise<string>} HTML-form email content
  */
 export const buildHtml = async (
-  params: EmailBuildOptions
+  params: EmailBuildOptions,
 ): Promise<string> => {
   const {
     content: messages = [],
     recipients,
     sender,
     wysiwyg = null,
-    sanitizeConfig
+    sanitizeConfig,
   } = params
 
   HtmlBuildSchema.parse(params)
@@ -37,7 +37,7 @@ export const buildHtml = async (
       wysiwyg
         .replace(/(\r\n|\n|\r|\t)/g, '')
         .trim(),
-      configOptions
+      configOptions,
     )
   }
 
@@ -68,7 +68,7 @@ export const buildHtml = async (
       recipient,
       messages: cleanMessages,
       sender,
-      wysiwyg: wysiwygHtml
+      wysiwyg: wysiwygHtml,
     })
 
     return html

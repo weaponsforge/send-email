@@ -14,7 +14,7 @@ const main = async () => {
 
   try {
     await copyFiles(outDir, [
-      path.join(templatesDir, 'email.ejs')
+      path.join(templatesDir, 'email.ejs'),
     ])
   } catch (err: unknown) {
     errMsg = (err instanceof Error) ? err.message : 'Something went wrong'

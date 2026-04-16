@@ -26,10 +26,10 @@ describe('Email format test', () => {
         {
           recipient: invalidEmail,
           subject: TEST_SUBJECT,
-          content: 'Henlo!'
+          content: 'Henlo!',
         },
-        oauthClient
-      )
+        oauthClient,
+      ),
     ).rejects.toThrow(EmailSchemaMessages.RECIPIENT_EMAIL)
   }, MAX_TIMEOUT)
 
@@ -42,10 +42,10 @@ describe('Email format test', () => {
         {
           recipient: longRecipientEmail,
           subject: TEST_SUBJECT,
-          content: 'Henlo!'
+          content: 'Henlo!',
         },
-        oauthClient
-      )
+        oauthClient,
+      ),
     ).rejects.toThrow(EmailSchemaMessages.RECIPIENT_EMAIL_LENGTH)
   }, MAX_TIMEOUT)
 
@@ -58,10 +58,10 @@ describe('Email format test', () => {
         {
           recipient: TEST_RECIPIENT,
           subject: longTitle,
-          content: 'Henlo!'
+          content: 'Henlo!',
         },
-        oauthClient
-      )
+        oauthClient,
+      ),
     ).rejects.toThrow(EmailSchemaMessages.SUBJECT)
   }, MAX_TIMEOUT)
 
@@ -74,10 +74,10 @@ describe('Email format test', () => {
         {
           recipient: TEST_RECIPIENT,
           subject: TEST_SUBJECT,
-          content: longContent
+          content: longContent,
         },
-        oauthClient
-      )
+        oauthClient,
+      ),
     ).rejects.toThrow(EmailSchemaMessages.CONTENT)
   }, MAX_TIMEOUT)
 
@@ -87,10 +87,10 @@ describe('Email format test', () => {
       send(
         {
           subject: TEST_SUBJECT,
-          content: 'Hello there'
+          content: 'Hello there',
         },
-        oauthClient
-      )
+        oauthClient,
+      ),
     ).rejects.toThrow(EmailSchemaMessages.RECIPIENT_REQUIRED)
   }, MAX_TIMEOUT)
 
@@ -103,10 +103,10 @@ describe('Email format test', () => {
         {
           recipients: emailList,
           subject: TEST_SUBJECT,
-          content: 'Hello there'
+          content: 'Hello there',
         },
-        oauthClient
-      )
+        oauthClient,
+      ),
     ).rejects.toThrow(EmailSchemaMessages.RECIPIENT_EMAIL_MAX)
   }, MAX_TIMEOUT)
 
@@ -119,10 +119,10 @@ describe('Email format test', () => {
           recipients: emailList,
           recipient: TEST_RECIPIENT,
           subject: TEST_SUBJECT,
-          content: 'Hello there'
+          content: 'Hello there',
         },
-        oauthClient
-      )
+        oauthClient,
+      ),
     ).rejects.toThrow(EmailSchemaMessages.RECIPIENT_EMAIL_MAX)
   }, MAX_TIMEOUT)
 })

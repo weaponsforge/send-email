@@ -2,16 +2,16 @@
 const CLI_META = {
   PROGRAM: {
     NAME: 'sendemail',
-    DESCRIPTION: 'CLI for sending text and HTML emails using Gmail SMTP and Google OAuth2'
+    DESCRIPTION: 'CLI for sending text and HTML emails using Gmail SMTP and Google OAuth2',
   },
   CMD_SEND_TEXT: {
     NAME: 'text',
-    DESCRIPTION: 'Send raw text email to one or multiple recipient/s'
+    DESCRIPTION: 'Send raw text email to one or multiple recipient/s',
   },
   CMD_SEND_HTML: {
     NAME: 'html',
-    DESCRIPTION: 'Send paragraphs of text or WYSIWYG content as styled\nHTML email to one or multiple recipient/s.'
-  }
+    DESCRIPTION: 'Send paragraphs of text or WYSIWYG content as styled\nHTML email to one or multiple recipient/s.',
+  },
 } as const
 
 // CLI command arguments
@@ -20,44 +20,44 @@ const CLI_ARGS = {
   COMMON: {
     SUBJECT: {
       OPTION: '-s, --subject <title>',
-      DESCRIPTION: 'email subject or title enclosed in double-quotes'
+      DESCRIPTION: 'email subject or title enclosed in double-quotes',
     },
     RECIPIENTS: {
       OPTION: '-r, --recipients <emails>',
-      DESCRIPTION: 'comma-separated list of email addresses'
+      DESCRIPTION: 'comma-separated list of email addresses',
     },
     ENV_FILE: {
       OPTION: '-e, --env [path]',
-      DESCRIPTION: 'path to .env file (optional)'
-    }
+      DESCRIPTION: 'path to .env file (optional)',
+    },
   },
 
   // Text content
   CMD_TEXT: {
     CONTENT: {
       OPTION: '-c, --content <text>',
-      DESCRIPTION: 'email text content enclosed in double-quotes'
-    }
+      DESCRIPTION: 'email text content enclosed in double-quotes',
+    },
   },
 
   // HTML content
   CMD_HTML: {
     CONTENT_HTML: {
       OPTION: '-c, --content <text...>',
-      DESCRIPTION: 'whitespace-delimited text/paragraphs enclosed in double-quotes'
+      DESCRIPTION: 'whitespace-delimited text/paragraphs enclosed in double-quotes',
     },
     CONTENT_WYSIWYG: {
       OPTION: '-w, --wysiwyg [html]',
-      DESCRIPTION: 'optional HTML tags that form a WYSIWYG content enclosed in double-quotes, using inline CSS styles'
+      DESCRIPTION: 'optional HTML tags that form a WYSIWYG content enclosed in double-quotes, using inline CSS styles',
     },
     TEMPLATE_FILE: {
       OPTION: '-t, --template [path]',
-      DESCRIPTION: 'optional path to an EJS template file'
-    }
-  }
+      DESCRIPTION: 'optional path to an EJS template file',
+    },
+  },
 } as const
 
 export {
   CLI_ARGS,
-  CLI_META
+  CLI_META,
 }

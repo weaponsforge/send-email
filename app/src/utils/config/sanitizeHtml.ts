@@ -8,7 +8,7 @@ import type { IOptions } from 'sanitize-html'
 
 const config: IOptions = {
   allowedAttributes: {
-    '*': ['style'] // allow style attribute on all tags
+    '*': ['style'], // allow style attribute on all tags
   },
   allowedStyles: {
     // Allow specific CSS properties on specific tags
@@ -17,7 +17,7 @@ const config: IOptions = {
       'width': [/^(\d+(?:px|%|em|rem|vh|vw))$/],
       'height': [/^(\d+(?:px|%|em|rem|vh|vw))$/],
       'border': [
-        /^(\d+(?:px|em|rem)?\s+(solid|dashed|dotted|double|groove|ridge|inset|outset|none|hidden)\s+(?:#[0-9a-fA-F]{3,6}|rgb\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*\)|rgba\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*,\s*[\d.]+\s*\)|[a-z]+))$/
+        /^(\d+(?:px|em|rem)?\s+(solid|dashed|dotted|double|groove|ridge|inset|outset|none|hidden)\s+(?:#[0-9a-fA-F]{3,6}|rgb\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*\)|rgba\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*,\s*[\d.]+\s*\)|[a-z]+))$/,
       ],
       'border-radius': [/^(\d+(?:px|%|em|rem)?)$/],
       'padding': [/^(\d+(?:px|%|em|rem)?( ?\d+(?:px|%|em|rem)?)*)$/],
@@ -26,17 +26,17 @@ const config: IOptions = {
       // Text alignment & color
       'text-align': [/^(left|right|center|justify)$/],
       'background-color': [
-        /^(?:#[0-9a-fA-F]{3,6}|rgb\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*\)|rgba\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*,\s*[\d.]+\s*\)|(?:transparent|white|black|red|green|blue|yellow|orange|purple|pink|gray|grey|brown|cyan|magenta|lime|navy|teal|olive|maroon|aqua|fuchsia|silver|azure))$/
+        /^(?:#[0-9a-fA-F]{3,6}|rgb\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*\)|rgba\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*,\s*[\d.]+\s*\)|(?:transparent|white|black|red|green|blue|yellow|orange|purple|pink|gray|grey|brown|cyan|magenta|lime|navy|teal|olive|maroon|aqua|fuchsia|silver|azure))$/,
       ],
       'color': [
-        /^(?:#[0-9a-fA-F]{3,6}|rgb\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*\)|rgba\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*,\s*[\d.]+\s*\)|(?:transparent|white|black|red|green|blue|yellow|orange|purple|pink|gray|grey|brown|cyan|magenta|lime|navy|teal|olive|maroon|aqua|fuchsia|silver))$/
+        /^(?:#[0-9a-fA-F]{3,6}|rgb\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*\)|rgba\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*,\s*[\d.]+\s*\)|(?:transparent|white|black|red|green|blue|yellow|orange|purple|pink|gray|grey|brown|cyan|magenta|lime|navy|teal|olive|maroon|aqua|fuchsia|silver))$/,
       ],
 
       // Font styles
       'font-family': [/^[\w\s'",.-]+$/],
-      'font-size': [/^(\d+(?:px|%|em|rem|pt))$/]
-    }
-  }
+      'font-size': [/^(\d+(?:px|%|em|rem|pt))$/],
+    },
+  },
 }
 
 export default config
