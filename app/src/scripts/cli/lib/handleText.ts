@@ -14,7 +14,7 @@ export const handleSendTextEmail = async (options: EmailTextOptions) => {
     await send({
       recipients,
       subject,
-      content
+      content,
     })
   } catch (err: unknown) {
     if (err instanceof Error) {

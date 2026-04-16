@@ -49,8 +49,8 @@ class EmailTransport implements IEmailTransport {
           clientId: oauth2Client.client?._clientId,
           clientSecret: oauth2Client.client?._clientSecret,
           refreshToken: oauth2Client?.refreshToken,
-          accessToken: token
-        }
+          accessToken: token,
+        },
       })
     } catch (err: unknown) {
       if (err instanceof Error) {
@@ -66,10 +66,10 @@ class EmailTransport implements IEmailTransport {
       throw new Error('Transport not initialized')
     }
 
-    return <SMTPTransport.Options>this.#transporter.options
+    return <SMTPTransport.Options> this.#transporter.options
   }
 
-  get transporter (): nodemailer.Transporter | null  {
+  get transporter (): nodemailer.Transporter | null {
     return this.#transporter
   }
 }

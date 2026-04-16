@@ -18,7 +18,7 @@ describe('Send email test', () => {
     await expect(send({
       recipient: TEST_RECIPIENT,
       subject: 'Test Simple Message',
-      content: 'Henlo!'
+      content: 'Henlo!',
     })).resolves.toBeUndefined()
   }, MAX_TIMEOUT)
 
@@ -29,9 +29,9 @@ describe('Send email test', () => {
         {
           recipient: TEST_RECIPIENT,
           subject: 'Test Simple Message',
-          content: 'Henlo!'
-        }, oauthClient
-      )
+          content: 'Henlo!',
+        }, oauthClient,
+      ),
     ).resolves.toBeUndefined()
   }, MAX_TIMEOUT)
 
@@ -41,9 +41,9 @@ describe('Send email test', () => {
         {
           recipients: ['student1@gmail.com', 'student2@gmail.com'],
           subject: 'Test Multiple Message',
-          content: 'Henlo, hello!'
-        }, oauthClient
-      )
+          content: 'Henlo, hello!',
+        }, oauthClient,
+      ),
     ).resolves.toBeUndefined()
   }, MAX_TIMEOUT)
 
@@ -54,10 +54,10 @@ describe('Send email test', () => {
           recipients: ['person1@gmail.com', 'person2@gmail.com'],
           recipient: TEST_RECIPIENT,
           subject: 'Test Multiple Message 2',
-          content: 'Hello there'
+          content: 'Hello there',
         },
-        oauthClient
-      )
+        oauthClient,
+      ),
     ).resolves.toBeUndefined()
   }, MAX_TIMEOUT)
 })

@@ -3,7 +3,7 @@ import SchemaValidator from '@/lib/validator/schemavalidator.js'
 import type {
   GetAccessTokenResponse,
   IOauthClient,
-  OAuth2Client
+  OAuth2Client,
 } from '@/types/oauth2client.types.js'
 
 /**

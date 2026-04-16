@@ -14,7 +14,7 @@ export const send = async (params: EmailType, client?: GmailOAuthClient): Promis
 
   const handler = new EmailSender({
     host: TRANSPORT_SMTP_HOSTS.GMAIL,
-    type: TRANSPORT_AUTH_TYPES.OAUTH2
+    type: TRANSPORT_AUTH_TYPES.OAUTH2,
   })
 
   try {
@@ -31,7 +31,7 @@ export const send = async (params: EmailType, client?: GmailOAuthClient): Promis
       recipients,
       subject,
       content,
-      isHtml
+      isHtml,
     })
 
     const acceptedCount = (result?.accepted || []).length

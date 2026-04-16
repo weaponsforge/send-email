@@ -2,6 +2,7 @@ import { test, expect } from 'vitest'
 
 const greet = (str: string): string => {
   console.log(str)
+
   return 'hello'
 }
 

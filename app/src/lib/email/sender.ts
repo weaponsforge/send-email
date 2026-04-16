@@ -31,7 +31,7 @@ class EmailSender extends EmailTransport implements IEmailSender {
         recipients = [],
         subject,
         content,
-        isHtml = false
+        isHtml = false,
       } = params
 
       const receivers = stringsToArray(recipient, recipients)
@@ -44,8 +44,8 @@ class EmailSender extends EmailTransport implements IEmailSender {
         from: transportOptions.auth?.user || process.env.GOOGLE_USER_EMAIL,
         to: receivers,
         subject,
-        ...(!isHtml && { text: content }),  // Text email
-        ...(isHtml && { html: content })    // HTML content format
+        ...(!isHtml && { text: content }), // Text email
+        ...(isHtml && { html: content }), // HTML content format
       })
     } catch (err: unknown) {
       if (err instanceof Error) {

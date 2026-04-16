@@ -10,7 +10,7 @@ import { GmailOAuthClientSchema } from '@/types/oauth2client.schema.js'
 import {
   type GetAccessTokenResponse,
   type IOauthClient,
-  type OAuth2Client
+  type OAuth2Client,
 } from '@/types/oauth2client.types.js'
 
 /**
@@ -53,7 +53,7 @@ class GmailOAuthClient implements IGmailOAuthClient {
       clientSecret,
       redirectURI,
       refreshToken,
-      userEmail
+      userEmail,
     })
   }
 
@@ -66,7 +66,7 @@ class GmailOAuthClient implements IGmailOAuthClient {
       this.#client = new google.auth.OAuth2(
         clientId,
         clientSecret,
-        redirectURI
+        redirectURI,
       )
 
       this.#client.setCredentials({ refresh_token: refreshToken })
@@ -84,6 +84,7 @@ class GmailOAuthClient implements IGmailOAuthClient {
 
   async getAccessToken (): Promise<GetAccessTokenResponse> {
     this.checkClient()
+
     return await this.#client!.getAccessToken()
   }
 
@@ -103,7 +104,7 @@ class GmailOAuthClient implements IGmailOAuthClient {
 
     this.#schema?.validate({
       data: { accessToken },
-      pick: true
+      pick: true,
     })
 
     this.#accessToken = accessToken

@@ -7,7 +7,7 @@ import type {
   ZodIssue,
   ZodObjectBasicType,
   ZodRawShape,
-  ZodSchemaType
+  ZodSchemaType,
 } from '@/types/schemavalidator.interface.js'
 
 /**
@@ -72,9 +72,9 @@ class SchemaValidator implements ISchemaValidator {
     }
 
     if (this.isZodEffectsSchema(this.schema!)) {
-      schema = <ZodObjectBasicType>this.getBaseSchema(this.schema!)
+      schema = <ZodObjectBasicType> this.getBaseSchema(this.schema!)
     } else {
-      schema = <ZodObjectBasicType>this.schema
+      schema = <ZodObjectBasicType> this.schema
     }
 
     const originalKeys = Object.keys(schema.shape)
@@ -111,16 +111,17 @@ class SchemaValidator implements ISchemaValidator {
     if (result && !result.success) {
       const errorMessage = this.formatErrors(
         result?.error?.errors,
-        errorDelimiter
+        errorDelimiter,
       )
 
-      throw new Error(errorMessage  || 'Encountered email parameter validation errors')
+      throw new Error(errorMessage || 'Encountered email parameter validation errors')
     }
   }
 
   formatErrors (errors: ZodIssue[], errorDelimiter: string = '\n'): string {
     return errors.reduce((list, item) => {
       const message = `${item.message} ${item.path[0]} ${errorDelimiter}`
+
       return list + message
     }, '')
   }
@@ -133,17 +134,19 @@ class SchemaValidator implements ISchemaValidator {
 
   get typeName (): string {
     this.checkSchema()
-    return (<ZodObjectBasicType>this.schema)._def.typeName
+
+    return (<ZodObjectBasicType> this.schema)._def.typeName
   }
 
   get properties (): string[] {
     this.checkSchema()
 
     if (this.isZodEffectsSchema(this.schema!)) {
-      const schema = <ZodObjectBasicType>this.getBaseSchema(this.schema!)
+      const schema = <ZodObjectBasicType> this.getBaseSchema(this.schema!)
+
       return Object.keys(schema.shape)
     } else {
-      return Object.keys((<ZodObjectBasicType>this.schema).shape)
+      return Object.keys((<ZodObjectBasicType> this.schema).shape)
     }
   }
 }
