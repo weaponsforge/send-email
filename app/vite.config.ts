@@ -30,8 +30,10 @@ export default defineConfig({
       ...configDefaults.exclude,
       'node_modules/**',
       'dist/**',
+      '.cursor/**',
       '.git/**',
-      '.vscode/**'
+      '.github/**',
+      '.vscode/**',
     ]
   }
 })
