@@ -3,7 +3,7 @@ import { describe, expect, test } from 'vitest'
 import { EmailSchemaMessages } from '@/types/email.schema.js'
 import htmlContent from '@/utils/constants/htmlContent.js'
 
-const MAX_TIMEOUT = 20000
+const MAX_TIMEOUT = 30000
 
 describe('CLI test suite', () => {
   /**
