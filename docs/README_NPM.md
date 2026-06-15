@@ -45,11 +45,11 @@ NPM library for sending text and HTML emails using Gmail SMTP with Google OAuth2
 
 (Installed via npm)
 
-1. [nodemailer](https://www.npmjs.com/package/nodemailer) `v8.0.1` - Sends emails using various transport options
+1. [nodemailer](https://www.npmjs.com/package/nodemailer) `v9.0.0` - Sends emails using various transport options
 2. [commander](https://www.npmjs.com/package/commander) `v15.0.0` - CLI library
 3. [sanitize-html](https://www.npmjs.com/package/sanitize-html) `v2.17.5` - Sanitizes WYSIWYG HTML input
 4. [zod](https://www.npmjs.com/package/zod) `v3.24.2` - Run-time input validation
-5. [ejs](https://www.npmjs.com/package/ejs) `v4.0.1` - Composes HTML with dynamic text content
+5. [ejs](https://www.npmjs.com/package/ejs) `v6.0.1` - Composes HTML with dynamic text content
 
 </details>
 <br>
@@ -153,7 +153,7 @@ class MyEmailClient extends EmailSender {
 
 const client = new MyEmailClient()
 
-const emailSchema = await client.schema
+const emailSchema = client.schema
 client.sayHello('Tester')
 ```
 

@@ -56,14 +56,14 @@ NPM library and CLI for sending text and HTML emails using Gmail SMTP with Googl
 
 (Installed via npm)
 
-1. [nodemailer](https://www.npmjs.com/package/nodemailer) `v8.0.1` - Sends emails using various transport options
+1. [nodemailer](https://www.npmjs.com/package/nodemailer) `v9.0.0` - Sends emails using various transport options
 2. [typescript](https://www.npmjs.com/package/typescript) `v6.0.3` - Compile-time error checker
 3. [tsx](https://www.npmjs.com/package/tsx) `v4.22.4` - Runs TS files in development mode
 4. [vitest](https://www.npmjs.com/package/vitest) `v4.1.9` - Runs tests
 5. [commander](https://www.npmjs.com/package/commander) `v15.0.0` - CLI library
 6. [sanitize-html](https://www.npmjs.com/package/sanitize-html) `v2.17.5` - Sanitizes WYSIWYG HTML input
 7. [zod](https://www.npmjs.com/package/zod) `v3.24.2` - Run-time input validation
-8. [ejs](https://www.npmjs.com/package/ejs) `v4.0.1` - Composes HTML with dynamic text content
+8. [ejs](https://www.npmjs.com/package/ejs) `v6.0.1` - Composes HTML with dynamic text content
 
 </details>
 <br>
