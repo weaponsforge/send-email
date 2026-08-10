@@ -83,7 +83,7 @@ We welcome contributions! Please see [CONTRIBUTING.md](/CONTRIBUTING.md) and the
    ```
 3. Transpile to JavaScript.
    ```bash
-   npm run transpile
+   npm run build
    ```
 4. Send a **text email** using the CLI, eg. using Bash:
    ```bash
@@ -93,7 +93,7 @@ We welcome contributions! Please see [CONTRIBUTING.md](/CONTRIBUTING.md) and the
      -r a@gmail.com,b@gmail.com,c@gmail.com
    ```
 
-   > 💡 **TIP:** Use `sendemail:dev` to work on development mode without needing to run `"npm run transpile"`
+   > 💡 **TIP:** Use `sendemail:dev` to work on development mode without needing to run `"npm run build"`
 
 5. Send a **styled HTML email** using the CLI, eg. using Bash:
    ```bash
@@ -158,7 +158,7 @@ We welcome contributions! Please see [CONTRIBUTING.md](/CONTRIBUTING.md) and the
 
    ```bash
    cd app
-   npm run transpile
+   npm run build
    node dist/utils/sample.js
    ```
 
@@ -264,11 +264,11 @@ Runs `vitest` in watch mode, watching file changes and errors to files linked wi
 
 Watches file changes in `.ts` files using the `tsc --watch` option.
 
-### `npm run transpile`
+### `npm run build`
 
 Builds JavaScript, `.d.ts` declaration files, and map files from the TypeScript source files in the `/src` directory.
 
-### `npm run transpile:noemit`
+### `npm run types:check`
 
 Runs type-checking without generating the JavaScript or declaration files from the TypeScript files in the `/src` and `__tests__` directories.
 
@@ -302,7 +302,7 @@ Fixes lint errors in TypeScript files.
 
 Copies the EJS email template into the `/dist/templates` directory.
 
-This script runs automatically after `"npm run transpile"`, copying the `"/app/src/templates/email.ejs"` to the `"/dist/templates"` directory.
+This script runs automatically after `"npm run build"`, copying the `"/app/src/templates/email.ejs"` to the `"/dist/templates"` directory.
 
 ### `npm run info`
 
@@ -319,7 +319,7 @@ Shorthand for `"npm run sendemail"`
 Sends text and HTML emails using the command line interface (CLI) with transpiled JavaScript.
 
 > 💡 **IMPORTANT:**
-> - This script requires running the `"npm run transpile"` script before usage.
+> - This script requires running the `"npm run build"` script before usage.
 > - If you want to run these without transpiling, append a `:dev` after the NPM script: `"npm run sendemail:dev"`
 
 #### CLI Usage
