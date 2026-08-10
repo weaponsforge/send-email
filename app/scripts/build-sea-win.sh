@@ -2,7 +2,7 @@
 
 # This script builds a Node Single Executable Application (SEA) for Windows OS
 # https://nodejs.org/api/single-executable-applications.
-# NOTE: Requires running `npm run transpile` first
+# NOTE: Requires running `npm run build` first
 
 # Exit on error
 set -e

@@ -135,7 +135,7 @@ This folder contains the [EJS](https://github.com/mde/ejs) HTML template used in
 ### 🧹 Linting and Formatting
 
 - Linting is handled by **ESLint**, configured via `eslint.config.mjs`.
-- All code should pass `"npm run lint"` and `"npm run transpile:noemit"` before commit.
+- All code should pass `"npm run lint"` and `"npm run types:check"` before commit.
 
 ### 📦 Use of External Libraries
 

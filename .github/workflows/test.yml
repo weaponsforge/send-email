@@ -32,7 +32,7 @@ jobs:
       - name: Transpile
         run: |
           cd app
-          npm run transpile:noemit
+          npm run types:check
 
   test-app:
     name: Unit/Integration Tests
