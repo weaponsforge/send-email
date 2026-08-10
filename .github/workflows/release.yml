@@ -41,7 +41,7 @@ jobs:
       - name: Transpile
         run: |
           cd app
-          npm run transpile:noemit
+          npm run types:check
 
       - name: Test
         run: |
@@ -160,7 +160,7 @@ jobs:
         run: |
           cd app
           npm ci
-          npm run transpile
+          npm run build
 
       - name: Publish package
         run: |

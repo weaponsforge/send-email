@@ -28,8 +28,8 @@ npm run lint          # Check for lint errors
 npm run lint:fix      # Auto-fix lint errors
 
 # Type checking / build
-npm run transpile:noemit   # Type-check only (no output)
-npm run transpile          # Compile TypeScript to dist/
+npm run types:check   # Type-check only (no output)
+npm run build         # Compile TypeScript to dist/
 
 # Testing (coverage always enabled, outputs to html/coverage/ and html/junit.xml)
 npm test              # Run all tests once
