@@ -19,6 +19,12 @@ NPM library and CLI for sending text and HTML emails using Gmail SMTP with Googl
 > - **Docker image**<br>
 >   A Docker image is available at https://hub.docker.com/r/weaponsforge/sendemail
 
+#### Architecture Diagram
+
+Interactive: https://weaponsforge.github.io/send-email/
+
+![architecture diagram](/docs/architecture.webp)
+
 **Windows Binary**
 
 ![sendemail windows cli](/docs/sendemail.gif)
