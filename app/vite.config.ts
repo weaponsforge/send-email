@@ -8,19 +8,18 @@ export default defineConfig({
     },
   },
   test: {
+    // reports and coverage artifacts go to .vitest/
     reporters: ['verbose', 'html', 'junit'],
-    outputFile: {
-      junit: './html/junit.xml',
-    },
     coverage: {
       provider: 'v8',
       enabled: true,
-      reportsDirectory: './html/coverage',
+      reportsDirectory: '.vitest/coverage',
       include: ['src/lib', 'src/scripts', 'src/types', 'src/utils'],
       exclude: [
         'node_modules/',
         'dist/',
         'html/',
+        '.vitest/',
         '**/*.html',
         '**/*.md',
         '**/*.ejs',

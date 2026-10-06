@@ -1,6 +1,6 @@
 {
   "name": "@weaponsforge/sendemail",
-  "version": "2.0.4",
+  "version": "2.0.3",
   "description": "Sends emails using Gmail SMTP with username/pw or Google OAuth2",
   "main": "dist/index.js",
   "types": "./dist/index.d.ts",
@@ -35,7 +35,7 @@
     "copy:files": "tsx ./src/scripts/build/copyTemplate.ts",
     "test": "vitest run",
     "test:ui": "vitest --ui",
-    "report:view": "vite preview --outDir html",
+    "report:view": "vite preview --outDir .vitest",
     "docker:report:view": "vite preview --outDir html --host 0.0.0.0",
     "docker:test:ui": "vitest --ui --api.port 51204 --api.host 0.0.0.0",
     "docker:debug": "export IS_DOCKER=true && node --inspect=0.0.0.0:9229 --import tsx src/utils/sample.ts",
