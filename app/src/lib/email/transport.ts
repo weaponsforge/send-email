@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer'
+import { type Transporter } from 'nodemailer'
 
 import SchemaValidator from '@/lib/validator/schemavalidator.js'
 import { TransportOath2Schema, type TransportOath2SchemaType } from '@/types/transport.schema.js'
@@ -15,7 +16,7 @@ class EmailTransport implements IEmailTransport {
   /** Zod schema wrapper methods and functions */
   #schema: SchemaValidator | null = null
   /** Nodemailer tansport */
-  #transporter: nodemailer.Transporter | null = null
+  #transporter: Transporter | null = null
 
   /** SMTP hosts allowed within Nodemailer */
   #host: TRANSPORT_SMTP_HOSTS | null = null
@@ -73,7 +74,7 @@ class EmailTransport implements IEmailTransport {
     return <SMTPTransport.Options> this.#transporter.options
   }
 
-  get transporter (): nodemailer.Transporter | null {
+  get transporter (): Transporter | null {
     return this.#transporter
   }
 }
