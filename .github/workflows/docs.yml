@@ -2,8 +2,9 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches-ignore:
-      - main
+    branches:
+      - docs/architecture-diagram
+  workflow_dispatch:
 
 permissions:
   contents: read
