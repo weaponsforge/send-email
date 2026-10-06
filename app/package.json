@@ -36,7 +36,7 @@
     "test": "vitest run",
     "test:ui": "vitest --ui",
     "report:view": "vite preview --outDir .vitest",
-    "docker:report:view": "vite preview --outDir html --host 0.0.0.0",
+    "docker:report:view": "vite preview --outDir .vitest --host 0.0.0.0",
     "docker:test:ui": "vitest --ui --api.port 51204 --api.host 0.0.0.0",
     "docker:debug": "export IS_DOCKER=true && node --inspect=0.0.0.0:9229 --import tsx src/utils/sample.ts",
     "docker:dev:win": "export CHOKIDAR_USEPOLLING=1 && export CHOKIDAR_INTERVAL=1000 && vitest",
