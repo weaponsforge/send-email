@@ -1,2 +1,5 @@
 .vscode
 .cursor
+*.html
+*.tar.gz
+*.env
