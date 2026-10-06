@@ -31,4 +31,4 @@ RUN npm ci --only=production && npm cache clean --force
 
 COPY --chown=node:node --from=build /opt/app/dist /opt/app/dist
 USER node
-CMD ["sh"]
+ENTRYPOINT ["npm", "start"]
