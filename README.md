@@ -23,7 +23,7 @@ NPM library and CLI for sending text and HTML emails using Gmail SMTP with Googl
 
 Interactive: https://weaponsforge.github.io/send-email/
 
-![architecture diagram](/docs/architecture_dark.webp)
+![architecture diagram](/docs/architecture.webp)
 
 **Windows Binary**
 
