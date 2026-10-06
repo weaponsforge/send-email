@@ -1,7 +1,7 @@
 node_modules/
 dist/
-html/
 build/
+.vitest/
 .git
 *.zip
 *.rar
