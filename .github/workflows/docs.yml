@@ -1,10 +1,8 @@
 name: Deploy to GitHub Pages
 
 on:
-  push:
-    branches:
-      - docs/architecture-diagram
-  workflow_dispatch:
+  release:
+    types: [published]
 
 permissions:
   contents: read
@@ -18,10 +16,12 @@ concurrency:
 jobs:
   # Single deploy job since we're just deploying
   deploy:
+    name: Deploy Docs
+    if: github.event.release.target_commitish == 'main'
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -29,14 +29,14 @@ jobs:
       - name: Prepare static files
         run: |
           mkdir -p public
-          tar -zxvf docs/architecture.tar.gz
-          mv architecture.html public/index.html
+          tar -zxvf docs/architecture.tar.gz -C public
+          mv public/architecture.html public/index.html
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: public/
 
